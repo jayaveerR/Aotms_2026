@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 export const MentorsSection = () => {
   return (
-    <section className="pt-8 md:pt-12 pb-2 md:pb-4 bg-background relative overflow-hidden">
+    <section className="pt-12 md:pt-20 pb-16 md:pb-24 bg-background relative overflow-hidden w-full">
       <div className="absolute inset-0 pointer-events-none opacity-50">
         <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
         <div className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="w-full px-4 sm:px-8 lg:px-16 relative z-10">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight">
             Learn from Our <span className="text-orange-500">Professional</span> <span className="text-blue-600">Industry Experts</span>

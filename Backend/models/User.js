@@ -18,9 +18,22 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false // Making it optional for now, or true if mandatory
     },
-    qualification: {
+    degree: {
         type: String,
-        enum: ['B.Tech', 'Degree', 'Others'],
+        enum: ['B.Tech', 'M.Tech', 'MCA', 'MBA', 'Others'],
+        required: false
+    },
+    department: {
+        type: String,
+        enum: ['CSE', 'IT', 'ECE', 'EEE', 'MECH', 'CIVIL', 'AI & DS', 'AIML', 'CYBER SECURITY', 'DATA SCIENCE'],
+        required: false
+    },
+    passoutYear: {
+        type: String,
+        required: false
+    },
+    course: {
+        type: String,
         required: false
     },
     avatar: {

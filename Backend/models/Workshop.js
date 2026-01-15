@@ -4,7 +4,7 @@ const workshopSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     tagline: { type: String },
-    mode: { type: String, enum: ['Online', 'Offline'], required: true },
+    mode: { type: String, enum: ['Online', 'Offline', 'Hybrid'], required: true },
     date: { type: String, required: true },
     duration: { type: String, required: true },
     bannerUrl: { type: String },
@@ -12,10 +12,11 @@ const workshopSchema = new mongoose.Schema({
     description: { type: String, required: true },
     eligibility: { type: String },
     level: { type: String },
-    whatYouWillLearn: [{ type: String }],
-    buttonText: { type: String, default: "Register Now" },
-    registrationLink: { type: String },
-    type: { type: String, default: 'workshop' }
+    startDate: { type: Date },
+    endDate: { type: Date },
+    registrationStatus: { type: String, enum: ['OPEN', 'CLOSED'], default: 'OPEN' },
+    showRegisterButton: { type: Boolean, default: true },
+    whatYouWillLearn: [{ type: String }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Workshop', workshopSchema);

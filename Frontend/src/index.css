@@ -243,3 +243,67 @@
 .bg-scan-lines-blue {
   background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 102, 204, 0.1) 2px, rgba(0, 102, 204, 0.1) 4px);
 }
+
+/* Course Details Mobile Fixes */
+@media (max-width: 768px) {
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .course-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 16px !important;
+    text-align: center !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+
+  .curriculum,
+  .detailed-curriculum {
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  .modules,
+  .modules-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .program-structure,
+  .program-details {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 16px !important;
+  }
+
+  /* Final Rule Fixes for all content sections */
+  section,
+  [id="curriculum"],
+  [id="outcomes"],
+  [id="tools"],
+  [id="instructor"],
+  [id="hiring-partners"],
+  [id="certifications"],
+  [id="faq"] {
+    height: auto !important;
+    min-height: unset !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+}

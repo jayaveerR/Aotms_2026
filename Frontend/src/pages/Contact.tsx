@@ -18,15 +18,52 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Real-time Input Restrictions
+    if (name === 'phone') {
+      const numbersOnly = value.replace(/[^0-9]/g, '');
+      if (numbersOnly.length <= 10) {
+        setFormData({ ...formData, [name]: numbersOnly });
+      }
+      return;
+    }
+
+    if (name === 'name') {
+      const alphabetsOnly = value.replace(/[^a-zA-Z\s]/g, '');
+      setFormData({ ...formData, [name]: alphabetsOnly });
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      toast.error("Please fill in all fields");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.name.trim() || formData.name.trim().length < 3) {
+      toast.error("Please enter a valid Name (min 3 characters)");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid Email address");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.phone || formData.phone.length !== 10) {
+      toast.error("Please enter a valid 10-digit Phone Number");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      toast.error("Message is too short!");
       setLoading(false);
       return;
     }
@@ -53,29 +90,29 @@ const Contact = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-slate-50">
+      <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
 
         {/* Decorative Blobs */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest shadow-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-widest shadow-sm mb-4">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               Get in Touch
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-[1.1]">
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
               We'd Love to Hear <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-[#FF6B35]">
                 From You
               </span>
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
               Have questions about our courses, placements, or just want to say hello?
               Our team is ready to help you start your journey.
             </p>
@@ -83,52 +120,52 @@ const Contact = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-6 -mt-20 relative z-20 pb-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
-            <div className="grid lg:grid-cols-12 min-h-[800px]">
+      <main className="container mx-auto px-6 -mt-16 relative z-20 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+            <div className="grid lg:grid-cols-12">
 
               {/* Left Side: Contact Info (5 cols) */}
-              <div className="lg:col-span-5 bg-[#0B1221] text-white p-8 md:p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+              <div className="lg:col-span-5 bg-[#0B1221] text-white p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
                 {/* Background Details */}
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px]" />
-                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FF6B35]/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FF6B35]/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-2">Contact Information</h3>
-                  <p className="text-slate-400 mb-12">Reach out to us through any of these channels.</p>
+                  <h3 className="text-lg font-bold mb-1 tracking-tight">Contact Info</h3>
+                  <p className="text-slate-400 text-[10px] mb-6">Reach out to us through these channels.</p>
 
-                  <div className="space-y-8">
-                    <a href="https://wa.me/918019942233" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group cursor-pointer">
-                      <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300">
-                        <Phone className="w-5 h-5" />
+                  <div className="space-y-4">
+                    <a href="https://wa.me/918019942233" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group cursor-pointer">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300 shadow-sm shrink-0">
+                        <Phone className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white mb-1 group-hover:text-[#FF6B35] transition-colors">Call or WhatsApp</h4>
-                        <p className="text-slate-400 text-sm group-hover:text-white transition-colors">+91 80199 42233</p>
+                        <h4 className="font-bold text-white text-xs mb-0.5 group-hover:text-[#FF6B35] transition-colors">WhatsApp</h4>
+                        <p className="text-slate-400 text-[10px] group-hover:text-white transition-colors">+91 80199 42233</p>
                       </div>
                     </a>
 
-                    <a href="mailto:info@aotms.com" className="flex items-start gap-4 group cursor-pointer">
-                      <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300">
-                        <Mail className="w-5 h-5" />
+                    <a href="mailto:info@aotms.com" className="flex items-start gap-3 group cursor-pointer">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300 shadow-sm shrink-0">
+                        <Mail className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white mb-1 group-hover:text-[#FF6B35] transition-colors">Email Us</h4>
-                        <p className="text-slate-400 text-sm group-hover:text-white transition-colors">info@aotms.com</p>
+                        <h4 className="font-bold text-white text-xs mb-0.5 group-hover:text-[#FF6B35] transition-colors">Email</h4>
+                        <p className="text-slate-400 text-[10px] group-hover:text-white transition-colors">info@aotms.com</p>
                       </div>
                     </a>
 
-                    <div className="flex items-start gap-4 group">
-                      <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300">
-                        <MapPin className="w-5 h-5" />
+                    <div className="flex items-start gap-3 group">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#FF6B35] group-hover:border-[#FF6B35] transition-all duration-300 shadow-sm shrink-0">
+                        <MapPin className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white mb-1 group-hover:text-[#FF6B35] transition-colors">Visit Us</h4>
-                        <p className="text-slate-400 text-sm leading-relaxed group-hover:text-white transition-colors">
-                          Pothuri Towers, 2nd Floor, MG Road,<br />
-                          Near DV Manor, Vijayawada - 520010
+                        <h4 className="font-bold text-white text-xs mb-0.5 group-hover:text-[#FF6B35] transition-colors">Location</h4>
+                        <p className="text-slate-400 text-[10px] leading-relaxed group-hover:text-white transition-colors">
+                          Pothuri Towers, 2nd Fl, MG Rd,<br />
+                          Vijayawada - 520010
                         </p>
                       </div>
                     </div>
@@ -159,77 +196,82 @@ const Contact = () => {
               </div>
 
               {/* Right Side: Form (7 cols) */}
-              <div className="lg:col-span-7 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-                <div className="max-w-lg mx-auto w-full">
-                  <h3 className="text-3xl font-black text-slate-900 mb-2">Send us a Message</h3>
-                  <p className="text-slate-500 mb-10">Use the form below to get in touch with our admissions team.</p>
+              <div className="lg:col-span-7 p-6 md:p-8 flex flex-col justify-center bg-gray-50/20">
+                <div className="max-w-sm mx-auto w-full">
+                  <h3 className="text-lg font-black text-slate-900 mb-0.5 tracking-tight">Send a Message</h3>
+                  <p className="text-slate-500 text-[10px] mb-6">Start your journey with us.</p>
 
-                  <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Full Name</label>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-0.5">Full Name</label>
                         <Input
                           required
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="bg-slate-50 border-slate-200 h-12 px-4 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all"
-                          placeholder="John Doe"
+                          className="bg-white border-slate-200 h-9 px-3 rounded-md focus:border-blue-600 focus:ring-2 focus:ring-blue-600/5 transition-all text-[13px]"
+                          placeholder="Your Name"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email</label>
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-0.5">Email</label>
                         <Input
                           required
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="bg-slate-50 border-slate-200 h-12 px-4 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all"
-                          placeholder="john@example.com"
+                          className="bg-white border-slate-200 h-9 px-3 rounded-md focus:border-blue-600 focus:ring-2 focus:ring-blue-600/5 transition-all text-[13px]"
+                          placeholder="your@email.com"
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Phone Number</label>
-                      <Input
-                        required
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="bg-slate-50 border-slate-200 h-12 px-4 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all"
-                        placeholder="+91 99999 99999"
-                      />
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-0.5">Phone (India)</label>
+                      <div className="relative group/input">
+                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[13px] font-bold text-slate-400 border-r border-slate-200 pr-2 pointer-events-none group-focus-within/input:text-blue-600 transition-colors">
+                          +91
+                        </div>
+                        <Input
+                          required
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="bg-white border-slate-200 h-9 pl-12 pr-3 rounded-md focus:border-blue-600 focus:ring-2 focus:ring-blue-600/5 transition-all text-[13px] font-medium"
+                          placeholder="99999 99999"
+                        />
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Message</label>
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-0.5">Message</label>
                       <Textarea
                         required
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="bg-slate-50 border-slate-200 px-4 py-3 rounded-xl focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all min-h-[150px] resize-none"
-                        placeholder="Tell us how we can help..."
+                        className="bg-white border-slate-200 px-3 py-2 rounded-md focus:border-blue-600 focus:ring-2 focus:ring-blue-600/5 transition-all min-h-[80px] resize-none text-[13px]"
+                        placeholder="Your message..."
                       />
                     </div>
 
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40 transition-all hover:-translate-y-1 active:scale-[0.98] text-base group"
+                      className="w-full h-10 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md shadow-sm transition-all active:scale-[0.99] text-xs group"
                     >
                       {loading ? (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                           <span>Sending...</span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <span>Send Message</span>
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                          <span>Submit Now</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       )}
                     </Button>
@@ -257,10 +299,10 @@ const Contact = () => {
             ></iframe>
           </div>
         </div>
-      </main>
+      </main >
 
       <Footer />
-    </div>
+    </div >
   );
 };
 

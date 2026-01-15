@@ -4,6 +4,7 @@ import { CompanyLogos } from "@/components/CompanyLogos";
 import { AboutSection } from "@/components/AboutSection";
 import { LearningProcess } from "@/components/LearningProcess";
 import { ProfessionalPrograms } from "@/components/courses/ProfessionalPrograms";
+import { PerformanceBreakdown } from "@/components/PerformanceBreakdown";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { CourseRequestSection } from "@/components/CourseRequestSection";
 import { MentorsSection } from "@/components/MentorsSection";
@@ -27,6 +28,7 @@ const Index = () => {
 
       <LearningProcess />
       <ProfessionalPrograms />
+      <PerformanceBreakdown />
       <WhyChooseUs />
       <CourseRequestSection />
       <MentorsSection />

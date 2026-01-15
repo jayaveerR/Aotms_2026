@@ -1,15 +1,20 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { ChevronLeft, ChevronRight, Sparkles, Lock } from "lucide-react";
 import { useCourses } from "@/hooks/useCourses";
 import { CourseCard } from "./CourseCard";
 import { Badge } from "@/components/ui/badge";
 import { useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAuthStore } from "@/store/authStore";
 
 export const ProfessionalPrograms = () => {
+    const { token } = useAuthStore();
+    const isLoggedIn = !!token;
     const { data: courses, isLoading } = useCourses();
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        { loop: true, align: "start", skipSnaps: false }
+        { loop: true, align: "start", skipSnaps: false, dragFree: true },
+        [AutoScroll({ playOnInit: true, stopOnInteraction: false, stopOnMouseEnter: true, speed: 1 })]
     );
 
     const scrollPrev = useCallback(() => {
@@ -76,7 +81,6 @@ export const ProfessionalPrograms = () => {
                     </div>
                 </div>
 
-                {/* Animated Horizontal Carousel (3 Cards) */}
                 {courses && courses.length > 0 ? (
                     <div className="embla overflow-hidden" ref={emblaRef}>
                         <div className="embla__container flex py-6">

@@ -50,43 +50,43 @@ export const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Right Column - Content */}
-          <div className="space-y-6 order-2 lg:order-2 text-center lg:text-left">
+          <div className="space-y-8 order-2 lg:order-2 text-center lg:text-left">
             <div className="flex flex-col gap-3 items-center lg:items-start">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent/10 text-accent text-sm font-bold rounded-full uppercase tracking-widest shadow-sm">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-[#0075CF] text-xs font-bold rounded-full uppercase tracking-widest shadow-sm">
                 About Our training model
               </span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-primary leading-[1.15]">
-              World-class education,<br className="hidden md:block" /> and the <span className="text-accent">Academy</span> difference.
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.15]">
+              World-class education,<br className="hidden md:block" /> and the <span className="text-[#0075CF]">Academy</span> difference.
             </h2>
 
-            <p className="text-sm md:text-base text-muted-foreground mx-auto lg:mx-0 leading-relaxed font-semibold max-w-lg">
+            <p className="text-sm text-slate-500 mx-auto lg:mx-0 leading-relaxed font-medium max-w-lg">
               Learn from industry experts, explore our success stories, and step into the future.
               We are a professional IT training institute focused on real-world skills,
               industry-level projects, and career outcomes.
             </p>
 
-            <div className="grid sm:grid-cols-3 gap-4 pt-4">
+            <div className="grid sm:grid-cols-3 gap-5 pt-2">
               {highlights.map((item) => (
                 <motion.div
                   key={item.title}
                   whileHover={{ y: -5 }}
-                  className="group bg-card p-4 rounded-xl border border-border/50 hover:shadow-lg transition-shadow duration-300"
+                  className="group bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center lg:items-start text-center lg:text-left"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/5 group-hover:bg-accent/10 flex items-center justify-center mb-3 transition-colors duration-300 mx-auto lg:mx-0">
-                    <item.icon className="w-6 h-6 text-primary group-hover:text-accent transition-colors duration-300" />
+                  <div className="w-14 h-14 rounded-xl bg-[#0075CF]/10 flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-[#0075CF] group-hover:shadow-md group-hover:shadow-blue-500/20">
+                    <item.icon className="w-7 h-7 text-[#0075CF] group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <h4 className="text-lg font-bold text-foreground mb-1">{item.title}</h4>
-                  <p className="text-sm text-muted-foreground leading-snug">{item.description}</p>
+                  <h4 className="text-base font-bold text-slate-900 mb-2">{item.title}</h4>
+                  <p className="text-xs text-slate-400 leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
 
-            <div className="pt-4">
+            <div className="pt-2">
               <button
                 onClick={() => window.location.href = '/about-us'}
-                className="inline-flex items-center justify-center h-12 px-8 text-base font-medium text-white transition-colors bg-accent rounded-md hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 shadow-lg shadow-accent/20"
+                className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold text-white transition-colors bg-[#0075CF] rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 shadow-lg shadow-blue-500/20"
               >
                 Know More About Us
               </button>

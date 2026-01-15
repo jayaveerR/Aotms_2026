@@ -25,29 +25,29 @@ const fallbackReasons = [
 ];
 
 export const WhyChooseUs = () => {
-    const { data: rawReasons, isLoading } = useAcademyDifference();
+  const { data: rawReasons, isLoading } = useAcademyDifference();
 
-    const reasons = useMemo(() => {
-        if (!rawReasons || rawReasons.length === 0) return fallbackReasons;
-        return rawReasons;
-    }, [rawReasons]);
+  const reasons = useMemo(() => {
+    if (!rawReasons || rawReasons.length === 0) return fallbackReasons;
+    return rawReasons;
+  }, [rawReasons]);
 
-    if (isLoading) {
-        return (
-            <div className="py-20 container mx-auto px-4 text-center">
-                <Skeleton className="h-10 w-64 mx-auto mb-10" />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {[1, 2, 3].map(i => (
-                        <div key={i} className="flex flex-col items-center">
-                            <Skeleton className="w-[230px] h-[230px] rounded-full mb-8" />
-                            <Skeleton className="h-6 w-32 mb-3" />
-                            <Skeleton className="h-4 w-48" />
-                        </div>
-                    ))}
-                </div>
+  if (isLoading) {
+    return (
+      <div className="py-20 container mx-auto px-4 text-center">
+        <Skeleton className="h-10 w-64 mx-auto mb-10" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="flex flex-col items-center">
+              <Skeleton className="w-[230px] h-[230px] rounded-full mb-8" />
+              <Skeleton className="h-6 w-32 mb-3" />
+              <Skeleton className="h-4 w-48" />
             </div>
-        );
-    }
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="pt-4 md:pt-10 pb-12 md:pb-20 bg-background relative overflow-hidden">

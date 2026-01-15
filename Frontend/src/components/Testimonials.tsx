@@ -19,9 +19,10 @@ export const Testimonials = () => {
         }));
     }, [rawFeedback]);
 
-    const firstColumn = testimonials.slice(0, Math.ceil(testimonials.length / 3));
-    const secondColumn = testimonials.slice(Math.ceil(testimonials.length / 3), Math.ceil(2 * testimonials.length / 3));
-    const thirdColumn = testimonials.slice(Math.ceil(2 * testimonials.length / 3));
+    const firstColumn = testimonials.slice(0, Math.ceil(testimonials.length / 4));
+    const secondColumn = testimonials.slice(Math.ceil(testimonials.length / 4), Math.ceil(2 * testimonials.length / 4));
+    const thirdColumn = testimonials.slice(Math.ceil(2 * testimonials.length / 4), Math.ceil(3 * testimonials.length / 4));
+    const fourthColumn = testimonials.slice(Math.ceil(3 * testimonials.length / 4));
 
     if (isLoading) {
         return (
@@ -39,14 +40,14 @@ export const Testimonials = () => {
     if (testimonials.length === 0) return null;
 
     return (
-        <section className="bg-background pt-4 md:pt-8 pb-8 md:pb-12 relative overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <section className="bg-slate-50/50 pt-12 md:pt-20 pb-16 md:pb-24 relative overflow-hidden w-full border-t border-slate-100">
+            <div className="w-full px-4 sm:px-8 lg:px-16 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className="flex flex-col items-center justify-center max-w-2xl mx-auto mb-8 text-center"
+                    className="flex flex-col items-center justify-center w-full mx-auto mb-8 text-center"
                 >
                     <div className="mb-4">
                         <span className="text-xs font-bold tracking-widest uppercase text-primary border border-primary/20 py-1.5 px-4 rounded-full bg-primary/5">
@@ -57,15 +58,16 @@ export const Testimonials = () => {
                     <h2 className="text-2xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
                         Student <span className="text-primary">Honest</span> <span className="text-orange-500">Reviews</span>
                     </h2>
-                    <p className="section-subheading mt-4">
+                    <p className="section-subheading mt-4 max-w-3xl">
                         Read honest reviews from our Verified Students.
                     </p>
                 </motion.div>
 
-                <div className="flex justify-center gap-6 md:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[800px] overflow-hidden">
-                    <TestimonialsColumn testimonials={firstColumn} duration={15} />
-                    <TestimonialsColumn testimonials={secondColumn} className="hidden md:block mt-20" duration={19} />
-                    <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+                <div className="flex justify-center gap-4 md:gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[850px] overflow-hidden w-full">
+                    <TestimonialsColumn testimonials={firstColumn} duration={14} />
+                    <TestimonialsColumn testimonials={secondColumn} className="hidden md:block mt-12" duration={18} />
+                    <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block mt-24" duration={16} />
+                    <TestimonialsColumn testimonials={fourthColumn} className="hidden xl:block md:mt-8" duration={20} />
                 </div>
             </div>
         </section>

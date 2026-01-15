@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { toast } from "sonner";
 
+
 const Placements = () => {
     const { data: students, isLoading } = useStudentPlacements();
 
@@ -169,90 +170,28 @@ const Placements = () => {
                 </div>
             </section>
 
-            {/* Placements Carousel Section - Logo Colors (Blue & Orange) */}
-            <section className="py-16 md:py-20 bg-[#005bb5] relative overflow-hidden">
-                {/* Brand Blue Background (Logo Match) */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0066CC] via-[#0055aa] to-[#003366] opacity-100" />
-
+            {/* Placements Carousel Section */}
+            <section className="py-16 md:py-20 bg-[#F8FAFC] relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                    {/* Hexagonal Grid - Blue */}
-                    <div className="absolute inset-0 opacity-[0.08] bg-hex-pattern-blue" />
-
-                    {/* Diagonal Scan Lines - Blue */}
-                    <div className="absolute inset-0 opacity-[0.03] bg-scan-lines-blue" />
-
-                    {/* Animated Data Streams - Blue */}
-                    {[...Array(6)].map((_, i) => (
-                        <motion.div
-                            key={`stream-${i}`}
-                            className="absolute w-px h-32 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent"
-                            style={{ left: `${15 + i * 15}%`, top: '-10%' }}
-                            animate={{
-                                y: ['0%', '120%'],
-                                opacity: [0, 1, 0]
-                            }}
-                            transition={{
-                                duration: 3 + i * 0.5,
-                                repeat: Infinity,
-                                delay: i * 0.8,
-                                ease: "linear"
-                            }}
-                        />
-                    ))}
-
-                    {/* Professional Tech Icons - Orange */}
-                    {[
-                        { symbol: "→", top: "15%", left: "8%", delay: 0 },
-                        { symbol: "⟨⟩", top: "65%", left: "88%", delay: 2 },
-                        { symbol: "01", top: "25%", left: "85%", delay: 4 },
-                        { symbol: "▸", top: "75%", left: "12%", delay: 1 },
-                        { symbol: "⌘", top: "10%", left: "65%", delay: 3 },
-                        { symbol: "◆", top: "55%", left: "45%", delay: 5 },
-                    ].map((item, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute text-orange-400/20 font-mono font-bold text-5xl select-none"
-                            style={{ top: item.top, left: item.left }}
-                            animate={{
-                                y: [0, -20, 0],
-                                opacity: [0.1, 0.3, 0.1],
-                                scale: [1, 1.1, 1]
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                delay: item.delay,
-                                ease: "easeInOut"
-                            }}
-                        >
-                            {item.symbol}
-                        </motion.div>
-                    ))}
-
-                    {/* Glowing Orbs - Blue & Orange */}
-                    <motion.div
-                        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px]"
-                    />
-                    <motion.div
-                        animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                        className="absolute top-2/3 right-1/4 w-[400px] h-[400px] bg-orange-500/20 rounded-full blur-[120px]"
-                    />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]" />
+                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px]" />
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px]" />
                 </div>
 
                 <div className="container mx-auto px-4 mb-8 relative z-10 text-center">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider mb-4 shadow-lg backdrop-blur-sm">
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-400 mr-2 animate-pulse"></span>
-                        Hall of Fame-Celebrating outstanding achievements of our learners
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
-                        Recent Success Stories
-                    </h2>
-                    <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                        Meet the ambitious individuals who recently started their journey with top tech giants.
-                    </p>
+                    <div className="container mx-auto px-4 mb-12 relative z-10 text-center">
+                        <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-400 mr-2 animate-pulse"></span>
+                            Hall of Fame
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Candidates</span> Working On <br className="hidden md:block" />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-rose-500">Top Companies</span>
+                        </h2>
+                        <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                            Meet the ambitious individuals who recently started their journey with top tech giants.
+                        </p>
+                    </div>
                 </div>
 
                 <div className="w-full relative">
@@ -264,33 +203,44 @@ const Placements = () => {
                         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent" />
                     </div>
 
-                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0066CC] to-transparent z-10 pointer-events-none md:w-32" />
-                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#003366] to-transparent z-10 pointer-events-none md:w-32" />
+                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none md:w-32" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none md:w-32" />
 
                     {infiniteStudents && infiniteStudents.length > 0 ? (
                         <div className="overflow-hidden py-4 px-4" ref={emblaRef}>
                             <div className="flex touch-pan-y items-center will-change-transform">
                                 {infiniteStudents.map((student, index) => (
-                                    <div key={index} className="flex-[0_0_240px] min-w-0 mx-4 select-none relative z-10">
-                                        <div className="flex flex-col items-center text-center p-6 transition-all duration-500 hover:-translate-y-3 cursor-pointer bg-[#003366]/40 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-orange-400/50 hover:shadow-[0_0_30px_rgba(255,107,53,0.2)] group">
+                                    <div key={index} className="flex-[0_0_260px] min-w-0 mx-4 select-none relative z-10">
+                                        <div className="flex flex-col items-center text-center cursor-pointer group h-full transition-all duration-300">
                                             <div className="relative mb-6">
-                                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/20 to-orange-500/20 blur-xl group-hover:blur-2xl transition-all" />
-                                                <div className="relative w-[130px] h-[130px] rounded-full overflow-hidden border-4 border-slate-700 ring-2 ring-blue-500/30 group-hover:ring-orange-400/50 transition-all shadow-xl">
-                                                    {student.image && <img
-                                                        src={student.image}
-                                                        alt={student.name}
-                                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                                    />}
+                                                <div className="relative w-[130px] h-[130px] rounded-full overflow-hidden border-4 border-white ring-4 ring-blue-500/10 group-hover:ring-blue-500 transition-all duration-500 shadow-xl">
+                                                    {student.image ? (
+                                                        <img
+                                                            src={student.image}
+                                                            alt={student.name}
+                                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
+                                                            <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                            </svg>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                {/* Status Badge */}
+                                                <div className="absolute -bottom-2 right-2 bg-orange-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter shadow-lg border-2 border-white transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                                                    Hired
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-orange-400 transition-colors">
+                                            <h3 className="text-xl font-black text-slate-900 mb-1 leading-tight group-hover:text-blue-600 transition-colors">
                                                 {student.name}
                                             </h3>
-                                            <p className="text-blue-400 font-semibold text-sm mb-3">
+                                            <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-black text-xs uppercase tracking-widest mb-4">
                                                 {student.jobTitle}
                                             </p>
-                                            <p className="text-slate-400 text-xs font-bold uppercase tracking-wider bg-slate-900/60 px-3 py-1.5 rounded-full border border-slate-700/50 backdrop-blur-sm">
+                                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm group-hover:border-blue-200 group-hover:shadow-blue-200/20 transition-all group-hover:text-slate-900">
                                                 {student.companies.join(' / ')}
                                             </p>
                                         </div>
@@ -306,140 +256,198 @@ const Placements = () => {
                 </div>
             </section>
 
+
+
+            {/* Hiring Partners Section (Logos) */}
+            <section className="py-20 bg-white border-y border-slate-200 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                </div>
+
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-[#4285F4] mb-2 tracking-tight">
+                            Our Clients
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 items-center justify-items-center">
+                        {[
+                            { name: "Google", src: "/images/Google-logo.png" },
+                            { name: "TCS", src: "/images/TCS.png" },
+                            { name: "HCL", src: "/images/HCL.png" },
+                            { name: "Capgemini", src: "/images/Capgemini.png" },
+                            { name: "Microsoft", src: "/images/Microsoft.webp" },
+                            { name: "Amazon", src: "/images/amazon-logo.webp" },
+                            { name: "Infosys", src: "/images/Infosys.png" },
+                            { name: "Wipro", src: "/images/Wipro.png" },
+                            { name: "Accenture", src: "/images/Accenture.svg-1-1536x405-1-595xh.webp" },
+                            { name: "IBM", src: "/images/IBM.png" },
+                            { name: "Tech Mahindra", src: "/images/tech-mahindra-1.webp" },
+                            { name: "Mindtree", src: "/images/mindtree.png" }
+                        ].map((company, idx) => (
+                            <div key={idx} className="w-40 h-24 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group relative z-10">
+                                <img
+                                    src={company.src}
+                                    alt={company.name}
+                                    className="max-w-full max-h-full object-contain transition-all duration-300"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).style.display = 'none';
+                                        (e.target as HTMLImageElement).parentElement!.innerText = company.name;
+                                        (e.target as HTMLImageElement).parentElement!.className = "w-40 h-24 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center p-6 text-sm font-bold text-slate-400 text-center";
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Placement Assistance Form Section */}
             <section className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 flex flex-col lg:flex-row">
+                {/* Background Decor */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent opacity-50" />
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl opacity-50 pointer-events-none" />
+                <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl opacity-50 pointer-events-none" />
 
-                        {/* Left Side: Visual & Context */}
-                        <div className="lg:w-1/2 relative bg-slate-900 p-8 md:p-12 flex flex-col justify-center overflow-hidden">
-                            {/* Animated Background */}
-                            <div className="absolute inset-0">
-                                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 opacity-90" />
-                                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-20" />
-                            </div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100 flex flex-col md:flex-row">
+
+                        {/* Interactive Left Side */}
+                        <div className="md:w-5/12 bg-slate-900 relative p-8 md:p-12 flex flex-col justify-between overflow-hidden group">
+                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay transition-transform duration-700 group-hover:scale-105" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/60 to-slate-900" />
 
                             <div className="relative z-10">
-                                <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider mb-6">
-                                    Career Acceleration
-                                </span>
-                                <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
-                                    Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-orange-400">Launch</span> Your Tech Career?
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                                    Career Guidance
+                                </div>
+                                <h2 className="text-3xl font-black text-white mb-4 leading-tight">
+                                    Unlock Your <span className="text-blue-400">Potential</span>
                                 </h2>
-                                <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                                    Get personalized career guidance, resume reviews, and mock interviews from industry experts.
+                                <p className="text-slate-300 text-sm leading-relaxed mb-8">
+                                    Connect with our placement experts to analyze your profile and find the perfect roadmap for your tech career.
                                 </p>
+                            </div>
 
-                                <ul className="space-y-4">
-                                    {[
-                                        "Exclusive Placement Support",
-                                        "1-on-1 Mentorship Sessions",
-                                        "Resume & Portfolio Building",
-                                        "Mock Interviews with Experts"
-                                    ].map((item, i) => (
-                                        <li key={i} className="flex items-center gap-3 text-slate-300 font-medium">
-                                            <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-                                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </div>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
+                            <div className="relative z-10 space-y-4">
+                                <div className="flex items-center gap-4 text-white">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10 text-orange-400 font-bold text-sm">
+                                        1k+
+                                    </div>
+                                    <div>
+                                        <div className="text-sm font-bold">Students Placed</div>
+                                        <div className="text-xs text-slate-400">Across Top MNCs</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 text-white">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10 text-blue-400 font-bold text-sm">
+                                        95%
+                                    </div>
+                                    <div>
+                                        <div className="text-sm font-bold">Success Rate</div>
+                                        <div className="text-xs text-slate-400">Career Transition</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Right Side: Form (The "Blue" Style from reference) */}
-                        <div className="lg:w-1/2 bg-[#0066CC] p-8 md:p-12 relative flex flex-col justify-center">
-                            {/* Slanted divider effect visual (overlap) -- Simplified for cleaner React implementation */}
-                            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                                <div className="absolute top-[-50%] left-[-10%] w-[200%] h-[200%] bg-gradient-to-br from-white/5 to-transparent rotate-12 blur-3xl opacity-30" />
-                            </div>
+                        {/* Modern Form Right Side */}
+                        <div className="md:w-7/12 p-8 md:p-12 bg-white relative">
+                            <h3 className="text-2xl font-bold text-slate-900 mb-2">Get in Touch</h3>
+                            <p className="text-slate-500 mb-8 text-sm">Fill in your details and our team will get back to you shortly.</p>
 
-                            <div className="relative z-10">
-                                <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
-                                    Start Your Application
-                                </h3>
-                                <p className="text-blue-100 mb-8">
-                                    Fill out the form below to schedule your free career counseling session.
-                                </p>
+                            <form className="space-y-6" onSubmit={handleSubmit}>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder="Full Name"
+                                        required
+                                        className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-blue-500 focus:bg-blue-50/50 transition-all peer rounded-t-lg"
+                                    />
+                                    <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-500 pointer-events-none">
+                                        Full Name
+                                    </label>
+                                </div>
 
-                                <form className="space-y-5" onSubmit={handleSubmit}>
-                                    <div>
-                                        <label className="block text-white text-xs font-bold uppercase tracking-wider mb-2 ml-1">Full Name</label>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="relative">
                                         <input
                                             type="text"
-                                            name="name"
-                                            value={formData.name}
+                                            name="phone"
+                                            value={formData.phone}
                                             onChange={handleChange}
-                                            placeholder="Enter your full name"
+                                            placeholder="Phone Number"
                                             required
-                                            className="w-full h-12 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-5 focus:outline-none focus:bg-blue-900/50 focus:border-orange-400/50 transition-all font-medium"
+                                            className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-blue-500 focus:bg-blue-50/50 transition-all peer rounded-t-lg"
                                         />
+                                        <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-500 pointer-events-none">
+                                            Phone Number
+                                        </label>
                                     </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div>
-                                            <label className="block text-white text-xs font-bold uppercase tracking-wider mb-2 ml-1">Phone Number</label>
-                                            <input
-                                                type="text"
-                                                name="phone"
-                                                value={formData.phone}
-                                                onChange={handleChange}
-                                                placeholder="+91 00000 00000"
-                                                required
-                                                className="w-full h-12 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-5 focus:outline-none focus:bg-blue-900/50 focus:border-orange-400/50 transition-all font-medium"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-white text-xs font-bold uppercase tracking-wider mb-2 ml-1">Email Address</label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                                placeholder="you@example.com"
-                                                required
-                                                className="w-full h-12 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-5 focus:outline-none focus:bg-blue-900/50 focus:border-orange-400/50 transition-all font-medium"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-white text-xs font-bold uppercase tracking-wider mb-2 ml-1">Interested Course / Role</label>
-                                        <select
-                                            name="course"
-                                            value={formData.course}
+                                    <div className="relative">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
                                             onChange={handleChange}
+                                            placeholder="Email Address"
                                             required
-                                            aria-label="Interested Course"
-                                            className="w-full h-full rounded-xl bg-blue-800/50 border border-blue-400/30 text-white px-5 focus:outline-none focus:bg-blue-900/50 focus:border-orange-400/50 transition-all font-medium appearance-none cursor-pointer"
-                                        >
-                                            <option className="bg-slate-900 text-white" value="">Select Course</option>
-                                            <option className="bg-slate-900 text-white" value="Full Stack Development">Full Stack Development</option>
-                                            <option className="bg-slate-900 text-white" value="Data Science & AI">Data Science & AI</option>
-                                            <option className="bg-slate-900 text-white" value="Cyber Security">Cyber Security</option>
-                                            <option className="bg-slate-900 text-white" value="Cloud Computing (AWS/Azure)">Cloud Computing (AWS/Azure)</option>
-                                            <option className="bg-slate-900 text-white" value="Other">Other</option>
-                                        </select>
+                                            className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-blue-500 focus:bg-blue-50/50 transition-all peer rounded-t-lg"
+                                        />
+                                        <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-500 pointer-events-none">
+                                            Email Address
+                                        </label>
                                     </div>
+                                </div>
 
-                                    <button disabled={loading} className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold h-14 rounded-xl shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-1 transition-all duration-300 mt-2 text-lg disabled:opacity-70 disabled:cursor-not-allowed">
-                                        {loading ? "Submitting..." : "Get Career Guidance"}
-                                    </button>
-                                    <p className="text-blue-200/60 text-xs text-center mt-4">
-                                        By submitting, you agree to receive career updates from AOTMS.
-                                    </p>
-                                </form>
-                            </div>
+                                <div className="relative">
+                                    <select
+                                        name="course"
+                                        value={formData.course}
+                                        onChange={handleChange}
+                                        required
+                                        aria-label="Select Interested Course"
+                                        title="Select Interested Course"
+                                        className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-blue-50/50 transition-all rounded-t-lg cursor-pointer appearance-none"
+                                    >
+                                        <option value="" disabled className="text-slate-400">Select Interested Course</option>
+                                        <option value="Full Stack Development">Full Stack Development</option>
+                                        <option value="Data Science & AI">Data Science & AI</option>
+                                        <option value="Cyber Security">Cyber Security</option>
+                                        <option value="Cloud Computing (AWS/Azure)">Cloud Computing (AWS/Azure)</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label className="absolute left-4 top-1 text-xs text-slate-400 font-medium pointer-events-none">
+                                        Interested Course
+                                    </label>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    </div>
+                                </div>
+
+                                <button
+                                    disabled={loading}
+                                    className="w-full bg-slate-900 hover:bg-black text-white font-bold h-12 rounded-xl shadow-lg shadow-slate-900/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 md:text-md flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {loading ? "Submitting Request..." : "Schedule Free Counseling"}
+                                    {!loading && <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>}
+                                </button>
+
+                                <p className="text-center text-[10px] text-slate-400 mt-4 leading-relaxed px-4">
+                                    By clicking submit, you authorize AOTMS to contact you. Your data is secure with us.
+                                </p>
+                            </form>
                         </div>
                     </div>
                 </div>
             </section>
 
             <Footer />
-        </div>
+        </div >
     );
 };
 

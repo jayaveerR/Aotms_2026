@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 // Register
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password, phone, qualification } = req.body;
+        const { name, email, password, phone, degree, department, passoutYear, course } = req.body;
 
         // Check if user exists
         let user = await User.findOne({ email });
@@ -22,7 +22,10 @@ router.post('/register', async (req, res) => {
             email,
             password,
             phone,
-            qualification,
+            degree,
+            department,
+            passoutYear,
+            course,
             avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random` // Default avatar
         });
 
@@ -52,7 +55,10 @@ router.post('/register', async (req, res) => {
                         name: user.name,
                         email: user.email,
                         phone: user.phone,
-                        qualification: user.qualification,
+                        degree: user.degree,
+                        department: user.department,
+                        passoutYear: user.passoutYear,
+                        course: user.course,
                         avatar: user.avatar,
                         role: user.role
                     }
@@ -102,7 +108,10 @@ router.post('/login', async (req, res) => {
                         name: user.name,
                         email: user.email,
                         phone: user.phone,
-                        qualification: user.qualification,
+                        degree: user.degree,
+                        department: user.department,
+                        passoutYear: user.passoutYear,
+                        course: user.course,
                         avatar: user.avatar,
                         role: user.role
                     }

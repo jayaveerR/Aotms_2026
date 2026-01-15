@@ -81,7 +81,7 @@ const testimonials: Testimonial[] = [
         description:
             "Transforming big data into actionable insights. Expert in predictive modeling, statistical analysis, and machine learning pipelines. PhD in Applied Mathematics.",
         imageUrl:
-            "/images/mentos-5.jpg",
+            "/images/mentor-5.jpg",
         linkedinUrl: "#",
     }
 ];
@@ -99,8 +99,22 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
         { icon: Github, url: activeMentor.githubUrl, label: "GitHub" },
     ].filter(social => social.url);
 
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        if (isPaused) return;
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, [isPaused]);
+
     return (
-        <div className={cn("w-full max-w-7xl mx-auto px-4", className)}>
+        <div
+            className={cn("w-full max-w-7xl mx-auto px-4", className)}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+        >
             {/* 1. Selection Row - 5 Mentors */}
             <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
                 {testimonials.map((mentor, index) => (
@@ -113,15 +127,15 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
                         )}
                     >
                         <div className={cn(
-                            "w-14 h-14 md:w-16 md:h-16 rounded-xl p-0.5 mb-2 transition-all duration-300",
+                            "w-14 h-14 md:w-16 md:h-16 rounded-full mb-2 transition-all duration-300",
                             currentIndex === index
-                                ? "bg-gradient-to-tr from-blue-600 to-accent shadow-[0_5px_15px_-5px_rgba(25,118,210,0.4)] rotate-2"
-                                : "bg-slate-200 group-hover:bg-slate-300"
+                                ? "ring-2 ring-blue-600 ring-offset-2 scale-110"
+                                : "opacity-70 hover:opacity-100 filter grayscale hover:grayscale-0"
                         )}>
                             <img
                                 src={mentor.imageUrl}
                                 alt={mentor.name}
-                                className="w-full h-full object-cover rounded-[10px]"
+                                className="w-full h-full object-cover rounded-full"
                             />
                         </div>
                         <span className={cn(

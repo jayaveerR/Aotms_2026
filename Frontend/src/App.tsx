@@ -8,7 +8,7 @@ import { useEffect, Suspense, lazy } from "react";
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
-const CourseDetail = lazy(() => import("./pages/CourseDetail"));
+const CourseDetail = lazy(() => import("./pages/CourseDetailPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const WhatWeDo = lazy(() => import("./pages/WhatWeDo"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
@@ -24,12 +24,14 @@ const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
 const Events = lazy(() => import("./pages/EventsPage"));
 const FAQPage = lazy(() => import("./pages/FAQPage"));
 const ComingSoon = lazy(() => import("./pages/ComingSoon"));
+const CoursesPage = lazy(() => import("./pages/CoursesPage"));
+const InternshipsPage = lazy(() => import("./pages/InternshipsPage"));
 
 import Chatbot from "./components/Chatbot";
 
 const queryClient = new QueryClient();
 
-const LoadingFallback = () => (
+export const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen bg-slate-50">
     <div className="w-16 h-16 border-4 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
   </div>
@@ -73,7 +75,7 @@ const App = () => {
     // Backend Warm-up / Anti-Cold-Start ping
     const warmUpBackend = async () => {
       try {
-        await fetch(`${import.meta.env.VITE_API_URL}/api/health`).catch(() => {});
+        await fetch(`${import.meta.env.VITE_API_URL}/api/health`).catch(() => { });
       } catch (e) {
         // Silent fail
       }
@@ -92,30 +94,31 @@ const App = () => {
           <ScrollToTop />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/course/:slug" element={<CourseDetail />} />
-            <Route path="/what-we-do" element={<WhatWeDo />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/feedback" element={<FeedbackPage />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/placements" element={<Placements />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/hackathon" element={<Hackathon />} />
-            <Route path="/workshop" element={<Workshop />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={<Index />} />
+              <Route path="/course/:slug" element={<CourseDetail />} />
+              <Route path="/what-we-do" element={<WhatWeDo />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/feedback" element={<FeedbackPage />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/placements" element={<Placements />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/hackathon" element={<Hackathon />} />
+              <Route path="/workshop" element={<Workshop />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/internships" element={<ComingSoon />} />
-            <Route path="/resources" element={<ComingSoon />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/internships" element={<InternshipsPage />} />
+              <Route path="/resources" element={<ComingSoon />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 

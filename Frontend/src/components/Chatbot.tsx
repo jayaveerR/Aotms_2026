@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
-import { MoreHorizontal, Send, MessageSquare, Smile, Copy, ThumbsUp, ThumbsDown, RefreshCw, MessageSquarePlus, MessageSquareX, History, X } from 'lucide-react';
+import { MoreHorizontal, Send, MessageSquare, Smile, Copy, ThumbsUp, ThumbsDown, RefreshCw, MessageSquarePlus, MessageSquareX, History, X, ChevronUp, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -70,7 +70,7 @@ const Chatbot: React.FC = () => {
         { id: 1, text: 'Hello! How can I help you today?', sender: 'bot' },
       ]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -96,6 +96,14 @@ const Chatbot: React.FC = () => {
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
     }, 1500);
+  };
+
+  const handleScrollUp = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScrollDown = () => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
   };
 
   const handleStartNewChat = () => {
@@ -132,6 +140,7 @@ const Chatbot: React.FC = () => {
             <button
               onClick={() => setShowMenu(!showMenu)}
               className="text-black hover:bg-black/5 rounded-full p-2 transition-colors relative"
+              title="Menu"
             >
               <MoreHorizontal className="w-5 h-5" />
             </button>
@@ -139,6 +148,7 @@ const Chatbot: React.FC = () => {
               onClick={toggleChat}
               className="text-black hover:bg-black/5 rounded-full p-2 transition-colors"
               aria-label="Close"
+              title="Close"
             >
               <X className="w-5 h-5" />
             </button>
@@ -173,16 +183,16 @@ const Chatbot: React.FC = () => {
                 </div>
                 {msg.sender === 'bot' && (
                   <div className="flex items-center gap-3 mt-1 ml-1 text-gray-400">
-                    <button className="hover:text-gray-600 transition-colors" title="Copy">
+                    <button className="hover:text-gray-600 transition-colors" title="Copy" aria-label="Copy Message">
                       <Copy className="w-3.5 h-3.5" />
                     </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Like">
+                    <button className="hover:text-gray-600 transition-colors" title="Like" aria-label="Like Message">
                       <ThumbsUp className="w-3.5 h-3.5" />
                     </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Dislike">
+                    <button className="hover:text-gray-600 transition-colors" title="Dislike" aria-label="Dislike Message">
                       <ThumbsDown className="w-3.5 h-3.5" />
                     </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Regenerate">
+                    <button className="hover:text-gray-600 transition-colors" title="Regenerate" aria-label="Regenerate Response">
                       <RefreshCw className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -212,6 +222,8 @@ const Chatbot: React.FC = () => {
                   type="button"
                   onClick={() => onEmojiSelect(emoji)}
                   className="text-xl hover:bg-gray-100 p-1 rounded transition-colors"
+                  title={`Select ${emoji}`}
+                  aria-label={`Select ${emoji}`}
                 >
                   {emoji}
                 </button>
@@ -233,7 +245,7 @@ const Chatbot: React.FC = () => {
               >
                 <Smile className="w-5 h-5" />
               </button>
-              <button type="submit" disabled={!inputValue.trim()} className="text-gray-400 hover:text-primary disabled:opacity-50 transition-colors">
+              <button type="submit" disabled={!inputValue.trim()} className="text-gray-400 hover:text-primary disabled:opacity-50 transition-colors" title="Send">
                 <Send className="w-5 h-5" />
               </button>
             </div>
@@ -241,15 +253,41 @@ const Chatbot: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Toggle Button */}
-      {!isOpen && (
-        <button ref={toggleBtnRef} onClick={toggleChat} className="chat-toggle-btn shadow-xl hover:shadow-2xl transition-all">
-          <div className="flex items-center gap-2">
+      {/* Floating Action Buttons Stack */}
+      <div className="fixed bottom-6 right-6 flex flex-col items-center gap-3">
+        {/* Scroll Buttons */}
+        <div className="flex flex-col gap-2">
+          <button
+            onClick={handleScrollUp}
+            className="w-9 h-9 rounded-full bg-[#004A99] hover:bg-[#003366] text-white flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
+            aria-label="Scroll Up"
+            title="Scroll to Top"
+          >
+            <ChevronUp className="w-5 h-5" />
+          </button>
+          <button
+            onClick={handleScrollDown}
+            className="w-9 h-9 rounded-full bg-[#004A99] hover:bg-[#003366] text-white flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
+            aria-label="Scroll Down"
+            title="Scroll to Bottom"
+          >
+            <ChevronDown className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Chat Toggle Button */}
+        {!isOpen && (
+          <button
+            ref={toggleBtnRef}
+            onClick={toggleChat}
+            className="h-11 px-5 rounded-full bg-[#004A99] hover:bg-[#003366] text-white shadow-xl hover:shadow-2xl transition-all flex items-center gap-2.5 border-2 border-white/10"
+            title="AOTMS Chat"
+          >
             <MessageSquare className="w-5 h-5" />
-            <span className="font-semibold text-sm">AOTMS</span>
-          </div>
-        </button>
-      )}
+            <span className="font-bold text-sm tracking-wide">AOTMS</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 };

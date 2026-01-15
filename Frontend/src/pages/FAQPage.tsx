@@ -119,17 +119,14 @@ const FAQPage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <div className="pt-36 md:pt-48 pb-16 bg-[#0B1221] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 pointer-events-none" />
-                <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066CC]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FF6B35]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+            <div className="pt-36 md:pt-48 pb-16 bg-[#003B95] relative overflow-hidden">
 
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <span className="inline-block py-1 px-3 rounded-full bg-[#FF6B35]/10 border border-[#FF6B35]/20 text-[#FF6B35] font-mono text-xs font-bold tracking-widest uppercase mb-4">
                         Got Questions?
                     </span>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
-                        Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066CC] to-[#00C2CB]">Questions</span>
+                        Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C2CB] to-[#0066CC]">Questions</span>
                     </h1>
                     <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
                         Find answers to common questions about our courses, admissions, placement support, and more.
@@ -220,9 +217,7 @@ const FAQPage = () => {
                 )}
 
                 {/* Contact CTA */}
-                <div className="mt-20 bg-[#0B1221] rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#0066CC]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-all duration-700 group-hover:bg-[#0066CC]/30" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FF6B35]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 transition-all duration-700 group-hover:bg-[#FF6B35]/20" />
+                <div className="mt-20 bg-[#003B95] rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group">
 
                     <div className="relative z-10">
                         <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm border border-white/10 text-white">

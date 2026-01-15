@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useCourses } from "@/hooks/useCourses";
 
 export const CourseRequestSection = () => {
+    const { data: courses } = useCourses();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -13,13 +15,60 @@ export const CourseRequestSection = () => {
     });
     const [loading, setLoading] = useState(false);
 
+    // Prepare marquee items (duplicate list for seamless loop)
+    const marqueeCourses = courses ? [...courses, ...courses, ...courses] : [];
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        // Real-time Input Restrictions
+        if (name === 'phone') {
+            const numbersOnly = value.replace(/[^0-9]/g, '');
+            if (numbersOnly.length <= 10) {
+                setFormData({ ...formData, [name]: numbersOnly });
+            }
+            return;
+        }
+
+        if (name === 'name') {
+            const alphabetsOnly = value.replace(/[^a-zA-Z\s]/g, '');
+            setFormData({ ...formData, [name]: alphabetsOnly });
+            return;
+        }
+
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!formData.name.trim() || formData.name.trim().length < 3) {
+            toast.error("Please enter a valid Name (min 3 characters)");
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.email || !emailRegex.test(formData.email)) {
+            toast.error("Please enter a valid Email address");
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.phone || formData.phone.length !== 10) {
+            toast.error("Please enter a valid 10-digit Phone Number");
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.course.trim() || formData.course.trim().length < 3) {
+            toast.error("Please enter a valid Course Name");
+            setLoading(false);
+            return;
+        }
+
         try {
             await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, formData);
             toast.success("Request submitted successfully!");
@@ -33,25 +82,81 @@ export const CourseRequestSection = () => {
     };
 
     return (
-        <section className="py-12 md:py-20 bg-background relative overflow-hidden">
-            <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="bg-primary rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row relative">
+        <section className="py-2 md:py-4 bg-[#007FCF] relative overflow-hidden w-full">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-1/3 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
-                    {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    <div className="absolute bottom-0 left-1/3 w-40 h-40 bg-accent/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="w-full pl-0 pr-6 md:pr-12 lg:pr-20 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center justify-start relative lg:min-h-[480px] gap-6 lg:gap-12">
+                    {/* Left Side - Course Image Auto-Scroll Carousel */}
+                    <div className="lg:w-[50%] relative h-full min-h-[400px] lg:min-h-[450px] overflow-hidden flex flex-col justify-center gap-6">
+                        {/* Overlay Gradient for smooth fade on sides */}
+                        <div className="absolute top-0 left-0 bottom-0 w-20 bg-gradient-to-r from-[#007FCF] to-transparent z-10" />
+                        <div className="absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-l from-[#007FCF] to-transparent z-10" />
 
-                    {/* Left Side - Image */}
-                    <div className="lg:w-5/12 relative min-h-[300px] lg:min-h-full">
-                    
-                        {/* Overlay */}
-                        <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
+                        {marqueeCourses.length > 0 ? (
+                            <>
+                                {/* Row 1: Scroll Left */}
+                                <div className="w-full overflow-hidden opacity-80 hover:opacity-100 transition-opacity duration-300">
+                                    <motion.div
+                                        className="flex gap-4 w-max"
+                                        animate={{ x: ["0%", "-33.33%"] }}
+                                        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+                                    >
+                                        {marqueeCourses.map((course, index) => (
+                                            <div key={`r1-${course._id}-${index}`} className="relative w-52 h-36 rounded-lg overflow-hidden shrink-0">
+                                                <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                                                <div className="absolute inset-0 bg-black/20" />
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                </div>
 
-                        {/* Slanted Edge Mask for Desktop */}
+                                {/* Row 2: Scroll Right (Center Row - Larger) */}
+                                <div className="w-full overflow-hidden py-4">
+                                    <motion.div
+                                        className="flex gap-4 w-max"
+                                        initial={{ x: "-33.33%" }}
+                                        animate={{ x: "0%" }}
+                                        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+                                    >
+                                        {marqueeCourses.map((course, index) => (
+                                            <div key={`r2-${course._id}-${index}`} className="relative w-72 h-48 rounded-xl overflow-hidden shrink-0 border-2 border-white/20">
+                                                <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                                                    <p className="text-white text-xs font-bold truncate">{course.title}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                </div>
+
+                                {/* Row 3: Scroll Left */}
+                                <div className="w-full overflow-hidden opacity-80 hover:opacity-100 transition-opacity duration-300">
+                                    <motion.div
+                                        className="flex gap-4 w-max"
+                                        animate={{ x: ["0%", "-33.33%"] }}
+                                        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+                                    >
+                                        {marqueeCourses.map((course, index) => (
+                                            <div key={`r3-${course._id}-${index}`} className="relative w-52 h-36 rounded-lg overflow-hidden shrink-0">
+                                                <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                                                <div className="absolute inset-0 bg-black/20" />
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center text-white/50">
+                                Loading Courses...
+                            </div>
+                        )}
                     </div>
 
                     {/* Right Side - Content */}
-                    <div className="lg:w-7/12 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 w-full">
+                    <div className="lg:w-[45%] flex flex-col justify-center relative z-10 w-full lg:pr-12">
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -99,17 +204,22 @@ export const CourseRequestSection = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
+                                    className="flex-1 px-6 py-4 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent transition-all shadow-sm"
                                 />
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    placeholder="Phone Number"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    required
-                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
-                                />
+                                <div className="flex-1 relative group/input">
+                                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 font-black text-sm border-r border-slate-200 pr-3 pointer-events-none group-focus-within/input:text-accent transition-colors">
+                                        +91
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        placeholder="Phone Number"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full pl-16 pr-6 py-4 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent transition-all shadow-sm"
+                                    />
+                                </div>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-4 w-full">
                                 <input
@@ -119,7 +229,7 @@ export const CourseRequestSection = () => {
                                     value={formData.course}
                                     onChange={handleChange}
                                     required
-                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
+                                    className="flex-1 px-6 py-4 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent transition-all shadow-sm"
                                 />
                                 <input
                                     type="email"
@@ -128,7 +238,7 @@ export const CourseRequestSection = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
+                                    className="flex-1 px-6 py-4 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent transition-all shadow-sm"
                                 />
                             </div>
                             <button disabled={loading} className="px-8 py-4 bg-accent text-white font-bold rounded-xl hover:bg-accent/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 whitespace-nowrap w-full sm:w-auto self-start disabled:opacity-70 disabled:cursor-not-allowed">

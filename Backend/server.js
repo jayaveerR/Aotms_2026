@@ -32,7 +32,6 @@ connectDB();
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/leads', require('./routes/leads'));
-app.use('/api/registrations', require('./routes/registrations'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/winners', require('./routes/winners'));

@@ -66,22 +66,25 @@ const CompanyLogos = ({
                     className="w-full"
                 >
                     <CarouselContent className="-ml-4">
-                        {[...logos, ...logos].map((logo, index) => (
-                            <CarouselItem
-                                key={`${logo.id}-${index}`}
-                                className="pl-4 flex basis-auto min-w-[150px] justify-center"
-                            >
-                                <div className="flex items-center gap-3 px-4 py-2 group select-none">
-                                    {logo.icon && (
-                                        <logo.icon
-                                            className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400 group-hover:scale-110 transition-transform duration-300"
-                                            style={{ color: logo.color }}
-                                        />
-                                    )}
-                                    <span className="text-sm sm:text-base font-bold text-slate-600 whitespace-nowrap">{logo.description}</span>
-                                </div>
-                            </CarouselItem>
-                        ))}
+                        {[...logos, ...logos].map((logo, index) => {
+                            const Icon = logo.icon;
+                            return (
+                                <CarouselItem
+                                    key={`${logo.id}-${index}`}
+                                    className="pl-4 flex basis-auto min-w-[150px] justify-center"
+                                >
+                                    <div className="flex items-center gap-3 px-4 py-2 group select-none">
+                                        {Icon && (
+                                            <Icon
+                                                className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400 group-hover:scale-110 transition-transform duration-300"
+                                                style={{ color: logo.color }}
+                                            />
+                                        )}
+                                        <span className="text-sm sm:text-base font-bold text-slate-600 whitespace-nowrap">{logo.description}</span>
+                                    </div>
+                                </CarouselItem>
+                            );
+                        })}
                     </CarouselContent>
                 </Carousel>
                 <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>

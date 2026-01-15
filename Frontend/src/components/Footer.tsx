@@ -1,7 +1,8 @@
-import { Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { FaTelegram, FaWhatsapp, FaYoutube, FaInstagram, FaLinkedin, FaFacebook, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
 import logo from "@/assets/logo.png";
+import { cn } from "@/lib/utils";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -14,23 +15,33 @@ const quickLinks = [
   { name: "Terms & Conditions", href: "/terms" },
 ];
 
-const courses = [
-  { name: "Quantum Computing", href: "/course/quantum-computing" },
-  { name: "Cyber Security", href: "/course/cyber-security" },
-  { name: "AI with Machine Learning", href: "/course/ai-ml" },
-  { name: "DevOps", href: "/course/devops" },
-  { name: "Embedded Systems", href: "/course/embedded-systems" },
-  { name: "Data Science", href: "/course/data-science" },
-  { name: "Cloud Computing", href: "/course/multi-cloud-engineering" },
-  { name: "Python Full Stack", href: "/course/python-full-stack" },
-  { name: "Java Full Stack", href: "/course/java-full-stack" },
-  { name: "MERN Stack", href: "/course/mern-stack" }
+const footerCourses = [
+  { name: "Quantum Computing", slug: "Quantum-Computing" },
+  { name: "Cybersecurity", slug: "Cybersecurity" },
+  { name: "AI with Machine Learning", slug: "AI-with-Machine-Learning" },
+  { name: "DevOps (AWS/Azure)", slug: "DevOps-AWS-Azure" },
+  { name: "Embedded Systems", slug: "Embedded-Systems" },
+  { name: "Data Science", slug: "Data-Science" },
+  { name: "Cloud Computing", slug: "Cloud-Computing" },
+  { name: "Python Full Stack", slug: "Python-full-stack" },
+  { name: "Java Full Stack", slug: "Java-full-stack" },
+  { name: "MERN Full Stack", slug: "MERN-full-stack" }
 ];
 
+const courses = footerCourses.map(course => ({
+  name: course.name,
+  href: `/course/${course.slug}`
+}));
+
 const socialLinks = [
-  { icon: Youtube, href: "https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF", label: "YouTube" },
-  { icon: Instagram, href: "https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/feed/", label: "LinkedIn" },
+  { icon: FaYoutube, href: "https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF", label: "YouTube", color: "bg-[#FF0000] hover:bg-[#CC0000]" },
+  { icon: FaInstagram, href: "https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr", label: "Instagram", color: "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:brightness-110" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/feed/", label: "LinkedIn", color: "bg-[#0077B5] hover:bg-[#005582]" },
+  { icon: FaXTwitter, href: "https://twitter.com/aotms", label: "X", color: "bg-[#000000] hover:bg-[#222222]" },
+  { icon: FaFacebook, href: "https://www.facebook.com/aotms", label: "Facebook", color: "bg-[#1877F2] hover:bg-[#155ab0]" },
+  { icon: FaTelegram, href: "https://t.me/aotms", label: "Telegram", color: "bg-[#26A5E4] hover:bg-[#1c7aa8]" },
+  { icon: FaWhatsapp, href: "https://wa.me/918019942233", label: "Whatsapp", color: "bg-[#25D366] hover:bg-[#1da851]" },
+  { icon: FaEnvelope, href: "mailto:Info@aotms.com", label: "Email", color: "bg-[#D44638] hover:bg-[#b03a2e]" },
 ];
 
 export const Footer = () => {
@@ -38,24 +49,26 @@ export const Footer = () => {
     <footer className="bg-[#0066CC] pt-10 pb-6 md:pt-14 md:pb-8 border-t border-white/20 font-sans text-white relative z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-2">
 
           {/* Column 1: Brand & Contact (Span 3) */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-3 space-y-4">
-            <div className="flex items-center justify-between lg:block">
+          <div className="md:col-span-2 lg:col-span-3 space-y-4">
+            <div className="flex flex-col items-start gap-6 lg:block">
               <Link to="/" className="inline-block bg-white p-3 rounded-2xl shadow-md transform transition-transform hover:scale-105">
-                <img src={logo} alt="AOTMS Logo" className="h-10 md:h-14 w-auto" />
+                <img src={logo} alt="AOTMS Logo" className="h-22 md:h-25 w-auto" />
               </Link>
               {/* Mobile Socials */}
-              <div className="flex lg:hidden gap-3">
+              <div className="flex lg:hidden flex-wrap gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/80 hover:bg-accent hover:text-white transition-colors"
+                    className={cn(
+                      "w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white transition-all transform hover:scale-110",
+                      social.color
+                    )}
                   >
                     <social.icon className="w-4 h-4" />
                   </a>
@@ -63,7 +76,7 @@ export const Footer = () => {
               </div>
             </div>
 
-            <p className="text-xs md:text-sm text-primary-foreground/70 leading-relaxed max-w-sm">
+            <p className="text-xs md:text-sm text-white/100 leading-relaxed max-w-sm">
               Transforming careers through industry-leading tech education. Master the future with Academy of Tech Masters.
             </p>
 
@@ -71,30 +84,30 @@ export const Footer = () => {
               {/* Contact Items */}
               <div className="flex flex-col gap-2 text-xs md:text-sm">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span className="text-primary-foreground/80">Vijayawada - 520010, AP, India.</span>
+                  <FaMapMarkerAlt className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                  <span className="text-white">Vijayawada - 520010, AP, India.</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-accent shrink-0" />
-                  <a href="tel:+918019942233" className="text-primary-foreground/80 hover:text-accent transition-colors">+91 80199 42233</a>
+                  <FaPhone className="w-4 h-4 text-accent shrink-0" />
+                  <a href="tel:+918019942233" className="text-white hover:text-accent transition-colors">+91 80199 52233</a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-accent shrink-0" />
-                  <a href="mailto:Info@aotms.com" className="text-primary-foreground/80 hover:text-accent transition-colors">Info@aotms.com</a>
+                  <FaEnvelope className="w-4 h-4 text-accent shrink-0" />
+                  <a href="mailto:Info@aotms.com" className="text-white hover:text-accent transition-colors">Info@aotms.com</a>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Column 2: Company (Span 2) */}
-          <div className="col-span-1 lg:col-span-2">
+          <div className="lg:col-span-2">
             <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-3">Company</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-xs md:text-sm text-primary-foreground/70 hover:text-accent transition-colors block"
+                    className="text-xs md:text-sm text-white hover:text-accent transition-colors block"
                   >
                     {link.name}
                   </Link>
@@ -104,14 +117,14 @@ export const Footer = () => {
           </div>
 
           {/* Column 3: Courses (Span 4) */}
-          <div className="col-span-1 lg:col-span-4">
+          <div className="lg:col-span-4">
             <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-3">Trending Courses</h4>
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
               {courses.map((course) => (
                 <li key={course.name}>
                   <Link
                     to={course.href}
-                    className="text-xs md:text-sm text-primary-foreground/70 hover:text-accent transition-colors truncate block"
+                    className="text-xs md:text-sm text-white hover:text-accent transition-colors truncate block"
                   >
                     {course.name}
                   </Link>
@@ -122,20 +135,22 @@ export const Footer = () => {
 
           {/* Column 4: Connect (Span 3 - The Gap Filler) */}
           <div className="hidden lg:block lg:col-span-3">
-            <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-3">Connect with us</h4>
-            <div className="flex flex-col gap-3">
+            <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-4">Connect with us</h4>
+            <div className="grid grid-cols-3 gap-3 w-fit">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 pl-3 pr-4 py-2.5 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-accent hover:border-accent hover:text-white text-primary-foreground/80 transition-all duration-300 group w-full max-w-[200px]"
+                  className={cn(
+                    "w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:scale-110 shadow-md hover:shadow-lg transition-all duration-300",
+                    social.color
+                  )}
+                  aria-label={social.label}
+                  title={social.label}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-primary-foreground/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                    <social.icon className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold">{social.label}</span>
+                  <social.icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
@@ -148,7 +163,7 @@ export const Footer = () => {
 
           <div className="text-center lg:text-left max-w-lg">
             <h4 className="text-lg md:text-xl font-bold text-white mb-2">Subscribe to our Newsletter</h4>
-            <p className="text-sm text-primary-foreground/60 leading-relaxed">
+            <p className="text-sm text-white/80 leading-relaxed">
               Get the latest insights, tutorials, and trends in tech delivered directly to your inbox.
             </p>
           </div>
@@ -167,7 +182,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] md:text-xs text-primary-foreground/50">
+        <div className="pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] md:text-xs text-white/70">
           <p>© {new Date().getFullYear()} AOTMS. All rights reserved. Engineered by Team AOTMS</p>
           <div className="flex gap-4">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

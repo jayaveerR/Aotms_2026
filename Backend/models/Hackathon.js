@@ -4,7 +4,7 @@ const hackathonSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     tagline: { type: String },
-    mode: { type: String, enum: ['Online', 'Offline'], required: true },
+    mode: { type: String, enum: ['Online', 'Offline', 'Hybrid'], required: true },
     date: { type: String, required: true },
     duration: { type: String, required: true },
     bannerUrl: { type: String },
@@ -14,22 +14,22 @@ const hackathonSchema = new mongoose.Schema({
     eligibility: { type: String },
     teamSize: { type: String },
     level: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
+    registrationStatus: { type: String, enum: ['OPEN', 'CLOSED'], default: 'OPEN' },
+    showRegisterButton: { type: Boolean, default: true },
     whatYouWillLearn: [{ type: String }],
     themes: [{ type: String }],
-    rewards: [{ type: String }],
+    challengeOverview: [{ type: String }],
+    rewards: [mongoose.Schema.Types.Mixed],
+    eventDetails: { type: Object },
     importantDates: [{
         event: { type: String },
         date: { type: String }
     }],
     registrationLink: { type: String },
-    buttonText: { type: String, default: "Register Now" },
-    actionButtonText: { type: String, default: "Action Winners" },
-    registrations: [{
-        name: { type: String },
-        email: { type: String },
-        createdAt: { type: Date, default: Date.now }
-    }],
-    type: { type: String, default: 'hackathon' }
+    buttonText: { type: String, default: "winners" },
+    type: { type: String, default: "hackathon" }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Hackathon', hackathonSchema);

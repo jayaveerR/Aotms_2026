@@ -32,7 +32,7 @@ const features: Feature[] = [
 
 export const FeatureGrid = () => {
     return (
-        <div className="w-full px-4 md:px-0">
+        <div className="px-4 md:px-0">
             <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 md:gap-6 max-w-7xl mx-auto">
                 {features.map((feature, index) => {
                     const isLast = index === features.length - 1;
@@ -55,10 +55,15 @@ export const FeatureGrid = () => {
                                 "w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300",
                                 isLast ? "bg-white/20" : "bg-blue-50 group-hover:bg-white/20"
                             )}>
-                                <feature.icon className={cn(
-                                    "w-4 h-4 md:w-5 md:h-5 transition-colors duration-300",
-                                    isLast ? "text-white" : "text-blue-600 group-hover:text-white"
-                                )} />
+                                {(() => {
+                                    const Icon = feature.icon;
+                                    return (
+                                        <Icon className={cn(
+                                            "w-4 h-4 md:w-5 md:h-5 transition-colors duration-300",
+                                            isLast ? "text-white" : "text-blue-600 group-hover:text-white"
+                                        )} />
+                                    );
+                                })()}
                             </div>
                             <span className="text-[10px] sm:text-xs md:text-base font-bold leading-tight">
                                 {feature.title}

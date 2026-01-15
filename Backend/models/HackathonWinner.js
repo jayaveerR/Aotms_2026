@@ -8,8 +8,7 @@ const WinnerSchema = new mongoose.Schema({
         teamName: { type: String, required: true },
         collegeName: { type: String, required: true },
         members: [{ type: String }],
-        prize: { type: String },
-        imageUrl: { type: String, required: true } // Required: Winner photo
+        imageUrl: { type: String, required: true }
     }]
 }, { timestamps: true });
 
