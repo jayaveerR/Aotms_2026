@@ -195,3 +195,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+// Refreshed Hero Section
