@@ -39,7 +39,7 @@ const courses = [
   { name: "MEAN Stack", href: "/course/mean-stack", icon: FaAngular },
   { name: "MERN Stack", href: "/course/mern-stack", icon: FaReact },
   { name: "Multi-Cloud Consultant", href: "/course/multi-cloud-consultant", icon: FaUserTie },
-  { name: "Multi-Cloud Engineering", href: "/course/multi-cloud-data-engineering", icon: FaNetworkWired },
+  { name: "Multi-Cloud Engineering", href: "/course/multi-cloud-engineering", icon: FaNetworkWired },
   { name: "Python Full Stack", href: "/course/python-full-stack", icon: FaPython },
   { name: "Quantum Computing", href: "/course/quantum-computing", icon: FaBrain },
   { name: "UI/UX Design", href: "/course/ui-ux-design", icon: SiMui },
@@ -313,12 +313,12 @@ export const Header = () => {
         />
 
         {/* Main Navbar */}
-        <nav className={`bg-background/95 backdrop-blur-md border-b border-border/40 transition-all duration-300 flex items-center ${isScrolled ? 'h-16 md:h-16' : 'h-20 md:h-20'}`}>
+        <nav className={`bg-background/95 backdrop-blur-md border-b border-border/40 transition-all duration-300 flex items-center ${isScrolled ? 'h-16 md:h-16' : 'h-20 md:h-24'}`}>
           <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-full">
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'}`} />
+              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-12 md:h-14' : 'h-16 md:h-20'}`} />
             </Link>
 
             {/* Desktop Navigation */}

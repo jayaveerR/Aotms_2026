@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import {
     SiPython, SiReact, SiNodedotjs, SiAmazonwebservices, SiDocker,
     SiGithub, SiVite, SiPandas, SiNumpy, SiScikitlearn, SiJupyter,
@@ -251,13 +251,13 @@ export const getProgramDetails = (category: string) => {
         "UI/UX Design": {
             duration: "90", unit: "Days",
             learning: "75 Days Learning", project: "15 Days Project",
-            learningText: "Design Systems, Wireframing, Prototyping", projectText: "Complete Product Design Portfolio",
+            learningText: "Daily 90 mins â€“ 60 mins Class + 30 mins Practice", projectText: "Hands-On Project with Certification",
             gradient: "bg-[conic-gradient(#10B981_0%_83%,#3B82F6_83%_100%)]",
             legend: [{ label: "75 Days Learning", color: "bg-emerald-500" }, { label: "15 Days Project", color: "bg-blue-500" }],
             roles: ["UI/UX Designer", "Product Designer", "UX Researcher", "Interaction Designer"],
-            activity: "Every Saturday Free Aptitude classes, Mock Interviews, Technical Tests.",
-            mode: "Classroom + Lab Practice + Simulations + Projects + Mock Interviews.",
-            eligibility: "B.Tech, B.Sc, BCA, M.Tech, MCA Students, Job seekers, Switchers."
+            activity: "Every Saturday Free Aptitude classes, Mock Interviews, Technical Tests and onboarding development skills.",
+            mode: "Classroom + Lab Practice + Simulations + Projects + Mock Interviews",
+            eligibility: "B.Tech, B.Sc, BCA, M.Tech, MCA Students as well as Job seekers, Job Switchers."
         },
         "UI/UX Design Masterclass": {
             duration: "90", unit: "Days",
@@ -324,7 +324,7 @@ export const getCourseOutcomes = (category: string) => {
             "Multi-Cloud CI/CD Pipeline: Jenkins + Docker + Terraform + AWS + Azure.",
             "Kubernetes Microservices: Deploy Node.js/Flask apps on EKS/GKE.",
             "Infrastructure Automation: Terraform + Ansible for EC2 clusters.",
-            "E-Commerce Pipeline: GitHub → Jenkins → Docker → AWS → K8s.",
+            "E-Commerce Pipeline: GitHub â†’ Jenkins â†’ Docker â†’ AWS â†’ K8s.",
             "Cloud-Native Monitoring Dashboard: Multi-cloud metrics with Grafana."
         ],
         "AI/Machine Learning": [
@@ -353,7 +353,7 @@ export const getCourseOutcomes = (category: string) => {
         "Quantum Computing": [
             "Quantum Cryptography Simulation: BB84 Protocol implementation.",
             "Quantum Machine Learning: Handwritten Digit Recognition.",
-            "Grover’s Algorithm: Search Engine Demo.",
+            "Groverâ€™s Algorithm: Search Engine Demo.",
             "Quantum Chemistry Simulation: Using Qiskit Nature.",
             "Quantum Finance: Portfolio Optimization Model.",
             "Quantum Cloud Integration: Using AWS Braket."
@@ -463,3 +463,455 @@ export const getCourseTheme = (category: string) => {
         image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2706&auto=format&fit=crop", // Clean Coding Workspace
     };
 };
+
+export const getCourseCustomContent = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            {
+                type: "about_us",
+                title: "ABOUT US",
+                content: {
+                    heading: "Learn from Industry Professionals with 10+ Years of Experience",
+                    text: "At Academy of Tech Masters, we believe that the right skills can transform into Professional careers. Our mission is to equip aspiring IT professionals with job-ready expertise through hands-on training, live projects, and expert mentorship."
+                }
+            },
+            {
+                type: "ui_ux_highlight",
+                title: "UI/UX DESIGN",
+                content: {
+                    badge: "UI",
+                    description: (
+                        <>
+                            <p className="text-slate-700 leading-relaxed text-base sm:text-lg mb-4">
+                                <span className="font-bold text-blue-900">UI (User Interface)</span> and{' '}
+                                <span className="font-bold text-blue-900">UX (User Experience)</span>{' '}
+                                Design focus on creating digital products that are both visually appealing and easy to use. UI deals with the look and layout of a website or app, while UX focuses on the overall experience a user has while interacting with it.
+                            </p>
+                            <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
+                                We need UI/UX Design & Development to make applications more user-friendly, engaging, and efficient, ensuring that users enjoy a smooth and satisfying digital experience.
+                            </p>
+                        </>
+                    ),
+                    keyPoints: [
+                        {
+                            title: "Visual Appeal",
+                            sub: "Creating aesthetically pleasing interfaces",
+                            iconColor: "bg-blue-600",
+                            bgGradient: "from-blue-50 to-blue-100",
+                            borderColor: "border-blue-200"
+                        },
+                        {
+                            title: "User Experience",
+                            sub: "Ensuring smooth and intuitive interactions",
+                            iconColor: "bg-purple-600",
+                            bgGradient: "from-purple-50 to-purple-100",
+                            borderColor: "border-purple-200"
+                        },
+                        {
+                            title: "Engagement",
+                            sub: "Keeping users interested and satisfied",
+                            iconColor: "bg-green-600",
+                            bgGradient: "from-green-50 to-green-100",
+                            borderColor: "border-green-200"
+                        },
+                        {
+                            title: "Efficiency",
+                            sub: "Streamlining user workflows and tasks",
+                            iconColor: "bg-orange-600",
+                            bgGradient: "from-orange-50 to-orange-100",
+                            borderColor: "border-orange-200"
+                        }
+                    ]
+                }
+            }
+        ];
+    }
+
+    // Default "About" section for all other courses (COMMON SECTION)
+    return [
+        {
+            type: "about_us",
+            title: "ABOUT US",
+            content: {
+                heading: "Learn from Industry Professionals with 10+ Years of Experience",
+                text: "At Academy of Tech Masters, we believe that the right skills can transform careers. Our mission is to equip aspiring IT professionals with job-ready expertise through hands-on training, live projects, and expert mentorship."
+            }
+        }
+    ];
+};
+
+export const getCourseToolsAndTechnologies = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design specific tools table
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            { category: "Design & Prototyping", tools: "Figma, Adobe XD, Sketch" },
+            { category: "Collaboration", tools: "Miro, Figma, InVision, Zeplin" },
+            { category: "Frontend Basics", tools: "HTML5, CSS3, Bootstrap, Tailwind, JS" },
+            { category: "Testing & Research", tools: "Maze, Lookback, Hotjar" },
+            { category: "Version Control", tools: "Git, GitHub" },
+            { category: "Asset Management", tools: "Notion, Canva, Behance" }
+        ];
+    }
+
+    // Data Science
+    if (search.includes("data science")) {
+        return [
+            { category: "Programming", tools: "Python, SQL" },
+            { category: "Data Processing", tools: "Pandas, NumPy, Scikit-Learn" },
+            { category: "Machine Learning", tools: "TensorFlow, Keras, PyTorch" },
+            { category: "Visualization", tools: "Matplotlib, Seaborn, Plotly, Tableau" },
+            { category: "Development", tools: "Jupyter, Streamlit, Git" },
+            { category: "Cloud & Deployment", tools: "AWS, Docker, Flask" }
+        ];
+    }
+
+    // AI/Machine Learning
+    if (search.includes("ai") || search.includes("machine learning")) {
+        return [
+            { category: "Programming", tools: "Python, TensorFlow, PyTorch" },
+            { category: "Deep Learning", tools: "Keras, OpenCV, YOLO" },
+            { category: "NLP", tools: "NLTK, Spacy, Hugging Face, LangChain" },
+            { category: "Data Processing", tools: "Pandas, NumPy, Matplotlib" },
+            { category: "Cloud & MLOps", tools: "AWS, Azure, Docker, Git" },
+            { category: "Deployment", tools: "Flask, Streamlit, FastAPI" }
+        ];
+    }
+
+    // Full Stack (MERN/MEAN/Java/Python)
+    if (search.includes("mern") || search.includes("full stack")) {
+        return [
+            { category: "Frontend", tools: "React, Redux, Material UI, HTML5, CSS3" },
+            { category: "Backend", tools: "Node.js, Express, REST APIs" },
+            { category: "Database", tools: "MongoDB, PostgreSQL, MySQL" },
+            { category: "DevOps", tools: "Docker, Git, GitHub, CI/CD" },
+            { category: "Testing", tools: "Jest, Mocha, Postman" },
+            { category: "Cloud", tools: "AWS, Heroku, Vercel" }
+        ];
+    }
+
+    // Cyber Security
+    if (search.includes("cyber") || search.includes("security")) {
+        return [
+            { category: "Operating Systems", tools: "Kali Linux, Ubuntu, Windows Server" },
+            { category: "Network Analysis", tools: "Wireshark, Nmap, Burp Suite" },
+            { category: "Penetration Testing", tools: "Metasploit, Nessus, OWASP ZAP" },
+            { category: "Scripting", tools: "Python, Bash, PowerShell" },
+            { category: "SIEM & Monitoring", tools: "Splunk, ELK Stack" },
+            { category: "Cloud Security", tools: "AWS Security, Azure Security" }
+        ];
+    }
+
+    // Default fallback
+    return [
+        { category: "Programming", tools: "Python, JavaScript, Java" },
+        { category: "Web Development", tools: "HTML5, CSS3, React, Node.js" },
+        { category: "Database", tools: "MySQL, MongoDB, PostgreSQL" },
+        { category: "Version Control", tools: "Git, GitHub" },
+        { category: "Cloud & DevOps", tools: "AWS, Docker, Jenkins" },
+        { category: "Tools", tools: "VS Code, Postman, Jira" }
+    ];
+};
+
+export const getCourseObjectives = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design objectives
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            "Master user interface (UI) and user experience (UX) design fundamentals.",
+            "Design wireframes, mockups, and prototypes using industry-standard tools.",
+            "Understand user research, persona creation, usability testing, and accessibility.",
+            "Develop interactive front-end designs using HTML, CSS, and JavaScript.",
+            "Build responsive and user-friendly web & mobile interfaces.",
+            "Become industry-ready for roles in UI/UX Design, Product Design, and Front-End Development."
+        ];
+    }
+
+    // Data Science objectives
+    if (search.includes("data science")) {
+        return [
+            "Master statistical analysis and data manipulation using Python.",
+            "Build and deploy machine learning models for real-world problems.",
+            "Perform exploratory data analysis and data visualization.",
+            "Work with popular libraries: Pandas, NumPy, Scikit-Learn, TensorFlow.",
+            "Create interactive dashboards using Tableau and Power BI.",
+            "Become job-ready for Data Scientist, ML Engineer, and Data Analyst roles."
+        ];
+    }
+
+    // AI/Machine Learning objectives
+    if (search.includes("ai") || search.includes("machine learning")) {
+        return [
+            "Understand deep learning architectures and neural networks.",
+            "Build NLP applications for text analysis and chatbots.",
+            "Implement computer vision projects using OpenCV and YOLO.",
+            "Deploy AI models using Flask, Streamlit, and cloud platforms.",
+            "Work with cutting-edge frameworks: TensorFlow, PyTorch, Keras.",
+            "Prepare for roles in AI Engineering, ML Ops, and Research."
+        ];
+    }
+
+    // Full Stack objectives
+    if (search.includes("full stack") || search.includes("mern") || search.includes("mean")) {
+        return [
+            "Master both frontend and backend web development.",
+            "Build dynamic, responsive web applications from scratch.",
+            "Work with modern frameworks: React, Node.js, Express, MongoDB.",
+            "Implement RESTful APIs and database integration.",
+            "Deploy applications to cloud platforms like AWS and Heroku.",
+            "Become job-ready for Full Stack Developer and Software Engineer roles."
+        ];
+    }
+
+    // Cyber Security objectives
+    if (search.includes("cyber") || search.includes("security")) {
+        return [
+            "Understand network security fundamentals and ethical hacking.",
+            "Perform vulnerability assessments and penetration testing.",
+            "Master tools like Kali Linux, Wireshark, Metasploit, and Burp Suite.",
+            "Learn incident response and security monitoring techniques.",
+            "Implement security best practices for web and cloud applications.",
+            "Prepare for roles in Ethical Hacking, Security Analysis, and SOC operations."
+        ];
+    }
+
+    // Default objectives
+    return [
+        "Gain comprehensive knowledge of core concepts and technologies.",
+        "Build real-world projects to strengthen your portfolio.",
+        "Master industry-standard tools and best practices.",
+        "Develop problem-solving skills for technical challenges.",
+        "Receive placement support and interview preparation.",
+        "Become job-ready for professional roles in the tech industry."
+    ];
+};
+
+export const getCourseFeatures = (category: string) => {
+    // Default features for most courses (based on the UI/UX screenshot as a template)
+    // Specific overrides can be added based on category if needed within this function.
+
+    return [
+        {
+            icon: "Award",
+            title: "Courses & Certifications",
+            color: "text-blue-600",
+            bgColor: "bg-blue-50"
+        },
+        {
+            icon: "Linkedin",
+            title: "LINKEDIN & NAUKRI & GIT Profile Support",
+            color: "text-sky-700",
+            bgColor: "bg-sky-50"
+        },
+        {
+            icon: "Briefcase",
+            title: "Corp.. level tasks handling",
+            color: "text-slate-700",
+            bgColor: "bg-slate-50"
+        },
+        {
+            icon: "Megaphone",
+            title: "Profile Marketing, Till you get the JOB",
+            color: "text-purple-600",
+            bgColor: "bg-purple-50"
+        },
+        {
+            icon: "FileText",
+            title: "CV creation thru ATS portal",
+            color: "text-emerald-600",
+            bgColor: "bg-emerald-50"
+        },
+        {
+            icon: "MessageSquare",
+            title: "Interview Guidance & Support",
+            color: "text-orange-600",
+            bgColor: "bg-orange-50"
+        },
+        {
+            icon: "MessageCircle",
+            title: "Free Soft SKILLS Training",
+            color: "text-pink-600",
+            bgColor: "bg-pink-50"
+        },
+        {
+            icon: "Unlock",
+            title: "Life Time AOTMS Portal Access",
+            color: "text-indigo-600",
+            bgColor: "bg-indigo-50"
+        },
+        {
+            icon: "Video",
+            title: "Free Recorded Sessions Access",
+            color: "text-red-600",
+            bgColor: "bg-red-50"
+        },
+        {
+            icon: "Handshake",
+            title: "100% Job Guidance",
+            color: "text-cyan-600",
+            bgColor: "bg-cyan-50"
+        },
+        {
+            icon: "TrendingUp",
+            title: "Beginner to PRO",
+            color: "text-yellow-600",
+            bgColor: "bg-yellow-50"
+        },
+        {
+            icon: "Globe",
+            title: "Offline / Online",
+            color: "text-teal-600",
+            bgColor: "bg-teal-50"
+        }
+    ];
+};
+
+// Capstone Project Ideas (specific project examples with descriptions)
+export const getCourseCapstoneProjects = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design capstone projects
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            { title: "E-Learning Platform Redesign", description: "Focus on user flow optimization, course browsing, and accessibility." },
+            { title: "Food Delivery App Interface", description: "Build wireframes to prototypes with user onboarding and cart design." },
+            { title: "Hospital Management Portal UX", description: "Improve appointment booking and patient navigation." },
+            { title: "E-Commerce Store UI/UX", description: "End-to-end responsive web store with checkout experience." },
+            { title: "Travel Planning Mobile App", description: "Focus on visual hierarchy, usability, and journey design." }
+        ];
+    }
+
+    // Default capstone projects
+    return [
+        { title: "Full-Stack Web Application", description: "End-to-end project with frontend and backend." },
+        { title: "Data Analysis Dashboard", description: "Interactive visualization of real-world data." },
+        { title: "Mobile App Prototype", description: "Responsive mobile application design." },
+        { title: "API Development Project", description: "RESTful API with authentication and database." },
+        { title: "Portfolio Website", description: "Professional portfolio showcasing your skills." }
+    ];
+};
+
+// Learning Outcomes (what students will be able to do after the course)
+export const getCourseLearningOutcomes = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design learning outcomes
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            "Conduct user research and usability testing independently.",
+            "Design wireframes, prototypes, and interactive user interfaces.",
+            "Implement modern, accessible, and responsive UI designs.",
+            "Create design systems for scalable product design.",
+            "Collaborate effectively with developers and stakeholders.",
+            "Build a professional portfolio to showcase UI/UX projects."
+        ];
+    }
+
+    // Default learning outcomes
+    return [
+        "Apply theoretical knowledge to practical projects.",
+        "Work independently and in team environments.",
+        "Debug and troubleshoot technical issues effectively.",
+        "Follow industry best practices and standards.",
+        "Communicate technical concepts clearly.",
+        "Build a professional portfolio of projects."
+    ];
+};
+
+// Certifications & Career Preparation
+export const getCourseCertifications = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design certifications
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            "Academy of Tech Masters – Certified UI/UX Designer",
+            "Figma Mastery Certificate (Advanced)",
+            "Google UX Design (Recommended External Certification)",
+            "Adobe XD Prototyping Certificate (Optional)"
+        ];
+    }
+
+    // Data Science certifications
+    if (search.includes("data science")) {
+        return [
+            "Academy of Tech Masters – Certified Data Scientist",
+            "Python for Data Science Certificate",
+            "Machine Learning Specialization",
+            "AWS Certified Machine Learning (Recommended)"
+        ];
+    }
+
+    // Default certifications
+    return [
+        "Academy of Tech Masters – Course Completion Certificate",
+        "Industry-Recognized Skill Certification",
+        "Project Portfolio Certificate"
+    ];
+};
+
+// Career Opportunities / Job Roles
+export const getCourseCareerRoles = (title: string, category: string = "") => {
+    const search = (title + " " + category).toLowerCase().trim();
+
+    // UI/UX Design career roles
+    if (search.includes("ui") && search.includes("ux")) {
+        return [
+            "UI/UX Designer",
+            "Product Designer",
+            "UX Researcher",
+            "Interaction Designer",
+            "Frontend Designer / Developer",
+            "Visual Designer",
+            "Web & App Interface Specialist"
+        ];
+    }
+
+    // Data Science career roles
+    if (search.includes("data science")) {
+        return [
+            "Data Scientist",
+            "Machine Learning Engineer",
+            "Data Analyst",
+            "AI Researcher",
+            "Business Intelligence Analyst",
+            "Data Engineer"
+        ];
+    }
+
+    // Default career roles
+    return [
+        "Software Developer",
+        "Full Stack Engineer",
+        "Backend Developer",
+        "Frontend Developer",
+        "Technical Consultant"
+    ];
+};
+
+// Hiring Companies (logos and names)
+export const getCourseHiringCompanies = (title: string, category: string = "") => {
+    // Common top tech companies that hire across all domains with local images
+    return [
+        { name: "Tech Mahindra", logo: "/images/tech-mahindra-1.webp" },
+        { name: "IBM", logo: "/images/IBM.png" },
+        { name: "Infosys", logo: "/images/Infosys.png" },
+        { name: "Accenture", logo: "/images/Accenture.svg-1-1536x405-1-595xh.webp" },
+        { name: "Wipro", logo: "/images/Wipro.png" },
+        { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg" },
+        { name: "Mindtree", logo: "/images/mindtree.png" },
+        { name: "Caterpillar", logo: "/images/caterpiller.png" },
+        { name: "Microsoft", logo: "/images/Microsoft.webp" },
+        { name: "Amazon", logo: "/images/amazon-logo.webp" },
+        { name: "Myntra", logo: "/images/myntra.png" },
+        { name: "Flipkart", logo: "/images/Flipkart.png" }
+    ];
+};
+
+
+
+

@@ -45,10 +45,10 @@ export const TopNavbar = ({ isScrolled, setAuthMode, setShowAuthModal }: TopNavb
                                 {/* Trigger */}
                                 <div className="group relative flex items-center gap-0.5 md:gap-1 cursor-pointer py-1">
                                     <span className="hidden md:inline uppercase tracking-wider font-bold text-xs text-white group-hover:text-blue-100 transition-colors">
-                                        Follow us
+                                        Follow Us
                                     </span>
                                     <span className="md:hidden uppercase tracking-wider font-bold text-[10px] text-white group-hover:text-blue-100 transition-colors">
-                                        Follow
+                                        Follow Us
                                     </span>
 
                                     <svg

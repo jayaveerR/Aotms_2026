@@ -42,6 +42,7 @@ const socialLinks = [
   { icon: FaTelegram, href: "https://t.me/aotms", label: "Telegram", color: "bg-[#26A5E4] hover:bg-[#1c7aa8]" },
   { icon: FaWhatsapp, href: "https://wa.me/918019942233", label: "Whatsapp", color: "bg-[#25D366] hover:bg-[#1da851]" },
   { icon: FaEnvelope, href: "mailto:Info@aotms.com", label: "Email", color: "bg-[#D44638] hover:bg-[#b03a2e]" },
+  { icon: FaMapMarkerAlt, href: "https://www.google.com/maps/search/Academy+of+Tech+Masters+Vijayawada", label: "Get Directions", color: "bg-[#0075CF] hover:bg-[#005582]" },
 ];
 
 export const Footer = () => {

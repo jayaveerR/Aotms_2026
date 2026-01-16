@@ -245,11 +245,10 @@ const Contact = () => {
           </div>
 
           {/* Full Width Map Section */}
-          <div className="w-full h-[450px] rounded-[32px] overflow-hidden shadow-xl border border-slate-200 relative z-0">
+          <div className="w-full h-[350px] md:h-[450px] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-xl border border-slate-200 relative z-0">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.5236791966513!2d80.64593811057928!3d16.49963922770637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fb43b8f6af1d%3A0x18151e18505cbaf8!2sAcademy%20Of%20Tech%20Masters!5e0!3m2!1sen!2sin!4v1768037573566!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
+              className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"

@@ -239,7 +239,7 @@ const FAQPage = () => {
                             <a href="/contact" className="px-8 py-3 bg-[#FD5A1A] hover:bg-[#e04f16] text-white font-bold rounded-xl transition-all shadow-lg shadow-[#FD5A1A]/20 hover:scale-105">
                                 Contact Us
                             </a>
-                            <a href="tel:+91" className="px-8 py-3 bg-white hover:bg-slate-50 text-[#0075CF] font-bold rounded-xl transition-all hover:scale-105">
+                            <a href="tel:+918019952233" className="px-8 py-3 bg-white hover:bg-slate-50 text-[#0075CF] font-bold rounded-xl transition-all hover:scale-105">
                                 Call Support
                             </a>
                         </div>
