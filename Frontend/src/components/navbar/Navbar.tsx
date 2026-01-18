@@ -100,7 +100,7 @@ export const Header = () => {
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-12 md:h-14' : 'h-16 md:h-20'}`} />
+              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-14 md:h-16' : 'h-16 md:h-20'}`} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -187,7 +187,7 @@ export const Header = () => {
                 <div className="relative group">
                   <button className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full border border-border/60 hover:border-primary/30 transition-all bg-background">
                     {user?.avatar ? (
-                      <img src={user.avatar} alt={user.name || "User Avatar"} className="w-8 h-8 rounded-full object-cover" />
+                      <img src={user.avatar} alt={user.name || "User Avatar"} className="w-8 h-8 rounded-full object-cover" referrerPolicy="no-referrer" />
                     ) : (
                       <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                         <User className="w-4 h-4" />

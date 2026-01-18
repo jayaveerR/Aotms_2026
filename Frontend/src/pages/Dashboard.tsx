@@ -360,7 +360,7 @@ const Dashboard = () => {
                                 <div className="w-20 h-20 md:w-24 md:h-24 p-1.5 bg-white/10 backdrop-blur-md rounded-full mb-4 md:mb-5">
                                     <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-[#0066CC] text-2xl md:text-3xl font-black shadow-inner overflow-hidden">
                                         {user?.avatar ? (
-                                            <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                                            <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                                         ) : (
                                             user?.name?.charAt(0).toUpperCase()
                                         )}
@@ -397,7 +397,7 @@ const Dashboard = () => {
                             </div>
                             <div className="text-center py-4 md:py-6">
                                 <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-slate-50 border-4 border-slate-100 text-slate-300 mb-2 md:mb-3">
-                                    <BookOpen className="w-5 h-5 md:w-6 h-6" />
+                                    <BookOpen className="w-5 h-5 md:w-6 md:h-6" />
                                 </div>
                                 <p className="text-xs md:text-sm font-bold text-slate-900 mb-1">No Active Courses</p>
                                 <p className="text-[10px] md:text-xs text-slate-400 font-medium mb-3 md:mb-4">Enroll in a course to track progress.</p>

@@ -126,7 +126,7 @@ export const TopNavbar = ({ isScrolled, setAuthMode, setShowAuthModal }: TopNavb
                                     <Link to="/dashboard" className="flex items-center gap-1.5 hover:text-accent transition-colors">
                                         <div className="w-6 h-6 rounded-full overflow-hidden border border-white/20 flex items-center justify-center bg-white/10 shrink-0">
                                             {user?.avatar ? (
-                                                <img src={user.avatar} alt="" className="w-full h-full object-cover" />
+                                                <img src={user.avatar} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                                             ) : (
                                                 <User className="w-3 h-3 text-white" strokeWidth={3} />
                                             )}

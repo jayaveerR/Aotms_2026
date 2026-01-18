@@ -50,7 +50,7 @@ export const MobileMenu = ({
                             {isLoggedIn ? (
                                 <div className="mb-6 bg-slate-50 p-4 rounded-xl flex items-center gap-3 border border-border/50">
                                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
-                                        {user?.avatar ? <img src={user.avatar} alt={user.name || "User Avatar"} className="w-full h-full rounded-full object-cover" /> : user?.name?.[0]}
+                                        {user?.avatar ? <img src={user.avatar} alt={user.name || "User Avatar"} className="w-full h-full rounded-full object-cover" referrerPolicy="no-referrer" /> : user?.name?.[0]}
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="font-bold text-sm truncate text-slate-900">{user?.name}</p>

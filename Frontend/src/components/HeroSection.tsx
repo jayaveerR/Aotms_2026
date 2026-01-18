@@ -26,7 +26,7 @@ const trustStats = [
 ];
 
 export const HeroSection = () => {
-  const [heroImages, setHeroImages] = useState<string[]>([]);
+  const [heroImages, setHeroImages] = useState<string[]>(["/Andra-hackathon-2025_Data_AI_d2uquj.jpg"]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
   const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
@@ -38,7 +38,8 @@ export const HeroSection = () => {
           `${import.meta.env.VITE_API_URL}/api/hero`
         );
         if (Array.isArray(res.data)) {
-          setHeroImages(res.data.map((i: { imageUrl: string }) => i.imageUrl));
+          const apiImages = res.data.map((i: { imageUrl: string }) => i.imageUrl);
+          setHeroImages(["/Andra-hackathon-2025_Data_AI_d2uquj.jpg", ...apiImages]);
         }
       } catch (err) {
         console.error(err);

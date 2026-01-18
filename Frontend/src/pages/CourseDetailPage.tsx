@@ -35,6 +35,7 @@ import {
     getCourseCertifications,
     getCourseCareerRoles,
     getCourseHiringCompanies,
+    getCourseCurriculum,
 } from "../data/courseMetadata";
 
 export default function CourseDetail() {
@@ -113,6 +114,7 @@ export default function CourseDetail() {
     const certifications = getCourseCertifications(course.title, course.category || "");
     const careerRoles = getCourseCareerRoles(course.title, course.category || "");
     const hiringCompanies = getCourseHiringCompanies(course.title, course.category || "");
+    const curriculumData = getCourseCurriculum(course.title, course.category || "");
 
     return (
         <div className="min-h-screen bg-slate-50">
@@ -163,7 +165,7 @@ export default function CourseDetail() {
                         <CourseLearningOutcomes outcomes={learningOutcomes as React.ReactNode[]} />
 
                         <CourseCurriculum
-                            curriculum={course.curriculum}
+                            curriculum={curriculumData}
                             activeModule={activeModule}
                             setActiveModule={setActiveModule}
                         />
