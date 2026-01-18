@@ -4,6 +4,7 @@ import { Calendar } from "lucide-react";
 import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventManager, EventItem } from "@/components/events/EventManager";
+import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
@@ -111,6 +112,7 @@ const EventsPage = () => {
                     title="Weekly Activities"
                     subtitle="Join our webinars and expert talks organized regularly for our student community."
                 />
+                <CertificateShowcase />
             </main>
             <Footer />
         </div>

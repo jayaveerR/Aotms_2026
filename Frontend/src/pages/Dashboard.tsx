@@ -19,6 +19,8 @@ import {
     Award
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { cn } from "@/lib/utils";
@@ -51,7 +53,13 @@ interface Lead {
 }
 
 const Dashboard = () => {
-    const { user, logout } = useAuthStore();
+    const { user, logout, setAuth, token } = useAuthStore();
+    const [isEditing, setIsEditing] = useState(false);
+    const [editForm, setEditForm] = useState({
+        name: "",
+        phone: ""
+    });
+
     const [myReviews, setMyReviews] = useState<UserReview[]>([]);
     const [workshops, setWorkshops] = useState<EventItem[]>([]);
     const [hackathons, setHackathons] = useState<EventItem[]>([]);
@@ -103,7 +111,43 @@ const Dashboard = () => {
         };
 
         fetchUserData();
+        fetchUserData();
     }, [user]);
+
+    const handleUpdateProfile = async () => {
+        try {
+            const res = await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/auth/update`,
+                editForm,
+                { headers: { "x-auth-token": token } }
+            );
+
+            // Start: Fix - Construct the user object correctly matching the User interface
+            const updatedUser = {
+                id: res.data.id,
+                name: res.data.name,
+                email: res.data.email,
+                role: res.data.role,
+                phone: res.data.phone,
+                qualification: res.data.degree, // Mapping degree to qualification if needed, or update interface
+                avatar: res.data.avatar
+            };
+            // End: Fix
+
+            // Update local store
+            // Assuming setAuth takes (user, token). We keep the same token.
+            if (token) {
+                setAuth(updatedUser, token);
+            }
+
+            setIsEditing(false);
+            toast.success("Profile updated successfully!");
+        } catch (error) {
+            console.error("Failed to update profile", error);
+            toast.error("Failed to update profile");
+        }
+    };
+
 
     // Stats Data with logo colors (lighter blue)
     const statsData = [
@@ -139,7 +183,7 @@ const Dashboard = () => {
                 )}
             </AnimatePresence>
 
-            <main className="pt-20 md:pt-28 pb-16 md:pb-20 px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+            <main className="pt-32 md:pt-36 pb-16 md:pb-20 px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
 
                 {/* Welcome Header Section */}
                 <section className="bg-white rounded-2xl md:rounded-[2rem] p-5 md:p-8 lg:p-10 shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden mb-6 md:mb-8">
@@ -362,8 +406,38 @@ const Dashboard = () => {
                                         {user?.name?.charAt(0).toUpperCase()}
                                     </div>
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-black mb-1 md:mb-1.5">{user?.name}</h3>
-                                <p className="text-blue-100/80 text-xs md:text-sm font-medium mb-4 md:mb-6 break-all px-2 md:px-4">{user?.email}</p>
+
+                                {isEditing ? (
+                                    <div className="w-full space-y-3 mb-4">
+                                        <Input
+                                            value={editForm.name}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+                                                if (/^[a-zA-Z\s]*$/.test(val)) {
+                                                    setEditForm({ ...editForm, name: val });
+                                                }
+                                            }}
+                                            placeholder="Full Name"
+                                            className="bg-white/10 border-white/20 text-white placeholder:text-blue-200 text-center font-bold"
+                                        />
+                                        <Input
+                                            value={editForm.phone}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+                                                if (/^\d*$/.test(val) && val.length <= 10) {
+                                                    setEditForm({ ...editForm, phone: val });
+                                                }
+                                            }}
+                                            placeholder="Phone Number"
+                                            className="bg-white/10 border-white/20 text-white placeholder:text-blue-200 text-center font-bold"
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <h3 className="text-xl md:text-2xl font-black mb-1 md:mb-1.5">{user?.name}</h3>
+                                        <p className="text-blue-100/80 text-xs md:text-sm font-medium mb-4 md:mb-6 break-all px-2 md:px-4">{user?.email}</p>
+                                    </>
+                                )}
 
                                 <div className="w-full bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-4 flex justify-between items-center mb-4 md:mb-6 border border-white/10">
                                     <div className="text-left">
@@ -377,9 +451,36 @@ const Dashboard = () => {
                                     </div>
                                 </div>
 
-                                <Button className="w-full bg-white text-[#0066CC] hover:bg-[#0066CC]/10 font-black h-10 md:h-12 rounded-xl transition-colors text-sm md:text-base">
-                                    Edit Profile
-                                </Button>
+                                {isEditing ? (
+                                    <div className="flex gap-2 w-full">
+                                        <Button
+                                            onClick={() => setIsEditing(false)}
+                                            variant="outline"
+                                            className="flex-1 bg-transparent text-white border-white/40 hover:bg-white/10 h-10 md:h-12 rounded-xl"
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            onClick={handleUpdateProfile}
+                                            className="flex-1 bg-white text-[#0066CC] hover:bg-white/90 h-10 md:h-12 rounded-xl font-bold"
+                                        >
+                                            Save
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <Button
+                                        onClick={() => {
+                                            setEditForm({
+                                                name: user?.name || "",
+                                                phone: user?.phone || ""
+                                            });
+                                            setIsEditing(true);
+                                        }}
+                                        className="w-full bg-white text-[#0066CC] hover:bg-[#0066CC]/10 font-black h-10 md:h-12 rounded-xl transition-colors text-sm md:text-base"
+                                    >
+                                        Edit Profile
+                                    </Button>
+                                )}
                             </div>
                         </div>
 

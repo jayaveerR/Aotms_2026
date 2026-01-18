@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventManager, EventItem } from "@/components/events/EventManager";
+import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
@@ -72,6 +73,7 @@ const WorkshopsPage = () => {
                     title="Workshops"
                     subtitle="Master in-demand skills with our expert-led intensive workshops."
                 />
+                <CertificateShowcase />
             </main>
             <Footer />
         </div>

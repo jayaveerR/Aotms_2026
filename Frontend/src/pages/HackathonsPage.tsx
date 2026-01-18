@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventManager, EventItem } from "@/components/events/EventManager";
+import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
+import certSample1 from "@/assets/certificate_sample_1.png";
+import certSample2 from "@/assets/certificate_sample_2.png";
 
 const HackathonsPage = () => {
     const [events, setEvents] = useState<EventItem[]>([]);
@@ -71,6 +74,10 @@ const HackathonsPage = () => {
                     events={events}
                     title="Hackathons"
                     subtitle="Compete, innovate, and build world-class solutions in our signature hackathons."
+                />
+                <CertificateShowcase
+                    certImage1={certSample1}
+                    certImage2={certSample2}
                 />
             </main>
             <Footer />

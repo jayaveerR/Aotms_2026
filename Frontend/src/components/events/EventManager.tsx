@@ -13,6 +13,9 @@ import {
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { toast } from "sonner";
+import workshopCert1 from "@/assets/workshop_certificate_1.png";
+import workshopCert2 from "@/assets/workshop_certificate_2.png";
+import workshopCert3 from "@/assets/workshop_certificate_3.png";
 
 export interface EventItem {
     id: string;
@@ -52,6 +55,8 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
     const [isPaused, setIsPaused] = useState(false);
     const [isWinnersModalOpen, setIsWinnersModalOpen] = useState(false);
     const [isRegModalOpen, setIsRegModalOpen] = useState(false);
+    const [isCertModalOpen, setIsCertModalOpen] = useState(false);
+    const [selectedCertImage, setSelectedCertImage] = useState<string>("");
     const [winnersData, setWinnersData] = useState<Winner[]>([]);
     const [loadingWinners, setLoadingWinners] = useState(false);
     const [regFormData, setRegFormData] = useState({
@@ -404,6 +409,42 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                 )}
             </AnimatePresence>
 
+            {/* Certificate Modal */}
+            <AnimatePresence>
+                {isCertModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+                        onClick={() => setIsCertModalOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            className="relative w-full max-w-5xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                onClick={() => setIsCertModalOpen(false)}
+                                className="absolute -top-12 right-0 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors group"
+                            >
+                                <X className="w-6 h-6 text-white" />
+                            </button>
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
+                                <img
+                                    src={selectedCertImage}
+                                    alt="Certificate Preview"
+                                    className="w-full h-auto object-contain"
+                                />
+                            </div>
+                            <p className="text-white text-center mt-4 text-sm font-medium">Click outside or press ESC to close</p>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <div className="w-full max-w-7xl mx-auto py-12 md:py-24 px-6 md:px-12 relative z-10">
                 {(title || subtitle) && (
                     <div className="mb-12 md:mb-20 text-center lg:text-left">
@@ -607,6 +648,8 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                                                         ))}
                                                     </ul>
                                                 </div>
+
+
 
                                                 {(isHackathon || title === "Courses" || title === "Internships" || title === "Workshops" || title === "Weekly Activities" || title === "Events") && (
                                                     <div className="pt-2 flex flex-col sm:flex-row gap-4">

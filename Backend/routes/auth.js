@@ -6,6 +6,19 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+const auth = (req, res, next) => {
+    const token = req.header('x-auth-token');
+    if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+        req.user = decoded.user;
+        next();
+    } catch (err) {
+        res.status(401).json({ msg: 'Token is not valid' });
+    }
+};
+
 // Register
 router.post('/register', async (req, res) => {
     try {
@@ -235,6 +248,46 @@ router.put('/reset-password/:resetToken', async (req, res) => {
 
     } catch (err) {
         console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+// Update Profile
+router.put('/update', auth, async (req, res) => {
+    const { name, phone, degree, department, passoutYear, course } = req.body;
+
+    // Build user object
+    const userFields = {};
+    if (name) userFields.name = name;
+    if (phone) userFields.phone = phone;
+    if (degree) userFields.degree = degree;
+    if (department) userFields.department = department;
+    if (passoutYear) userFields.passoutYear = passoutYear;
+    if (course) userFields.course = course;
+
+    try {
+        let user = await User.findById(req.user.id);
+        if (!user) return res.status(404).json({ msg: 'User not found' });
+
+        user = await User.findByIdAndUpdate(req.user.id, { $set: userFields }, { new: true });
+
+        // Return updated user plain object
+        const userObj = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            degree: user.degree,
+            department: user.department,
+            passoutYear: user.passoutYear,
+            course: user.course,
+            avatar: user.avatar,
+            role: user.role
+        };
+
+        res.json(userObj);
+    } catch (err) {
+        console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
