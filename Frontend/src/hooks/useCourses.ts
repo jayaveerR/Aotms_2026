@@ -9,7 +9,7 @@ export interface CourseModule {
 
 export interface Course {
   _id: string;
-  id: number;
+  id: number | string;
   slug: string;
   title: string;
   category: string;

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Header } from "@/components/Navbar";
+import { Header } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/Footer";
 import { useAuthStore } from "@/store/authStore";
 import {
@@ -358,8 +358,12 @@ const Dashboard = () => {
 
                             <div className="relative z-10 flex flex-col items-center text-center">
                                 <div className="w-20 h-20 md:w-24 md:h-24 p-1.5 bg-white/10 backdrop-blur-md rounded-full mb-4 md:mb-5">
-                                    <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-[#0066CC] text-2xl md:text-3xl font-black shadow-inner">
-                                        {user?.name?.charAt(0).toUpperCase()}
+                                    <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-[#0066CC] text-2xl md:text-3xl font-black shadow-inner overflow-hidden">
+                                        {user?.avatar ? (
+                                            <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            user?.name?.charAt(0).toUpperCase()
+                                        )}
                                     </div>
                                 </div>
                                 <h3 className="text-xl md:text-2xl font-black mb-1 md:mb-1.5">{user?.name}</h3>

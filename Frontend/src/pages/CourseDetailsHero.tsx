@@ -14,7 +14,7 @@ interface CourseDetailHeroProps {
 
 export const CourseDetailHero: React.FC<CourseDetailHeroProps> = ({ course, handleEnroll }) => {
     return (
-        <section className="hero course-hero relative pt-28 pb-16 md:pt-32 md:pb-20 bg-[#0066CC] overflow-hidden w-full">
+        <section className="hero course-hero relative pt-40 pb-16 md:pt-48 md:pb-20 bg-[#0066CC] overflow-hidden w-full">
             {/* Background Base with Rich Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#002855] to-[#00509d]" />
 

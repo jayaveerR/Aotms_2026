@@ -58,6 +58,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
                 "group relative flex flex-col bg-white overflow-hidden transition-all duration-300",
                 "w-full max-w-[340px] mx-auto min-h-[400px] md:min-h-[440px]", // Compacted Height
                 "rounded-[18px] md:rounded-[22px]",
+                "border-2 border-slate-200 hover:border-blue-300",
                 "hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50",
                 isClicked && "scale-[0.98]"
             )}
@@ -79,9 +80,8 @@ export const CourseCard = ({ course }: CourseCardProps) => {
             <div className="absolute top-[115px] md:top-[135px] left-6 z-20"> {/* Adjusted Position */}
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-lg flex items-center justify-center border border-slate-50">
                     <div
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-[var(--course-color)]"
-                        /* webhint-disable-next-line no-inline-styles */
-                        style={{ '--course-color': course.themeColor } as React.CSSProperties}
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: course.themeColor }}
                     >
                         <Icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
