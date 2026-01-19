@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 interface CourseDetailHeroProps {
     course: {
@@ -55,17 +56,27 @@ export const CourseDetailHero: React.FC<CourseDetailHeroProps> = ({ course, hand
         return true;
     };
 
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!validateForm()) return;
 
+        if (!executeRecaptcha) {
+            toast.error("ReCAPTCHA not ready");
+            return;
+        }
+
         setIsSubmitting(true);
         try {
+            const token = await executeRecaptcha("course_inquiry");
+
             await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, {
                 ...formData,
                 type: 'course-inquiry',
-                courseName: course.title
+                courseName: course.title,
+                recaptchaToken: token
             });
 
             toast.success("Details submitted successfully!");

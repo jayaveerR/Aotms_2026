@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { sanitizeInput, validate } from "@/utils/validation";
 import { Header } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/Footer";
@@ -44,40 +45,45 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     // Basic validation
     // Validation
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
       toast.error("Please fill in all fields");
-      setLoading(false);
       return;
     }
 
     if (!validate.isName(formData.name)) {
       toast.error("Please enter a valid name (letters only)");
-      setLoading(false);
       return;
     }
 
     if (!validate.isEmail(formData.email)) {
       toast.error("Please enter a valid email address");
-      setLoading(false);
       return;
     }
 
 
     if (!validate.isPhone(formData.phone)) {
       toast.error("Please enter a valid phone number (exactly 10 digits)");
-      setLoading(false);
       return;
     }
 
+    if (!executeRecaptcha) {
+      toast.error("ReCAPTCHA not ready");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const API_URL = "http://localhost:5000/api/contact";
-      await axios.post(API_URL, formData);
+      const token = await executeRecaptcha("contact_form");
+      const API_URL = `${import.meta.env.VITE_API_URL}/api/contact`; // Ensure absolute URL
+      await axios.post(API_URL, { ...formData, recaptchaToken: token });
       toast.success("Message sent successfully! We will get back to you soon.");
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error: any) {

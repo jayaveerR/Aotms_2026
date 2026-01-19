@@ -8,6 +8,7 @@ import { useStudentPlacements } from "@/hooks/usePlacements";
 import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 
 const Placements = () => {
@@ -22,14 +23,58 @@ const Placements = () => {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === 'phone') {
+            const numbers = value.replace(/[^0-9]/g, '');
+            if (numbers.length <= 10) setFormData({ ...formData, [name]: numbers });
+            return;
+        }
+        if (name === 'name') {
+            const alphas = value.replace(/[^a-zA-Z\s]/g, '');
+            setFormData({ ...formData, [name]: alphas });
+            return;
+        }
+        setFormData({ ...formData, [name]: value });
     };
+
+    const validateForm = () => {
+        if (!formData.name.trim() || formData.name.length < 3) {
+            toast.error("Please enter a valid name (min 3 characters)");
+            return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            toast.error("Please enter a valid email address");
+            return false;
+        }
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phone)) {
+            toast.error("Please enter a valid 10-digit phone number");
+            return false;
+        }
+        if (!formData.course) {
+            toast.error("Please select an interested course");
+            return false;
+        }
+        return true;
+    };
+
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!validateForm()) return;
+
+        if (!executeRecaptcha) {
+            toast.error("ReCAPTCHA not ready");
+            return;
+        }
+
         setLoading(true);
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, formData);
+            const token = await executeRecaptcha("placement_inquiry");
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, { ...formData, recaptchaToken: token });
             toast.success("Request submitted successfully!");
             setFormData({ name: "", email: "", phone: "", course: "" });
         } catch (error) {
@@ -366,7 +411,6 @@ const Placements = () => {
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder="Full Name"
-                                        required
                                         className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-[#0066CC] focus:bg-blue-50/50 transition-all peer rounded-t-lg"
                                     />
                                     <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-[#0066CC] pointer-events-none">
@@ -382,7 +426,6 @@ const Placements = () => {
                                             value={formData.phone}
                                             onChange={handleChange}
                                             placeholder="Phone Number"
-                                            required
                                             className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-[#0066CC] focus:bg-blue-50/50 transition-all peer rounded-t-lg"
                                         />
                                         <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-[#0066CC] pointer-events-none">
@@ -396,7 +439,6 @@ const Placements = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             placeholder="Email Address"
-                                            required
                                             className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 placeholder:text-transparent focus:outline-none focus:border-[#0066CC] focus:bg-blue-50/50 transition-all peer rounded-t-lg"
                                         />
                                         <label className="absolute left-4 top-3 text-slate-400 text-sm font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-[#0066CC] pointer-events-none">
@@ -410,7 +452,6 @@ const Placements = () => {
                                         name="course"
                                         value={formData.course}
                                         onChange={handleChange}
-                                        required
                                         aria-label="Select Interested Course"
                                         title="Select Interested Course"
                                         className="w-full h-12 bg-slate-50 border-b-2 border-slate-100 px-4 pt-1 font-medium text-slate-900 focus:outline-none focus:border-[#0066CC] focus:bg-blue-50/50 transition-all rounded-t-lg cursor-pointer appearance-none"
@@ -418,6 +459,7 @@ const Placements = () => {
                                         <option value="" disabled className="text-slate-400">Select Interested Course</option>
                                         <option value="Full Stack Development">Full Stack Development</option>
                                         <option value="Data Science & AI">Data Science & AI</option>
+                                        <option value="UI/UX Design">UI/UX Design</option>
                                         <option value="Cyber Security">Cyber Security</option>
                                         <option value="Cloud Computing (AWS/Azure)">Cloud Computing (AWS/Azure)</option>
                                         <option value="Other">Other</option>

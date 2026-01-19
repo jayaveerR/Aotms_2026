@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export interface EventItem {
     id: string;
@@ -116,6 +117,8 @@ export const WorkshopManager = ({ events, title, subtitle }: WorkshopManagerProp
         setRegFormData({ ...regFormData, [name]: value });
     };
 
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
     const handleRegSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSubmittingReg(true);
@@ -137,10 +140,18 @@ export const WorkshopManager = ({ events, title, subtitle }: WorkshopManagerProp
             return;
         }
 
+        if (!executeRecaptcha) {
+            toast.error("ReCAPTCHA not ready");
+            setSubmittingReg(false);
+            return;
+        }
+
         try {
+            const token = await executeRecaptcha("workshop_registration");
             await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, {
                 ...regFormData,
-                type: 'workshop-registration'
+                type: 'workshop-registration',
+                recaptchaToken: token
             });
             toast.success(`Successfully registered for ${selectedEvent?.name}!`);
             setIsRegModalOpen(false);

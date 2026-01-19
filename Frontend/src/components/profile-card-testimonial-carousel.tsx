@@ -52,7 +52,7 @@ const testimonials: Testimonial[] = [
         githubUrl: "#",
     },
     {
-        name: "P. Chaitanya",
+        name: "P.Lakshmi Chaitanya",
         title: "CRT Training Expert",
         specialty: "CRT",
         experience: "10+ Years",
@@ -60,6 +60,28 @@ const testimonials: Testimonial[] = [
             "Empowering students with essential Campus Recruitment Training (CRT) skills. Focused on aptitude, soft skills, and interview preparation to ensure career success in the tech industry.",
         imageUrl:
             "/images/mentos-3.jpg",
+        linkedinUrl: "#",
+    },
+    {
+        name: "Kiran Kumar",
+        title: "Senior Instructor",
+        specialty: "Software Development",
+        experience: "7+ Years",
+        description:
+            "Experienced educator and developer with a passion for teaching complex coding concepts in a simplified manner. dedicated to student success.",
+        imageUrl:
+            "/images/mentos-4.jpg",
+        linkedinUrl: "#",
+    },
+    {
+        name: "Divya Rani",
+        title: "QA Automation Lead",
+        specialty: "QA Automation",
+        experience: "6+ Years",
+        description:
+            "Expert in manual and automated testing, ensuring robust software quality through comprehensive test strategies and automation frameworks.",
+        imageUrl:
+            "/images/mentor-5.jpg",
         linkedinUrl: "#",
     }
 ];

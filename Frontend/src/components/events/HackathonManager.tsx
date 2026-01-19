@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export interface EventItem {
     id: string;
@@ -151,6 +152,8 @@ export const HackathonManager = ({ events, title, subtitle }: HackathonManagerPr
         setRegFormData({ ...regFormData, [name]: value });
     };
 
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
     const handleRegSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSubmittingReg(true);
@@ -172,10 +175,18 @@ export const HackathonManager = ({ events, title, subtitle }: HackathonManagerPr
             return;
         }
 
+        if (!executeRecaptcha) {
+            toast.error("ReCAPTCHA not ready");
+            setSubmittingReg(false);
+            return;
+        }
+
         try {
+            const token = await executeRecaptcha("hackathon_registration");
             await axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, {
                 ...regFormData,
-                type: 'event-registration'
+                type: 'event-registration',
+                recaptchaToken: token
             });
             toast.success(`Successfully registered for ${selectedEvent?.name}!`);
             setIsRegModalOpen(false);
