@@ -165,7 +165,7 @@ const faqs = [
             },
             {
                 question: "What facilities are available at the Vijayawada campus?",
-                answer: "Our Vijayawada campus features state-of-the-art computer labs with high-speed internet, air-conditioned classrooms, a dedicated project room, library with technical books, comfortable seating arrangements, and a cafeteria for breaks."
+                answer: "Our Vijayawada campus features with high-speed internet, air-conditioned classrooms, a dedicated project room, comfortable seating arrangements."
             },
             {
                 question: "Is parking available?",

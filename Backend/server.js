@@ -43,5 +43,6 @@ app.use('/api/placements', require('./routes/placements'));
 app.use('/api/feedback', require('./routes/feedback'));
 app.use('/api/hero', require('./routes/heroSection'));
 app.use('/api/academy-difference', require('./routes/academyDifference'));
+app.use('/api/chat', require('./routes/chat'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
