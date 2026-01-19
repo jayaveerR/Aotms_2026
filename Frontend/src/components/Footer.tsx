@@ -16,21 +16,21 @@ const quickLinks = [
 ];
 
 const footerCourses = [
-  { name: "Quantum Computing", slug: "Quantum-Computing" },
-  { name: "Cybersecurity", slug: "Cybersecurity" },
-  { name: "AI with Machine Learning", slug: "AI-with-Machine-Learning" },
-  { name: "DevOps (AWS/Azure)", slug: "DevOps-AWS-Azure" },
-  { name: "Embedded Systems", slug: "Embedded-Systems" },
-  { name: "Data Science", slug: "Data-Science" },
-  { name: "Cloud Computing", slug: "Cloud-Computing" },
-  { name: "Python Full Stack", slug: "Python-full-stack" },
-  { name: "Java Full Stack", slug: "Java-full-stack" },
-  { name: "MERN Full Stack", slug: "MERN-full-stack" }
+  { name: "Quantum Computing", slug: "quantum-computing", href: "/course/quantum-computing" },
+  { name: "Cybersecurity", slug: "cyber-security", href: "/course/cyber-security" },
+  { name: "AI with Machine Learning", slug: "ai-machine-learning", href: "/course/ai-machine-learning" },
+  { name: "DevOps (AWS/Azure)", slug: "devops", href: "/course/devops" },
+  { name: "Embedded Systems", slug: "embedded-systems", href: "/course/embedded-systems" },
+  { name: "Data Science", slug: "data-science", href: "/course/data-science" },
+  { name: "Cloud Computing", slug: "multi-cloud-engineering", href: "/course/multi-cloud-engineering" },
+  { name: "Python Full Stack", slug: "python-full-stack", href: "/course/python-full-stack" },
+  { name: "Java Full Stack", slug: "java-full-stack", href: "/course/java-full-stack" },
+  { name: "MERN Full Stack", slug: "mern-stack", href: "/course/mern-stack" }
 ];
 
 const courses = footerCourses.map(course => ({
   name: course.name,
-  href: `/course/${course.slug}`
+  href: course.href
 }));
 
 const socialLinks = [
@@ -133,6 +133,7 @@ export const Footer = () => {
                 <li key={course.name}>
                   <Link
                     to={course.href}
+                    onClick={() => window.scrollTo(0, 0)}
                     className="text-xs md:text-sm text-white hover:text-accent transition-colors truncate block"
                   >
                     {course.name}
