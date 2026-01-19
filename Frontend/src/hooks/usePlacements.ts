@@ -4,7 +4,7 @@ import axios from 'axios';
 export interface StudentPlacement {
     _id: string;
     name: string;
-    jobTitle: string;
+    jobRole: string;
     companies: string[];
     image: string;
 }
@@ -12,7 +12,7 @@ export interface StudentPlacement {
 export interface DetailedPlacement {
     _id: string;
     consultantName: string;
-    jobTitle: string;
+    jobRole: string;
     client: string;
     startDate: string;
     duration: string;
