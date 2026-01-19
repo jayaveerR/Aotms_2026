@@ -7,6 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useState, useEffect } from "react";
+import { PerformanceBreakdown } from "@/components/PerformanceBreakdown";
 
 const stats = [
   { number: "2000+", label: "Successful Trainees", icon: Users },
@@ -332,6 +333,9 @@ export const WhoWeAre = () => {
           </div>
         </div>
       </section>
+
+      {/* Performance Breakdown Chart */}
+      <PerformanceBreakdown />
 
       {/* Mission, Vision, Values */}
       <section className="py-20 md:py-28 bg-slate-50">

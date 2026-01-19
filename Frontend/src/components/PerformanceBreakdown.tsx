@@ -3,9 +3,13 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { motion } from 'framer-motion';
 
 const data = [
-    { name: 'Practical Exposure', value: 60, color: '#0075CF' },
-    { name: 'Theory Presentation', value: 30, color: '#F97316' },
-    { name: 'Group Discussion', value: 10, color: '#64748B' },
+    { name: 'Practical Exposure', value: 50, color: '#0075CF' }, // Primary Blue
+    { name: 'Live Projects', value: 20, color: '#0EA5E9' }, // Sky Blue
+    { name: 'Theory Knowledge', value: 10, color: '#F97316' }, // Orange
+    { name: 'Weekly Evaluations', value: 5, color: '#64748B' }, // Slate
+    { name: 'Placement Assessments', value: 5, color: '#10B981' }, // Emerald
+    { name: 'Mock Interviews', value: 5, color: '#8B5CF6' }, // Violet
+    { name: 'Group Discussion', value: 5, color: '#EC4899' }, // Pink
 ];
 
 export const PerformanceBreakdown = () => {
@@ -34,7 +38,7 @@ export const PerformanceBreakdown = () => {
     }) => {
         const RADIAN = Math.PI / 180;
         // Calculate position for the label (further out)
-        const labelRadius = isMobile ? 1.05 : 1.4;
+        const labelRadius = isMobile ? 1.55 : 1.4;
         const radius = outerRadius * labelRadius;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -52,13 +56,13 @@ export const PerformanceBreakdown = () => {
                 <path d={`M${cx + outerRadius * Math.cos(-midAngle * RADIAN)},${cy + outerRadius * Math.sin(-midAngle * RADIAN)}L${x},${y}`} stroke={color} strokeWidth={2} fill="none" />
 
                 {/* Circle at end of line */}
-                <circle cx={x} cy={y} r={4} fill={color} />
+                <circle cx={x} cy={y} r={isMobile ? 3 : 4} fill={color} />
 
                 {/* Text Label */}
-                <text x={x + (x > cx ? (isMobile ? 4 : 10) : (isMobile ? -4 : -10))} y={y - (isMobile ? 2 : 10)} textAnchor={textAnchor} fill="#334155" fontSize={isMobile ? 10 : 16} fontWeight="bold" fontFamily="sans-serif">
+                <text x={x + (x > cx ? (isMobile ? 4 : 10) : (isMobile ? -4 : -10))} y={y - (isMobile ? 2 : 10)} textAnchor={textAnchor} fill="#334155" fontSize={isMobile ? 9 : 16} fontWeight="bold" fontFamily="sans-serif">
                     {name}
                 </text>
-                <text x={x + (x > cx ? (isMobile ? 4 : 10) : (isMobile ? -4 : -10))} y={y + (isMobile ? 12 : 15)} textAnchor={textAnchor} fill={color} fontSize={isMobile ? 14 : 24} fontWeight="900" fontFamily="sans-serif">
+                <text x={x + (x > cx ? (isMobile ? 4 : 10) : (isMobile ? -4 : -10))} y={y + (isMobile ? 10 : 15)} textAnchor={textAnchor} fill={color} fontSize={isMobile ? 11 : 24} fontWeight="900" fontFamily="sans-serif">
                     {value}%
                 </text>
             </motion.g>
@@ -106,8 +110,8 @@ export const PerformanceBreakdown = () => {
                                     data={data}
                                     cx="50%"
                                     cy="50%"
-                                    innerRadius={isMobile ? 45 : 100}
-                                    outerRadius={isMobile ? 75 : 180}
+                                    innerRadius={isMobile ? 35 : 100}
+                                    outerRadius={isMobile ? 60 : 180}
                                     dataKey="value"
                                     startAngle={90}
                                     endAngle={-270}
@@ -127,9 +131,9 @@ export const PerformanceBreakdown = () => {
                                     data={data}
                                     cx="50%"
                                     cy="50%"
-                                    innerRadius={isMobile ? 45 : 100}
-                                    outerRadius={isMobile ? 75 : 180}
-                                    paddingAngle={5}
+                                    innerRadius={isMobile ? 35 : 100}
+                                    outerRadius={isMobile ? 60 : 180}
+                                    paddingAngle={1}
                                     dataKey="value"
                                     startAngle={90}
                                     endAngle={-270}
@@ -158,8 +162,8 @@ export const PerformanceBreakdown = () => {
                             transition={{ delay: 1.2, duration: 0.8 }}
                             className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
                         >
-                            <span className="text-2xl md:text-6xl font-black text-slate-900">100%</span>
-                            <span className="text-[8px] md:text-sm font-bold text-slate-500 uppercase tracking-wide mt-1">Success Model</span>
+                            <span className="text-2xl md:text-6xl font-black text-slate-900 leading-none">100%</span>
+                            <span className="text-[8px] md:text-sm font-bold text-slate-900 uppercase tracking-wide mt-0">Success Model</span>
                         </motion.div>
                     </motion.div>
                 </div>
