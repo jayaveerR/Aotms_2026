@@ -18,10 +18,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+const verifyRecaptcha = require('../utils/recaptcha');
+
 // Create Lead
 router.post('/', async (req, res) => {
     try {
-        const { name, email, phone, course, event, type } = req.body;
+        const { name, email, phone, course, event, type, recaptchaToken } = req.body;
+
+        // Verify Recaptcha
+        const recaptchaResult = await verifyRecaptcha(recaptchaToken);
+        if (!recaptchaResult.success) {
+            return res.status(400).json({ message: recaptchaResult.message });
+        }
 
         // Validation for event registration
         if (type === 'event-registration') {

@@ -812,43 +812,128 @@ export const getCourseCurriculum = (title: string, category: string = "") => {
     if (search.includes("python") && search.includes("stack")) {
         return [
             {
-                title: "Module 1: Python Fundamentals",
+                title: "Module 1: Programming Foundations (Python Basics)",
                 lessons: [
-                    "Introduction to Python",
-                    "Data Types & Variables",
-                    "Control Flow",
-                    "Functions & OOP",
-                    "File Handling"
+                    "Introduction to Programming and Python Setup (VS Code, PyCharm)",
+                    "Python Syntax, Indentation, and Dynamic Typing",
+                    "Variables, Data Types, and Operators",
+                    "Control Flow: if, for, while, break, continue",
+                    "Functions, Arguments, Return Values, and Recursion",
+                    "Lists, Tuples, Sets, and Dictionaries",
+                    "Input/Output Handling",
+                    "Exception Handling (Try, Except, Finally)",
+                    "Mini Project: Console -Based Calculator / To -Do List"
                 ]
             },
             {
-                title: "Module 2: Frontend Development",
+                title: "Module 2: Advanced & Object -Oriented Python",
                 lessons: [
-                    "HTML5 & CSS3",
-                    "Bootstrap & Tailwind",
-                    "JavaScript ES6+",
-                    "React.js Basics",
-                    "State Management"
+                    "Classes, Objects, Inheritance, Polymorphism, Encapsulation",
+                    "Modules, Packages, and Virtual Environments ( venv, pipenv)",
+                    "Decorators, Iterators, Generators",
+                    "File I/O Operations and Context Managers",
+                    "Regular Expressions",
+                    "Working with JSON, CSV, XML files",
+                    "Mini Project: Student Management CLI Tool"
                 ]
             },
             {
-                title: "Module 3: Backend with Flask & Django",
+                title: "Module 3: Data Handling & Database Management",
                 lessons: [
-                    "Flask Basics",
-                    "Django MVT Architecture",
-                    "Django ORM",
-                    "Building REST APIs",
-                    "Authentication"
+                    "SQL Fundamentals (DDL, DML, Joins, Keys, Constraints)",
+                    "MySQL / PostgreSQL Setup and Integration",
+                    "Python-DB Connectivity using mysql- connector and psycopg2",
+                    "CRUD Operations via Python",
+                    "Introduction to NoSQL Databases (MongoDB)",
+                    "ORM Concepts: SQLAlchemy & Django ORM",
+                    "Mini Project: Library Database Management"
                 ]
             },
             {
-                title: "Module 4: Database & Deployment",
+                title: "Module 4: Front-End Web Development",
                 lessons: [
-                    "SQL with MySQL/PostgreSQL",
-                    "NoSQL with MongoDB",
-                    "Docker Basics",
-                    "AWS Deployment",
-                    "CI/CD Pipelines"
+                    "HTML5 – Tags, Forms, Semantic Elements",
+                    "CSS3 – Styling, Animations, Flexbox, Grid",
+                    "Responsive Design using Bootstrap",
+                    "JavaScript (ES6+) – Variables, Functions, DOM Manipulation",
+                    "Event Handling, Fetch API, Promises, Async/Await",
+                    "JSON, AJAX, and REST API consumption",
+                    "Introduction to React.js: Components, Props, and State",
+                    "React Hooks and Conditional Rendering",
+                    "Routing with React Router",
+                    "Mini Project: Portfolio or Landing Page in React"
+                ]
+            },
+            {
+                title: "Module 5: Python Web Frameworks – Flask & Django",
+                lessons: [
+                    "Flask Setup and Routing",
+                    "Templates (Jinja2), Forms, and Sessions",
+                    "REST API development with Flask",
+                    "Integrating Flask with MySQL / MongoDB",
+                    "Blueprints and Modular App Design",
+                    "Authentication with Flask - Login / JWT",
+                    "Django Project Structure (MVT), Models, Views, Templates",
+                    "URL Routing and Static Files, Django ORM and QuerySets",
+                    "Admin Panel Customization, Authentication, Authorization, and Permissions",
+                    "Django REST Framework (DRF) – API Views, Serializers, Routers",
+                    "Mini Project: Blog API / Student Portal"
+                ]
+            },
+            {
+                title: "Module 6: Version Control & Deployment",
+                lessons: [
+                    "Git & GitHub Essentials ( init, commit, push, branching)",
+                    "Collaborating via Pull Requests",
+                    "Docker Basics (Containerizing Apps)",
+                    "Environment Variables & Secrets Management",
+                    "Deploying to Cloud Platforms (AWS EC2, Render, Heroku, PythonAnywhere)",
+                    "Continuous Integration/Deployment Overview (CI/CD Pipelines)",
+                    "Mini Project: Deploy Flask App on Render/Heroku"
+                ]
+            },
+            {
+                title: "Module 7: Testing, Debugging & Performance Optimization",
+                lessons: [
+                    "Unit Testing with unit test and pytest",
+                    "API Testing with Postman",
+                    "Debugging Tools and Loggers",
+                    "Exception Tracking with Sentry",
+                    "Code Optimization & Profiling Techniques",
+                    "Hands-on: Test a Django REST API"
+                ]
+            },
+            {
+                title: "Module 8: API Development & Real -World Integration",
+                lessons: [
+                    "RESTful API Principles",
+                    "Building Secure APIs with Django REST Framework",
+                    "JWT Authentication & OAuth 2.0",
+                    "Third-party API Integration (Google Maps, Razorpay , Twilio)",
+                    "Payment Gateway Integration (Stripe/ Razorpay Sandbox)",
+                    "Email, SMS, Push Notifications Integration",
+                    "Mini Project: API -Driven Dashboard Application"
+                ]
+            },
+            {
+                title: "Module 9: Cloud, DevOps & CI/CD Essentials",
+                lessons: [
+                    "AWS / GCP Overview",
+                    "Hosting Databases in the Cloud (RDS, Firebase)",
+                    "Docker Compose for Multi -Service Apps",
+                    "Basic Linux Commands for Deployment",
+                    "Introduction to Jenkins & GitHub Actions",
+                    "CI/CD Workflow Setup",
+                    "Mini Project: Automated Deployment Pipeline"
+                ]
+            },
+            {
+                title: "Module 10: Career Readiness & Capstone Projects",
+                lessons: [
+                    "Resume Building (Tech -focused)",
+                    "LinkedIn & GitHub Portfolio Enhancement",
+                    "Mock Technical & HR Interviews",
+                    "Final Capstone Project Development & Presentation"
                 ]
             }
         ];

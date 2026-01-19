@@ -1,4 +1,5 @@
 import { Header } from "@/components/navbar/Navbar";
+import { Link } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Target, Eye, Award, Users, Building2, TrendingUp, CheckCircle, Quote } from "lucide-react";
@@ -257,9 +258,9 @@ export const WhoWeAre = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-                <a href="#values" className="px-8 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 w-full sm:w-auto">
+                <Link to="/events" className="px-8 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 w-full sm:w-auto">
                   Our Journey
-                </a>
+                </Link>
                 <a href="/contact" className="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 hover:text-orange-500 transition-all shadow-sm hover:shadow-md hover:-translate-y-1 w-full sm:w-auto">
                   Contact Us
                 </a>

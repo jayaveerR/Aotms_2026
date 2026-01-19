@@ -2,12 +2,20 @@ const express = require('express');
 const router = express.Router();
 const Contact = require('../models/Contact'); // Import the Contact model
 
+const verifyRecaptcha = require('../utils/recaptcha');
+
 // @route   POST /api/contact
 // @desc    Submit a contact form message
 // @access  Public
 router.post('/', async (req, res) => {
     try {
-        const { name, email, phone, message } = req.body;
+        const { name, email, phone, message, recaptchaToken } = req.body;
+
+        // Verify Recaptcha
+        const recaptchaResult = await verifyRecaptcha(recaptchaToken);
+        if (!recaptchaResult.success) {
+            return res.status(400).json({ msg: recaptchaResult.message });
+        }
 
         // Basic validation
         if (!name || !email || !phone || !message) {

@@ -121,7 +121,7 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className={`chatbot-container ${isOpen ? 'z-[9999]' : 'z-[9998]'}`}>
+    <div className={`chatbot-container ${isOpen ? 'z-[20000]' : 'z-[19999]'}`}>
 
       {/* Chat Panel */}
       <div ref={chatPanelRef} className={`chat-panel ${isOpen ? 'open' : ''}`}>
