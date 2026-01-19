@@ -135,7 +135,7 @@ export const CourseDetailHero: React.FC<CourseDetailHeroProps> = ({ course, hand
                         </h1>
 
                         <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl drop-shadow-md mx-auto lg:mx-0 px-4">
-                            Dominate the digital world with our comprehensive <span className="text-[#FD5A1A] font-bold">{course.category}</span> training program in Vijayawada. Get placed in <span className="text-[#FD5A1A] font-bold">top MNCs</span> in Vijayawada and across India.
+                            Dominate the digital world with our comprehensive <span className="text-[#FD5A1A] font-bold">{course.title}</span> training program in Vijayawada. Get placed in <span className="text-[#FD5A1A] font-bold">top MNCs</span> in Vijayawada and across India.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-8 sm:gap-6 pt-6 sm:pt-4 w-full px-4">

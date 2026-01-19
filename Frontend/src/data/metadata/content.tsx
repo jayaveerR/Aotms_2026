@@ -101,7 +101,7 @@ export const getCourseCustomContent = (title: string, category: string = "") => 
     }
 
     // Data Science specific introduction
-    if (search.includes("data science")) {
+    if (search.includes("data science") && !search.includes("artificial") && !search.includes("machine")) {
         return [
             {
                 type: "about_us",

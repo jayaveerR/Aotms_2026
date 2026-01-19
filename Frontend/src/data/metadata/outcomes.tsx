@@ -31,6 +31,18 @@ export const getCourseObjectives = (title: string, category: string = "") => {
         ];
     }
 
+    // AI/Machine Learning objectives
+    if (search.includes("artificial") || search.includes("machine learning") || (search.includes("ai") && !search.includes("masterclass"))) {
+        return [
+            "Understand deep learning architectures and neural networks.",
+            "Build NLP applications for text analysis and chatbots.",
+            "Implement computer vision projects using OpenCV and YOLO.",
+            "Deploy AI models using Flask, Streamlit, and cloud platforms.",
+            "Work with cutting-edge frameworks: TensorFlow, PyTorch, Keras.",
+            "Prepare for roles in AI Engineering, ML Ops, and Research in Vijayawada."
+        ];
+    }
+
     // Data Science objectives
     if (search.includes("data science")) {
         return [
@@ -39,18 +51,6 @@ export const getCourseObjectives = (title: string, category: string = "") => {
             "Build machine learning and deep learning models for predictive and intelligent systems.",
             "Work with data visualization tools, cloud-based analytics, and AI frameworks.",
             "Become job-ready for roles in data analysis, data science, and AI development in Vijayawada."
-        ];
-    }
-
-    // AI/Machine Learning objectives
-    if (search.includes("ai") || search.includes("machine learning")) {
-        return [
-            "Understand deep learning architectures and neural networks.",
-            "Build NLP applications for text analysis and chatbots.",
-            "Implement computer vision projects using OpenCV and YOLO.",
-            "Deploy AI models using Flask, Streamlit, and cloud platforms.",
-            "Work with cutting-edge frameworks: TensorFlow, PyTorch, Keras.",
-            "Prepare for roles in AI Engineering, ML Ops, and Research in Vijayawada."
         ];
     }
 
@@ -241,6 +241,19 @@ export const getCourseCapstoneProjects = (title: string, category: string = "") 
                 title: "Marketing Campaign Effectiveness (Python + Power BI)",
                 description: "Measure ROI and impact using historical campaign data"
             }
+        ];
+    }
+
+    // AI & ML Capstone Projects
+    if (search.includes("artificial") || search.includes("machine learning") || (search.includes("ai") && !search.includes("masterclass"))) {
+        return [
+            { title: "AI Chatbot for Customer Support", description: "NLP + Flask + OpenAI API" },
+            { title: "Real-Time Object Detection System", description: "OpenCV + YOLO" },
+            { title: "Credit Card Fraud Detection", description: "Logistic Regression + Random Forest" },
+            { title: "AI-based Resume Screener", description: "NLP + Machine Learning" },
+            { title: "Stock Price Prediction System", description: "LSTM + Time Series" },
+            { title: "Emotion Detection from Images", description: "CNN + Transfer Learning" },
+            { title: "Medical Image Classification", description: "TensorFlow + Streamlit App" }
         ];
     }
 
@@ -479,7 +492,7 @@ export const getCourseLearningOutcomes = (title: string, category: string = "") 
     }
 
     // Data Science learning outcomes
-    if (search.includes("data science")) {
+    if (search.includes("data science") && !search.includes("artificial") && !search.includes("machine")) {
         return [
             "Collect, clean, and analyze real-world datasets using Python.",
             "Visualize and interpret data insights using modern tools.",
@@ -663,7 +676,7 @@ export const getCourseCertifications = (title: string, category: string = "") =>
     }
 
     // Data Science certifications
-    if (search.includes("data science")) {
+    if (search.includes("data science") && !search.includes("artificial") && !search.includes("machine")) {
         return [
             "Python for Data Science - Coursera / IBM / Google",
             "Machine Learning Specialization - Andrew Ng / DeepLearning.AI",
@@ -823,7 +836,7 @@ export const getCourseCareerRoles = (title: string, category: string = "") => {
     }
 
     // Data Science career roles
-    if (search.includes("data science")) {
+    if (search.includes("data science") && !search.includes("artificial") && !search.includes("machine")) {
         return [
             "Data Analyst",
             "Data Scientist",

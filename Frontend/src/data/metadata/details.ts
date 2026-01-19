@@ -91,6 +91,18 @@ export const getProgramDetails = (category: string) => {
         return { ...programs["Full Stack"], roles: category.includes("Java") ? ["Java Developer", "Spring Boot Engineer", "Full Stack Dev"] : category.includes("Python") ? ["Python Developer", "Django Engineer", "Full Stack Dev"] : ["MERN/MEAN Stack Dev", "Frontend Lead", "Backend Engineer"] };
     }
 
+    // Exact or Partial Category Matching prioritizing specific distinct programs
+    if (category.includes("AI") || category.includes("Machine Learning") || category.includes("Artificial Intelligence")) {
+        return programs["AI/Machine Learning"];
+    }
+    if (category.includes("Data Science") || category.includes("Data Analytics")) {
+        // Distinguish Analytics if you have separate config, otherwise fallback to Data Science
+        if (category.includes("Analytics") && programs["Data Analytics"]) return programs["Data Analytics"];
+        return programs["Data Science"];
+    }
+    if (category.includes("Cyber") || category.includes("Security")) return programs["Cyber Security"];
+    if (category.includes("UI") || category.includes("Design")) return programs["UI/UX Design"];
+
     return programs[category] || defaultProgram;
 };
 
@@ -101,10 +113,16 @@ export const getCourseTheme = (category: string) => {
             image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2706&auto=format&fit=crop",
         };
     }
-    if (category.includes("Data") || category.includes("AI") || category.includes("Machine")) {
+    if (category.includes("Data")) {
         return {
             color: "#3b82f6", // Blue-500
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop", // Data Visualization
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop", // Data Visualization (Says Data Science)
+        };
+    }
+    if (category.includes("AI") || category.includes("Machine") || category.includes("Artificial")) {
+        return {
+            color: "#8B5CF6", // Violet-500
+            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2670&auto=format&fit=crop", // AI / Neural Network
         };
     }
     if (category.includes("Cloud") || category.includes("DevOps")) {

@@ -2,7 +2,7 @@ export const getCourseCurriculum = (title: string, category: string = "") => {
     const search = (title + " " + category).toLowerCase().trim();
 
     // 1. Data Science Masterclass
-    if (search.includes("data science")) {
+    if (search.includes("data science") && !search.includes("artificial") && !search.includes("machine")) {
         return [
             {
                 title: "Module 1 : Python for Data Science (Foundations)",
@@ -1168,7 +1168,8 @@ export const getCourseCurriculum = (title: string, category: string = "") => {
     }
 
     // 13. Artificial Intelligence and Machine Learning
-    if (search.includes("artificial intelligence") || (search.includes("machine learning") && !search.includes("masterclass"))) {
+    // Updated search logic to catch both full name and shorter 'AI' variations
+    if (search.includes("artificial intelligence") || search.includes("machine learning") || (search.includes("ai") && !search.includes("masterclass"))) {
         return [
             {
                 title: "Module 1: Python Foundations for AI",
