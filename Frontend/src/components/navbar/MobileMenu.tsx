@@ -65,13 +65,14 @@ export const MobileMenu = ({
                                 </div>
                             ) : (
                                 <div className="flex flex-col gap-3 mb-6">
-                                    <Button asChild className="w-full h-12 rounded-xl font-bold shadow-lg bg-[#0066CC] text-white hover:bg-[#0052a3]">
+                                    <Button asChild className="w-full h-12 rounded-xl font-bold shadow-lg bg-[#0066CC] text-white hover:bg-[#0052a3] active:scale-95 transition-all">
                                         <Link to="/contact" onClick={onClose}>Book Free Demo</Link>
                                     </Button>
                                     <div className="grid grid-cols-2 gap-3">
-                                        <Button variant="outline" onClick={() => { onClose(); setAuthMode('login'); setShowAuthModal(true); }} className="font-bold h-11 rounded-xl bg-transparent border-slate-200 text-slate-700 hover:bg-slate-50">Login</Button>
-                                        <Button variant="secondary" onClick={() => { onClose(); setAuthMode('register'); setShowAuthModal(true); }} className="font-bold h-11 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border-none">Sign Up</Button>
+                                        <Button variant="outline" onClick={() => { onClose(); setAuthMode('login'); setShowAuthModal(true); }} className="font-bold h-11 rounded-xl bg-transparent border-slate-200 text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">Login</Button>
+                                        <Button variant="secondary" onClick={() => { onClose(); setAuthMode('register'); setShowAuthModal(true); }} className="font-bold h-11 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border-none active:scale-95 transition-all">Sign Up</Button>
                                     </div>
+
                                 </div>
                             )}
 
@@ -130,12 +131,12 @@ export const MobileMenu = ({
                             </div>
 
                             <div className="flex items-center gap-4 mt-8 justify-center">
-                                <a href="https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaInstagram className="w-5 h-5" /> </a>
-                                <a href="https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaYoutube className="w-5 h-5" /> </a>
-                                <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaLinkedin className="w-5 h-5" /> </a>
-                                <a href="https://twitter.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaXTwitter className="w-5 h-5" /> </a>
-                                <a href="https://www.facebook.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaFacebook className="w-5 h-5" /> </a>
-                                <a href="https://t.me/aotms" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaTelegram className="w-5 h-5" /> </a>
+                                <a href="https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaInstagram className="w-5 h-5" /> </a>
+                                <a href="https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaYoutube className="w-5 h-5" /> </a>
+                                <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaLinkedin className="w-5 h-5" /> </a>
+                                <a href="https://twitter.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaXTwitter className="w-5 h-5" /> </a>
+                                <a href="https://www.facebook.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaFacebook className="w-5 h-5" /> </a>
+                                <a href="https://t.me/aotms" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"> <FaTelegram className="w-5 h-5" /> </a>
                             </div>
                         </div>
 

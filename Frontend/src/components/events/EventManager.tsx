@@ -482,10 +482,12 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                                             ref={scrollRef}
                                             onMouseEnter={() => setIsPaused(true)}
                                             onMouseLeave={() => setIsPaused(false)}
+                                            onTouchStart={() => setIsPaused(true)}
+                                            onTouchEnd={() => setTimeout(() => setIsPaused(false), 2000)}
                                             className={cn(
                                                 "flex custom-scrollbar pointer-events-auto transition-all",
                                                 isMobile
-                                                    ? "flex-row overflow-x-auto overflow-y-hidden space-x-4 pb-6 px-1 scroll-smooth"
+                                                    ? "flex-row overflow-x-auto overflow-y-hidden space-x-4 pb-6 px-4 scroll-smooth snap-x snap-mandatory touch-pan-x"
                                                     : "flex-col overflow-y-auto pr-2 space-y-4 h-[600px] lg:max-h-[80vh]"
                                             )}
                                         >
@@ -497,8 +499,8 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                                                         key={`event-${event.id}-${index}`}
                                                         onClick={() => setSelectedEvent(event)}
                                                         className={cn(
-                                                            "group text-left transition-all duration-300 rounded-xl overflow-hidden mb-1 relative flex flex-col items-start shrink-0",
-                                                            isMobile ? "w-48" : "w-full",
+                                                            "group text-left transition-all duration-300 rounded-xl overflow-hidden mb-1 relative flex flex-col items-start shrink-0 snap-center",
+                                                            isMobile ? "w-64 sm:w-72" : "w-full",
                                                             isSelected
                                                                 ? "ring-2 ring-[#0075CF] bg-white shadow-xl scale-[1.02] z-10"
                                                                 : "border border-gray-100 bg-[#F9FAFB] hover:border-gray-200"
@@ -656,7 +658,7 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                                                     <div className="pt-2 flex flex-col sm:flex-row gap-4">
                                                         <button
                                                             onClick={handleButtonClick}
-                                                            className="group relative px-8 py-4 bg-[#111111] hover:bg-[#0A3D91] rounded-xl transition-all duration-300 shadow-xl shadow-gray-200 hover:shadow-[#0A3D91]/20 hover:-translate-y-1 w-full md:w-auto"
+                                                            className="group relative px-8 py-4 bg-[#111111] hover:bg-[#0A3D91] rounded-xl transition-all duration-300 shadow-xl shadow-gray-200 hover:shadow-[#0A3D91]/20 hover:-translate-y-1 active:scale-95 w-full md:w-auto"
                                                         >
                                                             <div className="relative z-10 flex items-center justify-center gap-3">
                                                                 <span className="text-white font-black tracking-widest uppercase text-xs">
@@ -679,7 +681,7 @@ export const EventManager = ({ events, title, subtitle }: EventManagerProps) => 
                                                                     }
                                                                 }}
                                                                 className={cn(
-                                                                    "group relative px-8 py-4 border-2 rounded-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-full md:w-auto overflow-hidden",
+                                                                    "group relative px-8 py-4 border-2 rounded-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95 w-full md:w-auto overflow-hidden",
                                                                     selectedEvent.isRegistrationOpen === false
                                                                         ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
                                                                         : isHackathon

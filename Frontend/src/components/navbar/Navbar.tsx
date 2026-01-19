@@ -211,7 +211,7 @@ export const Header = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-3">
-                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0066CC] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all">
+                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0066CC] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
                     <Link to="/contact">Book Free Demo</Link>
                   </Button>
                   <Button variant="ghost" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="font-bold hover:bg-primary/5">

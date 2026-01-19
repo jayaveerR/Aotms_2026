@@ -67,7 +67,7 @@ export const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white transition-all transform hover:scale-110",
+                      "w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white transition-all transform hover:scale-110 active:scale-95",
                       social.color
                     )}
                   >
@@ -153,7 +153,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:scale-110 shadow-md hover:shadow-lg transition-all duration-300",
+                    "w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:scale-110 active:scale-95 shadow-md hover:shadow-lg transition-all duration-300",
                     social.color
                   )}
                   aria-label={social.label}
