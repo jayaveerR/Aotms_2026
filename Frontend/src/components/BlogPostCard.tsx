@@ -19,7 +19,7 @@ export const BlogPostCard = ({ post, index }: BlogPostCardProps) => {
       transition={{ delay: index * 0.1 }}
       className="group relative bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500"
     >
-      <Link to={`/blog/${post.slug}`} className="block relative h-60 overflow-hidden">
+      <Link to={`/blog/${post.slug}`} className="block relative h-60 overflow-hidden active:scale-[0.98] transition-transform">
         <div className="absolute inset-0 bg-[#0075CF]/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity z-10" />
         <img
           src={post.image}
@@ -64,7 +64,7 @@ export const BlogPostCard = ({ post, index }: BlogPostCardProps) => {
           </div>
           <Link
             to={`/blog/${post.slug}`}
-            className="flex items-center gap-2 text-xs font-bold text-[#0075CF] uppercase tracking-widest hover:gap-3 transition-all"
+            className="flex items-center gap-2 text-xs font-bold text-[#0075CF] uppercase tracking-widest hover:gap-3 active:scale-95 transition-all"
           >
             Read More <ArrowRight className="w-3 h-3" />
           </Link>

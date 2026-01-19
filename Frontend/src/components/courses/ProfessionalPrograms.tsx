@@ -64,7 +64,7 @@ export const ProfessionalPrograms = () => {
                     <div className="flex items-center gap-4 mt-6">
                         <button
                             onClick={scrollPrev}
-                            className="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 group"
+                            className="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/10 active:scale-95 transition-all duration-300 group"
                             aria-label="Scroll left"
                             disabled={!courses || courses.length === 0}
                         >
@@ -72,7 +72,7 @@ export const ProfessionalPrograms = () => {
                         </button>
                         <button
                             onClick={scrollNext}
-                            className="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 group"
+                            className="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-100 hover:shadow-xl hover:shadow-blue-500/10 active:scale-95 transition-all duration-300 group"
                             aria-label="Scroll right"
                             disabled={!courses || courses.length === 0}
                         >

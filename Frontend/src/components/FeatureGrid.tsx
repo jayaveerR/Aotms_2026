@@ -45,7 +45,7 @@ export const FeatureGrid = () => {
                             transition={{ delay: index * 0.05 }}
                             whileHover={{ scale: 1.05 }}
                             className={cn(
-                                "flex items-center gap-2 md:gap-4 py-2.5 md:py-3 px-4 md:px-6 rounded-full shadow-lg transition-all duration-300 cursor-default group shrink-0",
+                                "flex items-center gap-2 md:gap-4 py-2.5 md:py-3 px-4 md:px-6 rounded-full shadow-lg transition-all duration-300 cursor-default group shrink-0 active:scale-95",
                                 isLast
                                     ? "bg-[#FD5A1A] text-white shadow-orange-500/20"
                                     : "bg-white text-slate-800 shadow-black/5 border border-slate-100 hover:bg-[#FD5A1A] hover:text-white"

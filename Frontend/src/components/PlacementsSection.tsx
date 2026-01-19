@@ -66,7 +66,7 @@ export const PlacementsSection = () => {
                 >
                   <button
                     onClick={() => setOpenId(openId === item.id ? null : item.id)}
-                    className="w-full py-5 flex items-center justify-between gap-4 text-left"
+                    className="w-full py-5 flex items-center justify-between gap-4 text-left active:scale-[0.98] transition-transform"
                   >
                     <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                       {item.title}

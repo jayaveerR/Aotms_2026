@@ -99,7 +99,7 @@ export const CertificateShowcase = ({
                                                     setSelectedCertImage(certImage1);
                                                     setIsCertModalOpen(true);
                                                 }}
-                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4]"
+                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4] active:scale-95"
                                             >
                                                 <img
                                                     src={certImage1}
@@ -115,7 +115,7 @@ export const CertificateShowcase = ({
                                                     setSelectedCertImage(certImage2);
                                                     setIsCertModalOpen(true);
                                                 }}
-                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4]"
+                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4] active:scale-95"
                                             >
                                                 <img
                                                     src={certImage2}
@@ -131,7 +131,7 @@ export const CertificateShowcase = ({
                                                     setSelectedCertImage(certImage3);
                                                     setIsCertModalOpen(true);
                                                 }}
-                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4]"
+                                                className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-orange-400 transition-all cursor-pointer group/cert aspect-[3/4] active:scale-95"
                                             >
                                                 <img
                                                     src={certImage3}

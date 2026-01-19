@@ -119,7 +119,7 @@ export const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="/courses"
-                className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-white bg-[#FD5A1A] rounded-md hover:bg-[#0066b3] transition"
+                className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-white bg-[#FD5A1A] rounded-md hover:bg-[#0066b3] active:scale-95 transition-all"
               >
                 Start Your Journey
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -127,7 +127,7 @@ export const HeroSection = () => {
 
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-[#0075CF] bg-[#0075CF]/5 border border-[#0075CF]/20 rounded-md hover:bg-[#0075CF]/10 transition-colors"
+                className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-[#0075CF] bg-[#0075CF]/5 border border-[#0075CF]/20 rounded-md hover:bg-[#0075CF]/10 active:scale-95 transition-all"
               >
                 <PlayCircle className="mr-2 w-4 h-4 text-orange-500" />
                 Book a Free Demo Class
