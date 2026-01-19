@@ -34,7 +34,7 @@ export const CourseIntroSections = ({ customSections }: CourseIntroSectionsProps
             {customSections.filter((s) => s.type === "about_us").map((section, idx) => (
                 <section key={`about-us-${idx}`} id="overview" className="scroll-mt-32 bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
                     <div className="flex items-center gap-2 mb-6">
-                        <h2 className="text-2xl font-bold text-slate-900 uppercase">ABOUT US</h2>
+                        <h2 className="text-2xl font-bold text-slate-900 uppercase">ABOUT US - Best Training in Vijayawada</h2>
                         <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                     </div>
                     <div className="bg-blue-50 rounded-xl p-6 sm:p-8">
@@ -231,24 +231,7 @@ const PythonFullStackIntro = ({ section }: { section: Section }) => (
                     </span>
                     FULL STACK
                 </h2>
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56">
-                    <svg viewBox="0 0 200 200" className="w-full h-full">
-                        <defs>
-                            <linearGradient id="pyBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#3776AB" />
-                                <stop offset="100%" stopColor="#28567E" />
-                            </linearGradient>
-                            <linearGradient id="pyYellow" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#FFD343" />
-                                <stop offset="100%" stopColor="#FFC107" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M100,40 C120,40 135,45 135,65 L135,85 L75,85 L75,80 C75,60 80,40 100,40 Z M115,55 C120,55 122,58 122,62 C122,66 118,68 115,68 C111,68 108,65 108,62 C108,58 112,55 115,55 Z" fill="url(#pyBlue)" />
-                        <path d="M135,85 L135,125 C135,145 125,160 100,160 L60,160 L60,135 L115,135 C125,135 130,130 130,120 L130,85 L135,85 Z" fill="url(#pyBlue)" />
-                        <path d="M100,160 C80,160 65,155 65,135 L65,115 L125,115 L125,120 C125,140 120,160 100,160 Z M85,145 C80,145 78,142 78,138 C78,134 82,132 85,132 C89,132 92,135 92,138 C92,142 88,145 85,145 Z" fill="url(#pyYellow)" />
-                        <path d="M65,115 L65,75 C65,55 75,40 100,40 L140,40 L140,65 L85,65 C75,65 70,70 70,80 L70,115 L65,115 Z" fill="url(#pyYellow)" />
-                    </svg>
-                </div>
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56"></div>
             </div>
             <div className="flex justify-center">
                 <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64">
