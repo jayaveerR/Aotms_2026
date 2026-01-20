@@ -8,6 +8,14 @@
   left: 0 !important;
   right: auto !important;
   margin: 0 !important;
+  transform: scaleX(-1);
+  /* Flip horizontally */
+  transform-origin: left bottom;
+}
+
+/* Unflip the text/content inside so it remains readable */
+.grecaptcha-badge iframe {
+  transform: scaleX(-1);
 }
 
 @tailwind base;
