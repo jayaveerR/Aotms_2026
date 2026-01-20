@@ -54,7 +54,7 @@ export const getCourseObjectives = (title: string, category: string = "") => {
         ];
     }
 
-    // DevOps Multi-Cloud Engineering specific objectives
+    // DevOps Data Engineering specific objectives
     if (search.includes("devops")) {
         return [
             "Understand the complete DevOps lifecycle – from development to deployment and monitoring.",
@@ -89,7 +89,7 @@ export const getCourseObjectives = (title: string, category: string = "") => {
         ];
     }
 
-    // Multi-Cloud Engineering specific objectives
+    // Data Engineering specific objectives
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             "Master the fundamentals of data engineering, data pipelines, and big data systems.",
@@ -270,7 +270,7 @@ export const getCourseCapstoneProjects = (title: string, category: string = "") 
         ];
     }
 
-    // DevOps Multi-Cloud Engineering capstone projects
+    // DevOps Data Engineering capstone projects
     if (search.includes("devops")) {
         return [
             {
@@ -375,7 +375,7 @@ export const getCourseCapstoneProjects = (title: string, category: string = "") 
         ];
     }
 
-    // Multi-Cloud Engineering capstone projects
+    // Data Engineering capstone projects
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             { title: "End-to-End Data Pipeline with AWS", description: "Ingest → Process → Store → Visualize using S3, Glue, Redshift, Power BI" },
@@ -525,7 +525,7 @@ export const getCourseLearningOutcomes = (title: string, category: string = "") 
         ];
     }
 
-    // DevOps Multi-Cloud Engineering learning outcomes
+    // DevOps Data Engineering learning outcomes
     if (search.includes("devops")) {
         return [
             "Build and deploy CI/CD pipelines using Jenkins, GitHub Actions, and Docker.",
@@ -560,7 +560,7 @@ export const getCourseLearningOutcomes = (title: string, category: string = "") 
         ];
     }
 
-    // Multi-Cloud Engineering learning outcomes
+    // Data Engineering learning outcomes
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             "Design and build data pipelines and ETL workflows.",
@@ -687,7 +687,7 @@ export const getCourseCertifications = (title: string, category: string = "") =>
         ];
     }
 
-    // DevOps Multi-Cloud Engineering certifications
+    // DevOps Data Engineering certifications
     if (search.includes("devops")) {
         return {
             providers: [
@@ -916,7 +916,7 @@ export const getCourseCareerRoles = (title: string, category: string = "") => {
         ];
     }
 
-    // Multi-Cloud Engineering career roles
+    // Data Engineering career roles
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             "Data Engineer",

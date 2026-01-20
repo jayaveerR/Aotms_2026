@@ -4,7 +4,7 @@ import { Header as Navbar } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/Footer";
 import { Plus, Minus, Search, MessageCircle, HelpCircle, MapPin, Clock, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 
 const faqs = [
     {
@@ -222,12 +222,12 @@ const FAQPage = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-accent/20">
-            <Helmet>
-                <title>FAQ - IT Training in Vijayawada | Academy of Tech Masters</title>
-                <meta name="description" content="Find answers to common questions about AOTMS Vijayawada's IT courses, eligibility, placements, fees, facilities, and more. Premier IT training institute in Vijayawada, Andhra Pradesh." />
-                <meta name="keywords" content="AOTMS FAQ, IT training Vijayawada, coding courses Vijayawada, placement assistance Vijayawada, tech education Andhra Pradesh" />
-                <link rel="canonical" href="https://aotms.com/faq" />
-            </Helmet>
+            <SEO
+                title="FAQ - IT Training in Vijayawada"
+                description="Find answers to common questions about AOTMS Vijayawada's IT courses, eligibility, placements, fees, facilities, and more. Premier IT training institute in Vijayawada, Andhra Pradesh."
+                keywords="AOTMS FAQ, IT training Vijayawada, coding courses Vijayawada, placement assistance Vijayawada, tech education Andhra Pradesh"
+                canonical="https://aotms.in/faq"
+            />
             <Navbar />
 
             {/* Hero Section */}

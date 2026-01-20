@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SEO } from "@/components/SEO";
 
 // --- Mock Data ---
 const categories = ["All", "Cheatsheets", "E-Books", "Roadmaps", "Video Tutorials", "Interview Prep"];
@@ -143,6 +144,12 @@ export const ResourcesPage = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans">
+            <SEO
+                title="Free Tech Learning Resources"
+                description="Download free cheatsheets, roadmaps, e-books, and tutorials from Academy of Tech Masters. Curated resources for developers, data scientists, and tech enthusiasts."
+                keywords="free tech resources, React cheatsheet, Python roadmap, coding e-books, AOTMS resources"
+                canonical="https://aotms.in/resources"
+            />
             <Header />
 
             {/* --- Hero Section --- */}

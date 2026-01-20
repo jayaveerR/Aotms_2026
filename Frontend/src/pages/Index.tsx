@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Header } from "@/components/navbar/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { CompanyLogos } from "@/components/CompanyLogos";
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 
 // Lazy load below-the-fold components for better performance
 const AboutSection = lazy(() => import("@/components/AboutSection").then(m => ({ default: m.AboutSection })));
@@ -25,12 +25,12 @@ const SectionLoader = () => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Helmet>
-        <title>Academy of Tech Masters | #1 IT Training Institute in Vijayawada</title>
-        <meta name="description" content="Join Academy of Tech Masters for the best IT training in Vijayawada. Master Full Stack, DevOps, AI, and more with 100% placement support." />
-        <meta name="keywords" content="IT Training Vijayawada, Coding Bootcamp, Software Courses, Placement Guarantee, AOTMS" />
-        <link rel="canonical" href="https://aotms.com/" />
-      </Helmet>
+      <SEO
+        title="Academy of Tech Masters | #1 IT Training Institute in Vijayawada"
+        description="Join Academy of Tech Masters for the best IT training in Vijayawada. Master Full Stack, DevOps, AI, and more with 100% placement support."
+        keywords="IT Training Vijayawada, Coding Bootcamp, Software Courses, Placement Guarantee, AOTMS"
+        canonical="https://aotms.in/"
+      />
 
       {/* Above-the-fold: Load immediately */}
       <Header />

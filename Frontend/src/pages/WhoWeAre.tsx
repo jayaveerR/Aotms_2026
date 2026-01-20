@@ -8,6 +8,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useState, useEffect } from "react";
 import { PerformanceBreakdown } from "@/components/PerformanceBreakdown";
+import { SEO } from "@/components/SEO";
 
 const stats = [
   { number: "2000+", label: "Successful Trainees", icon: Users },
@@ -222,6 +223,12 @@ const TestimonialCarousel = () => {
 export const WhoWeAre = () => {
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Who We Are - About Us"
+        description="Learn about Academy of Tech Masters (AOTMS), India's premier EdTech institution in Vijayawada. Explore our mission, leadership, and success in tech training."
+        keywords="AOTMS Vijayawada, about Academy of Tech Masters, Mr. Sayyed Ameenuddin, tech education Vijayawada"
+        canonical="https://aotms.in/about-us"
+      />
       <Header />
 
       {/* Hero Section */}

@@ -192,7 +192,7 @@ export const HeroSection = () => {
                       <motion.img
                         key={currentImageIndex}
                         src={heroImages[currentImageIndex]}
-                        alt="Hero"
+                        alt="IT Training Event and Class - Academy of Tech Masters"
                         loading="eager"
                         initial={shouldReduceMotion || isMobile ? { opacity: 1 } : { opacity: 0, scale: 1.05 }}
                         animate={{ opacity: 1, scale: 1 }}

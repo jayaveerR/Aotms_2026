@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { SEO } from "@/components/SEO";
 
 const FeedbackPage = () => {
     const [rating, setRating] = useState(0);
@@ -52,6 +53,12 @@ const FeedbackPage = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-accent/20">
+            <SEO
+                title="Student Feedback"
+                description="Share your learning experience at Academy of Tech Masters. Your feedback helps us improve our IT training programs in Vijayawada."
+                keywords="AOTMS feedback, student reviews Vijayawada, tech training feedback"
+                canonical="https://aotms.in/feedback"
+            />
             <Navbar />
 
             {/* Hero Section */}

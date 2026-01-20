@@ -6,6 +6,7 @@ import { CourseCard } from "@/components/courses/CourseCard";
 import { Search, Users, Laptop, Trophy, GraduationCap, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { SEO } from "@/components/SEO";
 
 const CoursesPage = () => {
     const { data: courses, isLoading } = useCourses();
@@ -36,6 +37,12 @@ const CoursesPage = () => {
 
     return (
         <div className="bg-[#f8fafc] min-h-screen flex flex-col font-sans">
+            <SEO
+                title="Professional IT Courses"
+                description="Explore job-ready IT training programs in Vijayawada. Master Full Stack Development, DevOps, AI, and more with AOTMS. 100% Placement Assistance."
+                keywords="IT Courses Vijayawada, Full Stack training, DevOps certification, AI coaching, coding classes"
+                canonical="https://aotms.in/courses"
+            />
             <Header />
 
             {/* Blue Hero Section */}

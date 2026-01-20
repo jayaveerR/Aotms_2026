@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Header } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { CourseDetailHero } from "./CourseDetailsHero";
 import { useCourseBySlug, useCourses } from "@/hooks/useCourses";
 import { useCartStore } from "@/store/cartStore";
@@ -121,13 +121,12 @@ export default function CourseDetail() {
             <Header />
 
             {/* SEO Meta Tags */}
-            <Helmet>
-                <title>{course.title} Training in Vijayawada | Academy of Tech Masters</title>
-                <meta name="description" content={`Learn ${course.title} with expert training in Vijayawada. ${course.duration} course with placement assistance and certification.`} />
-                <meta property="og:title" content={`${course.title} | AOTMS`} />
-                <meta property="og:image" content={course.image} />
-                <link rel="canonical" href={`https://aotms.in/course/${slug}`} />
-            </Helmet>
+            <SEO
+                title={`${course.title} Training in Vijayawada`}
+                description={`Learn ${course.title} with expert training in Vijayawada. ${course.duration} course with placement assistance and certification.`}
+                image={course.image}
+                canonical={`https://aotms.in/course/${slug}`}
+            />
 
             {/* Hero */}
             <CourseDetailHero

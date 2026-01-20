@@ -131,7 +131,7 @@ export const getCourseCustomContent = (title: string, category: string = "") => 
         ];
     }
 
-    // DevOps Multi-Cloud Engineering specific introduction
+    // DevOps Data Engineering specific introduction
     if (search.includes("devops")) {
         return [
             {
@@ -144,16 +144,16 @@ export const getCourseCustomContent = (title: string, category: string = "") => 
             },
             {
                 type: "devops_multicloud_introduction",
-                title: "DEVOPS MULTI-CLOUD ENGINEERING",
+                title: "DEVOPS DATA ENGINEERING",
                 content: {
-                    heading: "DevOps & Multi-Cloud Engineering",
+                    heading: "DevOps & Data Engineering",
                     description: (
                         <>
                             <p className="text-slate-700 leading-relaxed text-base sm:text-lg mb-4">
                                 <span className="font-bold text-blue-900">DevOps</span> combines Development and Operations. Our DevOps training in Vijayawada helps teams build, test, and deploy software faster.
                             </p>
                             <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
-                                <span className="font-bold text-blue-900">Multi-Cloud Engineering</span> involves using multiple cloud platforms (like <span className="font-bold">AWS, Azure, and Google Cloud</span>) together to run applications. It provides flexibility, reduces dependency on one provider, and improves performance and reliability.
+                                <span className="font-bold text-blue-900">Data Engineering</span> involves designing, building, and maintaining systems for collecting, storing, and analyzing data. It provides the foundation for data-driven decision making and enables organizations to extract valuable insights from their data.
                             </p>
                         </>
                     )
@@ -224,7 +224,7 @@ export const getCourseCustomContent = (title: string, category: string = "") => 
         ];
     }
 
-    // Multi-Cloud Engineering specific introduction
+    // Data Engineering specific introduction
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             {
@@ -237,7 +237,7 @@ export const getCourseCustomContent = (title: string, category: string = "") => 
             },
             {
                 type: "multicloud_engineering_introduction",
-                title: "MULTI-CLOUD ENGINEERING",
+                title: "DATA ENGINEERING",
                 content: {
                     heading: "Data Engineering & Multi-Cloud Development",
                     description: (

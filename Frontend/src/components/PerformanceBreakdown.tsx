@@ -17,6 +17,7 @@ export const PerformanceBreakdown = () => {
     // State to trigger animations only when in view
     const [startAnim, setStartAnim] = useState(false);
     const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -146,7 +147,18 @@ export const PerformanceBreakdown = () => {
                                     animationEasing="ease-out"
                                 >
                                     {data.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                        <Cell
+                                            key={`cell-${index}`}
+                                            fill={entry.color}
+                                            opacity={activeIndex === null ? 1 : activeIndex === index ? 1 : 0.3}
+                                            onMouseEnter={() => setActiveIndex(index)}
+                                            onMouseLeave={() => setActiveIndex(null)}
+                                            style={{
+                                                cursor: 'pointer',
+                                                transition: 'opacity 0.3s ease, filter 0.3s ease',
+                                                filter: activeIndex === index ? 'brightness(1.1)' : 'none'
+                                            }}
+                                        />
                                     ))}
                                 </Pie>
                                 <Tooltip

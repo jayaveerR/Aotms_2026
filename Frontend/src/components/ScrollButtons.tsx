@@ -26,15 +26,16 @@ export const ScrollButtons = () => {
     if (!showButtons) return null;
 
     return (
-        <div className="fixed bottom-24 right-8 z-[100] flex flex-col gap-3">
-            {/* Scroll to Top Button */}
+        <div className="fixed bottom-16 right-0 z-[90] flex flex-col gap-3">
+            {/* Scroll to Top Button - Sticky Edge Style */}
             <button
                 onClick={scrollToTop}
-                className="group w-9 h-9 rounded-full text-white shadow-lg touch-manipulation transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center -webkit-tap-highlight-transparent"
+                className="group w-10 h-10 rounded-l-xl rounded-r-none text-white shadow-lg touch-manipulation transition-all duration-300 hover:w-12 active:scale-95 flex items-center justify-center -webkit-tap-highlight-transparent pl-1"
                 style={{
                     background: '#0066CC',
-                    boxShadow: '0 4px 14px rgba(0, 102, 204, 0.3)',
-                    border: '2px solid white'
+                    boxShadow: '-4px 4px 14px rgba(0, 102, 204, 0.3)',
+                    border: '2px solid white',
+                    borderRight: 'none'
                 }}
                 aria-label="Scroll to top"
             >

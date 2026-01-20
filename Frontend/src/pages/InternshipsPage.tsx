@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { InternshipManager, EventItem } from "@/components/events/InternshipManager";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+import { SEO } from "@/components/SEO";
 
 const InternshipsPage = () => {
     const [internships, setInternships] = useState<EventItem[]>([]);
@@ -118,6 +119,12 @@ const InternshipsPage = () => {
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
+            <SEO
+                title="Industrial Internships"
+                description="Apply for industrial internships at Academy of Tech Masters, Vijayawada. Work on real-world projects in AI, Cyber Security, Full Stack, and Data Analytics."
+                keywords="IT internships Vijayawada, industrial training AOTMS, tech internships for students"
+                canonical="https://aotms.in/internships"
+            />
             <Header />
             <main className="pt-28 md:pt-32 flex-1 relative">
                 <InternshipManager

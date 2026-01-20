@@ -97,21 +97,52 @@ export const MobileMenu = ({
                                                             className="overflow-hidden bg-slate-50/80 rounded-lg mt-1"
                                                         >
                                                             <div className="flex flex-col p-2 gap-0.5">
-                                                                {link.dropdownItems?.map((item) => (
-                                                                    <Link
-                                                                        key={item.name}
-                                                                        to={item.href}
-                                                                        onClick={onClose}
-                                                                        className="flex items-center gap-3 p-3 rounded-md hover:bg-white transition-colors active:bg-slate-100"
-                                                                    >
-                                                                        <div className="text-primary shrink-0 opacity-80">
-                                                                            {item.icon && <item.icon className="w-4 h-4" />}
-                                                                        </div>
-                                                                        <div className="min-w-0">
-                                                                            <div className="text-xs md:text-sm font-bold truncate text-slate-700">{item.name}</div>
-                                                                        </div>
-                                                                    </Link>
-                                                                ))}
+                                                                {(link as any).menuCategories ? (
+                                                                    <>
+                                                                        {(link as any).menuCategories.map((category: any, catIdx: number) => (
+                                                                            <div key={catIdx} className="mb-3 last:mb-0">
+                                                                                <div className="px-2 py-1.5 mb-1">
+                                                                                    <span className="text-[10px] font-bold text-primary uppercase tracking-wider">
+                                                                                        {category.category}
+                                                                                    </span>
+                                                                                </div>
+                                                                                {category.courses.map((course: any, courseIdx: number) => (
+                                                                                    <Link
+                                                                                        key={courseIdx}
+                                                                                        to={course.href}
+                                                                                        onClick={onClose}
+                                                                                        className="flex items-center gap-3 p-3 rounded-md hover:bg-white transition-colors active:bg-slate-100"
+                                                                                    >
+                                                                                        <div className="text-primary shrink-0 opacity-80">
+                                                                                            {course.icon && <course.icon className="w-4 h-4" />}
+                                                                                        </div>
+                                                                                        <div className="min-w-0">
+                                                                                            <div className="text-xs md:text-sm font-bold truncate text-slate-700">{course.name}</div>
+                                                                                        </div>
+                                                                                    </Link>
+                                                                                ))}
+                                                                            </div>
+                                                                        ))}
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        {link.dropdownItems?.map((item) => (
+                                                                            <Link
+                                                                                key={item.name}
+                                                                                to={item.href}
+                                                                                onClick={onClose}
+                                                                                className="flex items-center gap-3 p-3 rounded-md hover:bg-white transition-colors active:bg-slate-100"
+                                                                            >
+                                                                                <div className="text-primary shrink-0 opacity-80">
+                                                                                    {item.icon && <item.icon className="w-4 h-4" />}
+                                                                                </div>
+                                                                                <div className="min-w-0">
+                                                                                    <div className="text-xs md:text-sm font-bold truncate text-slate-700">{item.name}</div>
+                                                                                </div>
+                                                                            </Link>
+                                                                        ))}
+                                                                    </>
+                                                                )}
                                                             </div>
                                                         </motion.div>
                                                     )}

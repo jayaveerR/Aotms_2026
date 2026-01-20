@@ -7,6 +7,7 @@ import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
+import { SEO } from "@/components/SEO";
 
 const WorkshopsPage = () => {
     const [events, setEvents] = useState<EventItem[]>([]);
@@ -66,6 +67,12 @@ const WorkshopsPage = () => {
 
     return (
         <div className="bg-white min-h-screen">
+            <SEO
+                title="Professional Tech Workshops"
+                description="Join expert-led tech workshops at Academy of Tech Masters in Vijayawada. Gain hands-on experience in the latest technologies and industry practices."
+                keywords="tech workshops Vijayawada, specialized IT training, hands-on workshops AOTMS"
+                canonical="https://aotms.in/workshops"
+            />
             <Header />
             <main className="pt-28 md:pt-32">
                 <WorkshopManager

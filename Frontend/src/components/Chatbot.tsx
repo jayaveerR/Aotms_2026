@@ -6,6 +6,9 @@ import { MoreHorizontal, Send, MessageSquare, Smile, Copy, ThumbsUp, ThumbsDown,
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { FaRobot } from 'react-icons/fa6';
+
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Message {
   id: number;
@@ -153,147 +156,191 @@ const Chatbot: React.FC = () => {
     <div className={`chatbot-container ${isOpen ? 'z-[20000]' : 'z-[19999]'}`}>
 
       {/* Chat Panel */}
-      <div ref={chatPanelRef} className={`chat-panel ${isOpen ? 'open' : ''}`}>
-
-        {/* Header - White with Black Text */}
-        <div className="chat-header relative">
-          <h2 className="text-white font-semibold text-base">Academy Of Tech Masters</h2>
-          <div className="flex items-center gap-1">
-            <button
-              onClick={() => setShowMenu(!showMenu)}
-              className="text-white hover:bg-white/10 rounded-full p-2 transition-colors relative"
-              aria-label="More options"
-              title="More options"
-            >
-              <MoreHorizontal className="w-5 h-5" />
-            </button>
-            <button
-              onClick={toggleChat}
-              className="text-white hover:bg-white/10 rounded-full p-2 transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Header Dropdown Menu */}
-          {showMenu && (
-            <div ref={menuRef} className="absolute top-12 right-4 bg-white rounded-xl shadow-xl border border-gray-100 py-2 w-56 z-50 animate-fade-in-up">
-              <button onClick={handleStartNewChat} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
-                <MessageSquarePlus className="w-5 h-5 text-gray-500" />
-                <span className="font-medium text-sm">Start a new chat</span>
-              </button>
-              <button onClick={handleEndChat} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
-                <MessageSquareX className="w-5 h-5 text-gray-500" />
-                <span className="font-medium text-sm">End chat</span>
-              </button>
-              <button onClick={handleViewRecentChats} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
-                <History className="w-5 h-5 text-gray-500" />
-                <span className="font-medium text-sm">View recent chats</span>
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Messages Area */}
-        <div className="chat-messages">
-          {messages.map((msg) => (
-            <div key={msg.id} className={`message-row ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className="flex flex-col gap-1 max-w-[85%]">
-                <div className={`message-bubble ${msg.sender}`}>
-                  {msg.text}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            ref={chatPanelRef}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="chat-panel open"
+          >
+            {/* Header - White with Black Text */}
+            <div className="chat-header relative">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                  <motion.div
+                    animate={{ rotateY: [0, 360] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                    <FaRobot className="w-5 h-5 text-white" />
+                  </motion.div>
                 </div>
-                {msg.sender === 'bot' && (
-                  <div className="flex items-center gap-3 mt-1 ml-1 text-gray-400">
-                    <button className="hover:text-gray-600 transition-colors" title="Copy" aria-label="Copy message">
-                      <Copy className="w-3.5 h-3.5" />
-                    </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Like" aria-label="Like response">
-                      <ThumbsUp className="w-3.5 h-3.5" />
-                    </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Dislike" aria-label="Dislike response">
-                      <ThumbsDown className="w-3.5 h-3.5" />
-                    </button>
-                    <button className="hover:text-gray-600 transition-colors" title="Regenerate" aria-label="Regenerate response">
-                      <RefreshCw className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                )}
+                <h2 className="text-white font-semibold text-sm">Academy Of Tech Masters</h2>
               </div>
-            </div>
-          ))}
-          {isTyping && (
-            <div className="message-row justify-start">
-              <div className="message-bubble bot typing">
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Input Area - Floating Style */}
-        <div className="chat-input-area border-t pt-2">
-          {showEmojiPicker && (
-            <div ref={emojiPickerRef} className="absolute bottom-16 left-4 bg-white border rounded-lg shadow-lg p-2 flex flex-wrap gap-2 z-50 animate-fade-in-up w-56">
-              {commonEmojis.map((emoji, index) => (
+              <div className="flex items-center gap-1">
                 <button
-                  key={index}
-                  type="button"
-                  onClick={() => onEmojiSelect(emoji)}
-                  className="text-xl hover:bg-gray-100 p-1 rounded transition-colors"
+                  onClick={() => setShowMenu(!showMenu)}
+                  className="text-white hover:bg-white/10 rounded-full p-2 transition-colors relative"
+                  aria-label="More options"
+                  title="More options"
                 >
-                  {emoji}
+                  <MoreHorizontal className="w-5 h-5" />
                 </button>
-              ))}
-            </div>
-          )}
-          <form className="chat-input-form shadow-lg border border-gray-100" onSubmit={handleSendMessage}>
-            <Input
-              className="border-none focus-visible:ring-0 shadow-none bg-transparent"
-              value={inputValue}
-              onChange={(e) => setInputValue(sanitizeInput.text(e.target.value))}
-              placeholder="Message..."
-            />
-            <div className="flex items-center gap-2 pr-2">
-              <button
-                type="button"
-                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className={`transition-colors ${showEmojiPicker ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}
-                aria-label="Add emoji"
-                title="Add emoji"
-              >
-                <Smile className="w-5 h-5" />
-              </button>
-              <button
-                type="submit"
-                disabled={!inputValue.trim()}
-                className="text-gray-400 hover:text-primary disabled:opacity-50 transition-colors"
-                aria-label="Send message"
-                title="Send message"
-              >
-                <Send className="w-5 h-5" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+                <button
+                  onClick={toggleChat}
+                  className="text-white hover:bg-white/10 rounded-full p-2 transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-      {/* Floating Toggle Button */}
+              {/* Header Dropdown Menu */}
+              {showMenu && (
+                <div ref={menuRef} className="absolute top-12 right-4 bg-white rounded-xl shadow-xl border border-gray-100 py-2 w-56 z-50 animate-fade-in-up">
+                  <button onClick={handleStartNewChat} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
+                    <MessageSquarePlus className="w-5 h-5 text-gray-500" />
+                    <span className="font-medium text-sm">Start a new chat</span>
+                  </button>
+                  <button onClick={handleEndChat} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
+                    <MessageSquareX className="w-5 h-5 text-gray-500" />
+                    <span className="font-medium text-sm">End chat</span>
+                  </button>
+                  <button onClick={handleViewRecentChats} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors">
+                    <History className="w-5 h-5 text-gray-500" />
+                    <span className="font-medium text-sm">View recent chats</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Messages Area */}
+            <div className="chat-messages">
+              {messages.map((msg) => (
+                <div key={msg.id} className={`message-row ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className="flex flex-col gap-1 max-w-[85%]">
+                    <div className={`message-bubble ${msg.sender}`}>
+                      {msg.text}
+                    </div>
+                    {msg.sender === 'bot' && (
+                      <div className="flex items-center gap-3 mt-1 ml-1 text-gray-400">
+                        <button className="hover:text-gray-600 transition-colors" title="Copy" aria-label="Copy message">
+                          <Copy className="w-3.5 h-3.5" />
+                        </button>
+                        <button className="hover:text-gray-600 transition-colors" title="Like" aria-label="Like response">
+                          <ThumbsUp className="w-3.5 h-3.5" />
+                        </button>
+                        <button className="hover:text-gray-600 transition-colors" title="Dislike" aria-label="Dislike response">
+                          <ThumbsDown className="w-3.5 h-3.5" />
+                        </button>
+                        <button className="hover:text-gray-600 transition-colors" title="Regenerate" aria-label="Regenerate response">
+                          <RefreshCw className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isTyping && (
+                <div className="message-row justify-start">
+                  <div className="message-bubble bot typing">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input Area - Floating Style */}
+            <div className="chat-input-area border-t pt-2">
+              {showEmojiPicker && (
+                <div ref={emojiPickerRef} className="absolute bottom-16 left-4 bg-white border rounded-lg shadow-lg p-2 flex flex-wrap gap-2 z-50 animate-fade-in-up w-56">
+                  {commonEmojis.map((emoji, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => onEmojiSelect(emoji)}
+                      className="text-xl hover:bg-gray-100 p-1 rounded transition-colors"
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <form className="chat-input-form shadow-lg border border-gray-100" onSubmit={handleSendMessage}>
+                <Input
+                  className="border-none focus-visible:ring-0 shadow-none bg-transparent"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(sanitizeInput.text(e.target.value))}
+                  placeholder="Message..."
+                />
+                <div className="flex items-center gap-2 pr-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    className={`transition-colors ${showEmojiPicker ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}
+                    aria-label="Add emoji"
+                    title="Add emoji"
+                  >
+                    <Smile className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={!inputValue.trim()}
+                    className="text-gray-400 hover:text-primary disabled:opacity-50 transition-colors"
+                    aria-label="Send message"
+                    title="Send message"
+                  >
+                    <Send className="w-5 h-5" />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Sticky Edge Toggle Button */}
       {!isOpen && (
         <button
           ref={toggleBtnRef}
           onClick={toggleChat}
-          className="chat-toggle-btn shadow-xl hover:shadow-2xl transition-all"
+          className="fixed bottom-0 right-0 rounded-tl-2xl rounded-tr-none rounded-br-none rounded-bl-none shadow-xl hover:shadow-2xl transition-all duration-300 hover:px-7 z-[19999] group overflow-hidden"
+          style={{
+            padding: '10px 20px',
+            background: '#0066CC',
+            color: 'white',
+            border: '2px solid white',
+            borderRight: 'none',
+            borderBottom: 'none',
+            boxShadow: '-4px -4px 14px rgba(11, 78, 150, 0.3)'
+          }}
           aria-label="Open support chat"
           title="Open support chat"
         >
-          <div className="flex items-center gap-2">
-            <MessageSquare className="w-5 h-5" />
-            <span className="font-semibold text-sm">AOTMS</span>
+          <div className="flex items-center gap-2 relative z-10">
+            <motion.div
+              animate={{
+                y: [0, -4, 0],
+                rotateZ: [0, -5, 5, 0]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="perspective-1000"
+            >
+              <FaRobot className="w-5 h-5 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+            </motion.div>
+            <span className="font-bold text-sm tracking-wide">AOTMS</span>
           </div>
+          {/* Animated Glow Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         </button>
       )}
     </div>

@@ -6,7 +6,14 @@ import {
     ArrowRight,
     Tag,
     X,
-    CheckCircle2
+    CheckCircle2,
+    BookOpen,
+    GraduationCap,
+    Lightbulb,
+    Target,
+    Users,
+    Award,
+    Briefcase
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
@@ -271,15 +278,122 @@ export const WorkshopManager = ({ events, title, subtitle }: WorkshopManagerProp
 
             <div className="w-full max-w-7xl mx-auto py-12 md:py-24 px-6 md:px-12 relative z-10">
                 {(title || subtitle) && (
-                    <div className="mb-12 md:mb-20 text-center lg:text-left">
-                        <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A] tracking-tight mb-8">
-                            {title}
-                        </h2>
-                        {subtitle && (
-                            <p className="text-gray-500 text-base md:text-xl max-w-4xl font-medium mx-auto lg:mx-0 leading-relaxed opacity-80">
-                                {subtitle}
-                            </p>
-                        )}
+                    <div className="relative mb-12 md:mb-20 overflow-hidden rounded-3xl">
+                        {/* Green Hero Background Container - Unique for Workshops */}
+                        <div className="relative bg-emerald-600 p-8 md:p-12 lg:p-16">
+                            {/* Grid Pattern Overlay */}
+                            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:32px_32px] opacity-5 pointer-events-none" />
+
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent pointer-events-none" />
+
+                            {/* Teal Glows - Unique for Workshops with Optimized Animations */}
+                            <motion.div
+                                animate={{
+                                    y: [0, -15, 0],
+                                    x: [0, 12, 0],
+                                }}
+                                transition={{
+                                    duration: 18,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-400 opacity-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none will-change-transform hidden md:block"
+                            />
+                            <motion.div
+                                animate={{
+                                    y: [0, 18, 0],
+                                    x: [0, -12, 0],
+                                }}
+                                transition={{
+                                    duration: 22,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: 1.5
+                                }}
+                                className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400 opacity-40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none will-change-transform hidden md:block"
+                            />
+                            {/* Static glows for mobile - no animation to prevent lag */}
+                            <div className="md:hidden absolute top-0 right-0 w-[500px] h-[500px] bg-teal-400 opacity-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                            <div className="md:hidden absolute bottom-0 left-0 w-96 h-96 bg-cyan-400 opacity-40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
+                            {/* Floating Workshop/Learning Icons (Desktop/Tablet) */}
+                            <motion.div
+                                animate={{ y: [0, -25, 0], rotate: [0, 8, 0] }}
+                                transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
+                                className="hidden md:block absolute top-24 right-40 opacity-10"
+                            >
+                                <BookOpen className="w-16 h-16 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, 20, 0], rotate: [0, -12, 0] }}
+                                transition={{ duration: 19, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                className="hidden md:block absolute bottom-40 left-24 opacity-10"
+                            >
+                                <GraduationCap className="w-14 h-14 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, -18, 0], x: [0, 10, 0] }}
+                                transition={{ duration: 23, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+                                className="hidden md:block absolute top-1/3 left-40 opacity-10"
+                            >
+                                <Lightbulb className="w-12 h-12 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, 22, 0], rotate: [0, 15, 0] }}
+                                transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                                className="hidden md:block absolute bottom-24 right-32 opacity-10"
+                            >
+                                <Target className="w-14 h-14 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, -20, 0], x: [0, -12, 0] }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+                                className="hidden md:block absolute top-1/2 right-20 opacity-10"
+                            >
+                                <Users className="w-10 h-10 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }}
+                                transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
+                                className="hidden md:block absolute bottom-1/3 left-16 opacity-10"
+                            >
+                                <Briefcase className="w-12 h-12 text-white" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+                                transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: 3.5 }}
+                                className="hidden md:block absolute top-40 left-12 opacity-10"
+                            >
+                                <Award className="w-11 h-11 text-white" />
+                            </motion.div>
+
+
+
+                            {/* Content */}
+                            <div className="relative z-10 text-center lg:text-left">
+                                <motion.h2
+                                    initial={{ opacity: 0, y: -20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    viewport={{ once: true }}
+                                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight mb-4 md:mb-6"
+                                >
+                                    {title}
+                                </motion.h2>
+                                {subtitle && (
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.6, delay: 0.2 }}
+                                        viewport={{ once: true }}
+                                        className="text-blue-100/80 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl font-medium mx-auto lg:mx-0 leading-relaxed"
+                                    >
+                                        {subtitle}
+                                    </motion.p>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
 

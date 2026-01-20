@@ -39,7 +39,6 @@ const socialLinks = [
   { icon: FaLinkedin, href: "https://www.linkedin.com/feed/", label: "LinkedIn", color: "bg-[#0077B5] hover:bg-[#005582]" },
   { icon: FaXTwitter, href: "https://twitter.com/aotms", label: "X", color: "bg-[#000000] hover:bg-[#222222]" },
   { icon: FaFacebook, href: "https://www.facebook.com/aotms", label: "Facebook", color: "bg-[#1877F2] hover:bg-[#155ab0]" },
-  { icon: FaTelegram, href: "https://t.me/aotms", label: "Telegram", color: "bg-[#26A5E4] hover:bg-[#1c7aa8]" },
   { icon: FaWhatsapp, href: "https://wa.me/918019942233", label: "Whatsapp", color: "bg-[#25D366] hover:bg-[#1da851]" },
   { icon: FaEnvelope, href: "mailto:Info@aotms.com", label: "Email", color: "bg-[#D44638] hover:bg-[#b03a2e]" },
   { icon: FaMapMarkerAlt, href: "https://www.google.com/maps/search/Academy+of+Tech+Masters+Vijayawada", label: "Get Directions", color: "bg-[#0075CF] hover:bg-[#005582]" },
@@ -192,11 +191,21 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-3 text-xs md:text-sm text-white/70 md:pr-36">
-          <p>© {new Date().getFullYear()} AOTMS. All rights reserved. Engineered by Team AOTMS</p>
+        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-white/100 md:pr-36">
+          <p>
+
+            <span className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4  text-xs md:text-sm text-white/100 md:pr-36">
+              © {new Date().getFullYear()} AOTMS. All rights reserved.
+            </span>
+
+
+            <span className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4  text-xs md:text-sm text-white/100 md:pr-36">
+              Designed & Engineered With 🧡 By Team AOTMS
+            </span>
+          </p>
           <div className="flex gap-4">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">▫️Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">▫️Terms</Link>
           </div>
         </div>
       </div>

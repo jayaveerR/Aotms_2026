@@ -8,21 +8,46 @@ import { SiMui } from "react-icons/si";
 import { FaBookOpen } from "react-icons/fa6";
 
 export const courses = [
-    { name: "AI & Machine Learning", href: "/course/ai-machine-learning", icon: FaBrain },
-    { name: "Cyber Security", href: "/course/cyber-security", icon: FaShieldAlt },
-    { name: "Data Analytics", href: "/course/data-analytics", icon: FaChartBar },
-    { name: "Data Science", href: "/course/data-science", icon: FaDatabase },
-    { name: "DevOps", href: "/course/devops", icon: FaCloud },
-    { name: "Embedded Systems", href: "/course/embedded-systems", icon: FaCode },
-    { name: "Java Full Stack", href: "/course/java-full-stack", icon: FaJava },
-    { name: "MEAN Stack", href: "/course/mean-stack", icon: FaAngular },
-    { name: "MERN Stack", href: "/course/mern-stack", icon: FaReact },
-    { name: "Multi-Cloud Consultant", href: "/course/multi-cloud-consultant", icon: FaUserTie },
-    { name: "Multi-Cloud Engineering", href: "/course/multi-cloud-engineering", icon: FaNetworkWired },
-    { name: "Python Full Stack", href: "/course/python-full-stack", icon: FaPython },
-    { name: "Quantum Computing", href: "/course/quantum-computing", icon: FaBrain },
-    { name: "UI/UX Design", href: "/course/ui-ux-design", icon: SiMui },
-    { name: "QA Automation", href: "/course/qa-automation", icon: FaCode },
+    {
+        category: "Full Stack Development",
+        courses: [
+            { name: "Java Full Stack", href: "/course/java-full-stack", icon: FaJava },
+            { name: "Python Full Stack", href: "/course/python-full-stack", icon: FaPython },
+            { name: "MEAN Stack", href: "/course/mean-stack", icon: FaAngular },
+            { name: "MERN Stack", href: "/course/mern-stack", icon: FaReact },
+        ],
+    },
+    {
+        category: "Data & AI",
+        courses: [
+            { name: "Data Analytics", href: "/course/data-analytics", icon: FaChartBar },
+            { name: "Data Science", href: "/course/data-science", icon: FaDatabase },
+            { name: "Data Engineering", href: "/course/multi-cloud-engineering", icon: FaNetworkWired },
+            { name: "AI & Machine Learning", href: "/course/ai-machine-learning", icon: FaBrain },
+            { name: "Quantum Computing", href: "/course/quantum-computing", icon: FaBrain },
+        ],
+    },
+    {
+        category: "Cloud & DevOps",
+        courses: [
+            { name: "DevOps", href: "/course/devops", icon: FaCloud },
+            { name: "Multi-Cloud Consultant", href: "/course/multi-cloud-consultant", icon: FaUserTie },
+        ],
+    },
+    {
+        category: "Security & Testing",
+        courses: [
+            { name: "Cyber Security", href: "/course/cyber-security", icon: FaShieldAlt },
+            { name: "QA Automation", href: "/course/qa-automation", icon: FaCode },
+        ],
+    },
+    {
+        category: "Core & Design",
+        courses: [
+            { name: "Embedded Systems", href: "/course/embedded-systems", icon: FaCode },
+            { name: "UI/UX Design", href: "/course/ui-ux-design", icon: SiMui },
+        ],
+    },
 ];
 
 export const navLinks = [
@@ -40,7 +65,7 @@ export const navLinks = [
         name: "Courses",
         href: "/courses",
         hasDropdown: true,
-        dropdownItems: courses.map(c => ({ ...c, desc: "Professional Program" })),
+        menuCategories: courses,
         isMegaMenu: true
     },
     {

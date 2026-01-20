@@ -9,7 +9,7 @@
 
 /* Toggle Button - Rounded Pill Style */
 .chat-toggle-btn {
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 30px;
     background: #0066CC;
     color: white;
@@ -30,14 +30,16 @@
 /* Chat Panel */
 .chat-panel {
     position: absolute;
-    bottom: 80px;
-    /* Floating above the toggle button */
-    right: 0;
-    width: 340px;
-    height: 480px;
+    bottom: 0px;
+    /* Sticking to bottom */
+    right: 0px;
+    /* Sticking to right */
+    width: 300px;
+    height: 400px;
     max-height: 60vh;
     background-color: white;
-    border-radius: 16px;
+    border-radius: 16px 16px 0 16px;
+    /* Rounded except bottom-right */
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
@@ -89,7 +91,7 @@
 .message-bubble {
     padding: 0.8rem 1rem;
     border-radius: 18px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     position: relative;
 }

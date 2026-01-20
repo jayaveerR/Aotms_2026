@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Header } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/Footer";
 
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 import {
     ArrowRight,
     Heart,
@@ -206,28 +206,43 @@ export default function CareersPage() {
     const [selectedJob, setSelectedJob] = useState<JobPosition | null>(null);
     const [showJobDetails, setShowJobDetails] = useState(false);
 
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const headerOffset = 120;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    };
+
     const handleViewDetails = (job: JobPosition) => {
         setSelectedJob(job);
         setShowJobDetails(true);
     };
 
     const handleApply = () => {
-        document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
         setShowJobDetails(false);
+        // Small timeout to prevent layout thrashing from modal closing while scrolling
+        setTimeout(() => {
+            scrollToSection('application-form');
+        }, 100);
     };
 
     return (
         <div className="min-h-screen bg-white">
             <Header />
 
-            <Helmet>
-                <title>Careers in Vijayawada - Join AOTMS Team | IT Training Jobs</title>
-                <meta name="description" content="Explore career opportunities at AOTMS Vijayawada. Join Andhra Pradesh's leading IT training institute. Openings for trainers, developers, placement coordinators & more." />
-                <meta name="keywords" content="IT jobs Vijayawada, tech careers Vijayawada, training jobs Andhra Pradesh, AOTMS careers, education jobs Vijayawada, placement coordinator jobs, technical trainer jobs" />
-                <meta property="og:title" content="Careers at AOTMS Vijayawada | Build Your Future in EdTech" />
-                <meta property="og:description" content="Join AOTMS Vijayawada and shape the future of tech education. Explore exciting career opportunities with growth, learning, and impact." />
-                <link rel="canonical" href="https://aotms.in/careers" />
-            </Helmet>
+            <SEO
+                title="Careers in Vijayawada - Join AOTMS Team"
+                description="Explore career opportunities at AOTMS Vijayawada. Join Andhra Pradesh's leading IT training institute. Openings for trainers, developers, placement coordinators & more."
+                keywords="IT jobs Vijayawada, tech careers Vijayawada, training jobs Andhra Pradesh, AOTMS careers, education jobs Vijayawada, placement coordinator jobs, technical trainer jobs"
+                canonical="https://aotms.in/careers"
+            />
 
             {/* Hero Section - People-Focused */}
             <section className="pt-32 md:pt-40 pb-12 md:pb-20 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
@@ -244,50 +259,43 @@ export default function CareersPage() {
                             </div>
 
                             <h1 className="
-                                 text-3xl sm:text-2xl md:text-3xl 
-                                 font-black text-slate-900 
-                                 mb-4 leading-snug sm:leading-tight
-                                 max-w-[22rem] sm:max-w-none mx-auto
-                                 ">
+                                text-3xl sm:text-4xl md:text-6xl 
+                                font-black text-slate-900 
+                                mb-5 leading-snug sm:leading-tight
+                                max-w-[22rem] sm:max-w-none mx-auto
+                            ">
+                                Launch Your IT Career with
                                 <span className="
-                                        block
-                                        text-5xl sm:text-5xl md:text-3xl    
+                                    block mt-1
+                                    text-transparent bg-clip-text 
+                                    bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]
+                                    leading-snug
                                 ">
-                                    Launch Your IT Career with
-                                </span>
-
-                                <span className="
-                                        block mt-1
-                                        text-transparent bg-clip-text 
-                                        bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]
-                                        leading-snug
-                                ">
-                                    Vijayawada's Leading EdTech Institute
+                                    Vijayawada’s Leading EdTech Institute
                                 </span>
                             </h1>
 
-
                             <p className="
-                                    text-base sm:text-lg md:text-1xl 
-                                    text-slate-900 
-                                    mb-7 leading-relaxed
-                                    max-w-[20rem] sm:max-w-3xl mx-auto
-                                    font-light
-                                ">
-                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh's
+                                text-base sm:text-lg md:text-1xl
+                                text-slate-700 
+                                mb-5 leading-relaxed
+                                max-w-[20rem] sm:max-w-2xl mx-auto
+                                font-light
+                            ">
+                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh’s
                                 premier IT training institute and grow with a team driving innovation across India.
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <button
-                                    onClick={() => document.getElementById('open-positions')?.scrollIntoView({ behavior: 'smooth' })}
+                                    onClick={() => scrollToSection('open-positions')}
                                     className="px-8 py-4 bg-[#0075CF] hover:bg-[#0066CC] text-white font-bold rounded-full transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2 text-lg"
                                 >
                                     View Open Roles
                                     <ArrowRight className="w-5 h-5" />
                                 </button>
                                 <button
-                                    onClick={() => document.getElementById('life-at-aotms')?.scrollIntoView({ behavior: 'smooth' })}
+                                    onClick={() => scrollToSection('life-at-aotms')}
                                     className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 font-bold rounded-full transition-all border-2 border-slate-200 hover:border-[#0075CF] hover:scale-105 text-lg"
                                 >
                                     Life at AOTMS
@@ -354,7 +362,7 @@ export default function CareersPage() {
             </section>
 
             {/* Life at AOTMS - Culture Section */}
-            <section id="life-at-aotms" className="py-16 md:py-24 bg-gradient-to-br from-blue-50/50 via-white to-slate-50 scroll-mt-24">
+            <section id="life-at-aotms" className="py-16 md:py-24 bg-gradient-to-br from-blue-50/50 via-white to-slate-50 scroll-mt-32">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">
@@ -487,7 +495,7 @@ export default function CareersPage() {
             </section>
 
             {/* Open Positions */}
-            <section id="open-positions" className="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 scroll-mt-24">
+            <section id="open-positions" className="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 scroll-mt-32">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">
@@ -686,7 +694,7 @@ export default function CareersPage() {
             </section>
 
             {/* Final CTA */}
-            <section id="application-form" className="py-16 md:py-20 bg-gradient-to-br from-[#0075CF] via-[#0066CC] to-[#0075CF] relative overflow-hidden scroll-mt-24">
+            <section id="application-form" className="py-16 md:py-20 bg-gradient-to-br from-[#0075CF] via-[#0066CC] to-[#0075CF] relative overflow-hidden scroll-mt-32">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -709,7 +717,7 @@ export default function CareersPage() {
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <button
-                                    onClick={() => document.getElementById('open-positions')?.scrollIntoView({ behavior: 'smooth' })}
+                                    onClick={() => scrollToSection('open-positions')}
                                     className="px-8 py-4 bg-white hover:bg-slate-100 text-[#0075CF] font-bold rounded-full transition-all shadow-lg hover:scale-105 flex items-center gap-2 text-lg"
                                 >
                                     Apply Now

@@ -1083,85 +1083,113 @@ export const getCourseCurriculum = (title: string, category: string = "") => {
     if (search.includes("qa") || search.includes("testing") || search.includes("automation")) {
         return [
             {
-                title: "Module 1 : Manual Testing Basics",
+                title: "Module 1: Manual Testing & Software Quality Assurance",
                 lessons: [
-                    "Test Scenarios",
-                    "Bug Life Cycle",
-                    "Requirement Analysis"
+                    "Introduction to SDLC (Waterfall, Agile, Scrum) & STLC",
+                    "Requirement Analysis & Test Scenario Identification",
+                    "Test Case Design Techniques (Boundary Value Analysis, Equivalence Partitioning)",
+                    "Defect Management: Bug Life Cycle, Severity vs Priority",
+                    "Types of Testing: Smoke, Sanity, Regression, Functional vs Non-Functional"
                 ]
             },
             {
-                title: "Module 2 : Java for Testers",
+                title: "Module 2: Java Foundations for Automation",
                 lessons: [
-                    "Basics for Automation",
-                    "OOPs for Testing"
+                    "Java Environment Setup (JDK, IntelliJ/Eclipse)",
+                    "Core Java: Data Types, Variables, Operators, Conditionals & Loops",
+                    "Arrays, Strings and Wrapper Classes",
+                    "OOPs Concepts: Inheritance, Polymorphism, Abstraction, Encapsulation",
+                    "Java Collections Framework: List, Set, Map for Test Data Management",
+                    "Exception Handling & File I/O (Properties files)"
                 ]
             },
             {
-                title: "Module 3 : Selenium WebDriver",
+                title: "Module 3: Selenium WebDriver Essentials",
                 lessons: [
-                    "Locators",
-                    "Element Interactions",
-                    "Waits"
+                    "Selenium Architecture & Component Overview",
+                    "Advanced Locators: XPath (Relative/Absolute) & CSS Selectors",
+                    "Handling Sync Issues: Implicit, Explicit, and Fluent Waits",
+                    "Interacting with Web Elements: Dropdowns, Checkboxes, Radio Buttons",
+                    "Handling Alerts, Pop-ups, Frames, and Multiple Windows",
+                    "Actions Class: Mouse Hover, Double Click, Drag & Drop",
+                    "JavaScript Executor & Taking Screenshots"
                 ]
             },
             {
-                title: "Module 4 : TestNG Framework",
+                title: "Module 4: TestNG - Testing Framework",
                 lessons: [
-                    "Annotations",
-                    "Parallel Execution",
-                    "Assertions"
+                    "TestNG Setup & Annotations Lifecycle (@Before, @After, @Test)",
+                    "TestNG.xml Configuration: Suites, Tests, and Groups",
+                    "Parameterization & DataProvider for Data-Driven Testing",
+                    "Assertions: Hard Assert vs Soft Assert",
+                    "Parallel Execution & Multi-Browser Testing",
+                    "Generating TestNG Reports & Using Listeners"
                 ]
             },
             {
-                title: "Module 5 : Page Object Model (POM)",
+                title: "Module 5: Page Object Model (POM) Design Pattern",
                 lessons: [
-                    "Design Patterns",
-                    "Page Factories"
+                    "Understanding POM Benefits and Architecture",
+                    "Implementing Page Factory and @FindBy Annotation",
+                    "Separating Test Logic from Page Objects",
+                    "Creating Reusable Utility Classes & Base Test Setup"
                 ]
             },
             {
-                title: "Module 6 : Data Driven Testing",
+                title: "Module 6: Advanced Data-Driven Automation",
                 lessons: [
-                    "Excel Integration",
-                    "JSON/XML Data"
+                    "Apache POI Library for Excel Data Reading/Writing",
+                    "Working with JSON and XML Test Data Files",
+                    "Connecting to SQL Databases for Backend Testing",
+                    "Integration of DataProviders with External Data Sources"
                 ]
             },
             {
-                title: "Module 7 : API Automation",
+                title: "Module 7: API Testing with Rest-Assured",
                 lessons: [
-                    "Rest Assured",
-                    "HTTP Methods",
-                    "Status Codes"
+                    "API Basics: HTTP Methods, Status Codes, JSON/XML Formats",
+                    "Manual API Testing using Postman",
+                    "Rest-Assured Library: Given-When-Then BDD Style",
+                    "Validating JSON Responses & Schema Validation",
+                    "Handling Authentication: OAuth, Bearer Tokens, API Keys"
                 ]
             },
             {
-                title: "Module 8 : CI/CD Integration",
+                title: "Module 8: CI/CD, Git & Build Tools",
                 lessons: [
-                    "Jenkins for QA",
-                    "GitHub Actions"
+                    "Version Control with Git: Commit, Push, Pull, Branching",
+                    "Maven Build Tool: Dependencies, Plugins, and Profiles",
+                    "Jenkins Continuous Integration: Creating Jobs & Pipelines",
+                    "Running Selenium Tests in Headless Mode on Cloud Engines"
                 ]
             },
             {
-                title: "Module 9 : Behavior Driven Dev (Cucumber)",
+                title: "Module 9: BDD Framework with Cucumber",
                 lessons: [
-                    "Gherkin Syntax",
-                    "Feature Files"
+                    "Introduction to Behavior Driven Development (BDD)",
+                    "Writing Scenarios in Gherkin Language (Feature Files)",
+                    "Step Definitions & Runner Class Configuration",
+                    "Cucumber Hooks, Tagging, and Data Tables",
+                    "Generating Advanced Cucumber HTML Reports"
                 ]
             },
             {
-                title: "Module 10 : Mobile Testing basics",
+                title: "Module 10: Mobile Automation using Appium",
                 lessons: [
-                    "Appium Intro",
-                    "Device Testing"
+                    "Appium Architecture & Mobile Automation Setup",
+                    "Inspecting Mobile App Elements (Appium Inspector)",
+                    "Automating Native, Hybrid, and Web Apps on Android/iOS",
+                    "Handling Mobile Gestures: Swipe, Scroll, Long Press"
                 ]
             },
             {
-                title: "Module 11 : Final Framework Build",
+                title: "Module 11: End-to-End Hybrid Framework Build",
                 lessons: [
-                    "Custom Framework lab",
-                    "Reporting setup",
-                    "Job Prep"
+                    "Designing a scalable Hybrid Automation Framework",
+                    "Integrating Extent Reports or Allure for Rich Visuals",
+                    "Log4j for Log Management and Debugging",
+                    "Live Industry Project: E-commerce or Banking Application",
+                    "Interview Preparation: Resume Workshop & Mock QA Interviews"
                 ]
             }
         ];

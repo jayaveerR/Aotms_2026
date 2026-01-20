@@ -140,36 +140,68 @@ export const Header = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.98 }}
                           transition={{ duration: 0.2 }}
-                          className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 p-2 overflow-hidden z-[150] ${link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%]' : 'w-64'
+                          className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] ${(link as any).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
                             }`}
                         >
                           <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-popover border-t border-l border-border/50 rotate-45" />
 
-                          <div className={`grid gap-1 relative z-10 ${link.isMegaMenu ? 'grid-cols-2 p-2' : 'grid-cols-1'}`}>
-                            {link.dropdownItems?.map((item) => {
-                              const isActive = location.pathname === item.href;
-                              return (
-                                <Link
-                                  key={item.name}
-                                  to={item.href}
-                                  onClick={() => setActiveDropdown(null)}
-                                  className={`flex items-center gap-3 p-2.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50 ring-1 ring-blue-100' : 'hover:bg-primary/5'}`}
-                                >
-                                  <div className={`p-2 rounded-md transition-colors ${isActive ? 'bg-[#0066CC] text-white' : 'bg-primary/10 text-primary group-hover/item:bg-[#0066CC] group-hover/item:text-white'}`}>
-                                    {item.icon && <item.icon className="w-4 h-4" />}
+                          {(link as any).menuCategories ? (
+                            <div className="grid grid-cols-3 gap-y-4 gap-x-6 relative z-10">
+                              {(link as any).menuCategories.map((category: any, idx: number) => (
+                                <div key={idx} className="space-y-2">
+                                  <div className="flex items-center gap-2 border-b border-border/40 pb-2 mb-1">
+                                    <span className="text-xs font-bold text-primary uppercase tracking-widest">{category.category}</span>
                                   </div>
-                                  <div>
-                                    <div className={`text-sm font-bold transition-colors ${isActive ? 'text-[#0066CC]' : 'text-foreground group-hover/item:text-[#0066CC]'}`}>
-                                      {item.name}
-                                    </div>
-                                    <div className="text-[10px] text-muted-foreground font-medium line-clamp-1">
-                                      {item.desc}
-                                    </div>
+                                  <div className="grid gap-1">
+                                    {category.courses.map((course: any, cIdx: number) => {
+                                      const isActive = location.pathname === course.href;
+                                      return (
+                                        <Link
+                                          key={cIdx}
+                                          to={course.href}
+                                          onClick={() => setActiveDropdown(null)}
+                                          className={`flex items-center gap-3 p-1.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50' : 'hover:bg-blue-50'}`}
+                                        >
+                                          <div className={`p-1.5 rounded-md transition-colors ${isActive ? 'bg-primary text-white' : 'bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-white'}`}>
+                                            <course.icon className="w-3.5 h-3.5" />
+                                          </div>
+                                          <span className={`text-sm font-bold transition-colors ${isActive ? 'text-primary' : 'text-slate-900 group-hover/item:text-primary'}`}>
+                                            {course.name}
+                                          </span>
+                                        </Link>
+                                      );
+                                    })}
                                   </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className={`grid gap-1 relative z-10 ${link.isMegaMenu ? 'grid-cols-2 p-2' : 'grid-cols-1'}`}>
+                              {link.dropdownItems?.map((item) => {
+                                const isActive = location.pathname === item.href;
+                                return (
+                                  <Link
+                                    key={item.name}
+                                    to={item.href}
+                                    onClick={() => setActiveDropdown(null)}
+                                    className={`flex items-center gap-3 p-2.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50 ring-1 ring-blue-100' : 'hover:bg-primary/5'}`}
+                                  >
+                                    <div className={`p-2 rounded-md transition-colors ${isActive ? 'bg-[#0066CC] text-white' : 'bg-primary/10 text-primary group-hover/item:bg-[#0066CC] group-hover/item:text-white'}`}>
+                                      {item.icon && <item.icon className="w-4 h-4" />}
+                                    </div>
+                                    <div>
+                                      <div className={`text-sm font-bold transition-colors ${isActive ? 'text-[#0066CC]' : 'text-foreground group-hover/item:text-[#0066CC]'}`}>
+                                        {item.name}
+                                      </div>
+                                      <div className="text-[10px] text-muted-foreground font-medium line-clamp-1">
+                                        {item.desc}
+                                      </div>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -216,9 +248,6 @@ export const Header = () => {
                 <div className="flex items-center gap-3">
                   <Button onClick={handleOpenEnrollment} className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0066CC] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
                     Book Free Demo
-                  </Button>
-                  <Button variant="ghost" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="font-bold hover:bg-primary/5">
-                    Login
                   </Button>
                 </div>
               )}

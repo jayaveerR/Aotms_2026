@@ -8,6 +8,7 @@ import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
+import { SEO } from "@/components/SEO";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -104,6 +105,12 @@ const EventsPage = () => {
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
+            <SEO
+                title="Weekly Activities & Events"
+                description="Join Academy of Tech Masters' weekly activities and community events in Vijayawada. Enhance your tech skills, network with experts, and grow together."
+                keywords="tech events Vijayawada, weekly activities AOTMS, tech community workshops"
+                canonical="https://aotms.in/events"
+            />
             <Header />
 
             <main className="flex-1 pt-28 md:pt-32">

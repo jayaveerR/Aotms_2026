@@ -68,7 +68,7 @@ export const getCourseSpecificLogos = (title: string, category: string = ""): Lo
             name: tool,
             id: index,
             // Create a wrapper component that applies the color using style
-            img: (props: React.ComponentProps<'svg'>) => <Icon { ...props } style={{ ...props.style, color: toolData.color }} />
+            img: (props: React.ComponentProps<'svg'>) => <Icon {...props} style={{ ...props.style, color: toolData.color }} />
         };
     });
 };
@@ -129,7 +129,7 @@ export const getCourseToolsAndTechnologies = (title: string, category: string = 
         ];
     }
 
-    // DevOps Multi-Cloud Engineering specific tools
+    // DevOps Data Engineering specific tools
     if (search.includes("devops") && (search.includes("multi") || search.includes("cloud"))) {
         return [
             { category: "DevOps Tools", tools: "Jenkins, Ansible, Terraform, Docker, Kubernetes" },
@@ -160,7 +160,7 @@ export const getCourseToolsAndTechnologies = (title: string, category: string = 
         ];
     }
 
-    // Multi-Cloud Engineering specific tools
+    // Data Engineering specific tools
     if (search.includes("multi") && search.includes("cloud") && search.includes("engineering")) {
         return [
             { category: "Programming", tools: "Python 3.x, SQL" },

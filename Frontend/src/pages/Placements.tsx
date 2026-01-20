@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { toast } from "sonner";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { SEO } from "@/components/SEO";
 
 
 const Placements = () => {
@@ -118,6 +119,12 @@ const Placements = () => {
 
     return (
         <div className="min-h-screen bg-white">
+            <SEO
+                title="Student Placements & Success Stories"
+                description="See our alumni working at top tech companies like Google, TCS, Microsoft, and Amazon. 500+ successful career transitions with 100% placement support in Vijayawada."
+                keywords="IT placements Vijayawada, student success stories AOTMS, hiring partners Vijayawada, career transition tech"
+                canonical="https://aotms.in/placements"
+            />
             <Header />
 
             {/* Compact Page Header with Tech Animations */}

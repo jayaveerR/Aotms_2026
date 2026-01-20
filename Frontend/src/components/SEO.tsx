@@ -11,8 +11,9 @@ export const SEO = ({
     title,
     description = "Become job-ready in 90 days with Academy of Tech Masters. Expert-led IT training in Vijayawada for AI, Cloud, DevOps, and Full Stack.",
     keywords = "IT Training Vijayawada, Full Stack Course, DevOps Training, AI Coaching",
-    image = "/og-image.png"
-}: SEOProps) => {
+    image = "/og-image.png",
+    canonical
+}: SEOProps & { canonical?: string }) => {
     const siteTitle = "Academy of Tech Masters | Job-Ready IT Training in Vijayawada";
 
     return (
@@ -20,6 +21,7 @@ export const SEO = ({
             <title>{title} | Academy of Tech Masters</title>
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
+            {canonical && <link rel="canonical" href={canonical} />}
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />

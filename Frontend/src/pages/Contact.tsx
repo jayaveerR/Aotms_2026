@@ -10,6 +10,7 @@ import { Phone, Mail, MapPin, Youtube, Instagram, Linkedin, Send } from 'lucide-
 import { FaXTwitter } from "react-icons/fa6";
 import axios from 'axios';
 import { toast } from 'sonner';
+import { SEO } from "@/components/SEO";
 
 // Google Maps Embed used instead of Leaflet
 
@@ -97,6 +98,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with Academy of Tech Masters (AOTMS) in Vijayawada. Reach out for course inquiries, career guidance, or support. We're here to help you."
+        keywords="Contact AOTMS, Vijayawada IT Training center, course inquiry, tech support Vijayawada"
+        canonical="https://aotms.in/contact"
+      />
       <Header />
 
       <main className="container mx-auto px-6 pt-48 pb-24">

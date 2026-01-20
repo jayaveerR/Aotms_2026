@@ -7,6 +7,7 @@ import { CertificateShowcase } from "@/components/CertificateShowcase";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import axios from "axios";
+import { SEO } from "@/components/SEO";
 import certSample1 from "@/assets/certificate_sample_1.png";
 import certSample2 from "@/assets/certificate_sample_2.png";
 
@@ -68,6 +69,12 @@ const HackathonsPage = () => {
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
+            <SEO
+                title="Hackathons & Competitions"
+                description="Participate in exciting hackathons and coding competitions at Academy of Tech Masters, Vijayawada. Showcase your skills, solve real problems, and win prizes."
+                keywords="hackathons Vijayawada, coding competitions, AOTMS hackathon, tech challenges"
+                canonical="https://aotms.in/hackathons"
+            />
             <Header />
             <main className="pt-28 md:pt-32 flex-1 relative">
                 <EventManager
