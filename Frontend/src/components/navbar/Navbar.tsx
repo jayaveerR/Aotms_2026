@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
+import { useUIStore } from "@/store/uiStore";
 import { TopNavbar } from "./TopNavbar";
 import { navLinks } from "./navData";
 import { AuthModal } from "./AuthModal";
@@ -25,12 +26,17 @@ export const Header = () => {
   const { user, token, setAuth, logout: storeLogout } = useAuthStore();
   const isLoggedIn = !!token;
 
+  // Global UI Store for Auth Modal
+  const { isAuthModalOpen, authModalMode, openAuthModal, closeAuthModal } = useUIStore();
+
+  // Helper getters/setters to maintain compatibility with existing components
+  const setShowAuthModal = (show: boolean) => (show ? openAuthModal(authModalMode) : closeAuthModal());
+  const setAuthMode = openAuthModal;
+
   // Cart Store
   const { items, clearCart } = useCartStore();
   const cartItemCount = items.length;
 
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'register' | 'forgot'>('login');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   // Enrollment Modal State
@@ -42,12 +48,12 @@ export const Header = () => {
 
   // Scroll Lock for Mobile Menu & Modal
   useEffect(() => {
-    if (isMobileMenuOpen || showAuthModal) {
+    if (isMobileMenuOpen || isAuthModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isMobileMenuOpen, showAuthModal]);
+  }, [isMobileMenuOpen, isAuthModalOpen]);
 
   // Scroll Detection
   useEffect(() => {
@@ -213,14 +219,7 @@ export const Header = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center gap-3">
-                  <Button onClick={handleOpenEnrollment} className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0066CC] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
-                    Book Free Demo
-                  </Button>
-                  <Button variant="ghost" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="font-bold hover:bg-primary/5">
-                    Login
-                  </Button>
-                </div>
+                null
               )}
             </div>
 
@@ -254,9 +253,9 @@ export const Header = () => {
       />
 
       <AuthModal
-        showAuthModal={showAuthModal}
+        showAuthModal={isAuthModalOpen}
         setShowAuthModal={setShowAuthModal}
-        authMode={authMode}
+        authMode={authModalMode}
         setAuthMode={setAuthMode}
       />
 
