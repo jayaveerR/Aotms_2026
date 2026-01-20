@@ -243,16 +243,39 @@ export default function CareersPage() {
                                 <span className="text-[#0075CF] text-sm font-semibold">We're Hiring</span>
                             </div>
 
-                            <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
-                                Launch Your IT Career with
-                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">
+                            <h1 className="
+                                 text-3xl sm:text-2xl md:text-3xl 
+                                 font-black text-slate-900 
+                                 mb-4 leading-snug sm:leading-tight
+                                 max-w-[22rem] sm:max-w-none mx-auto
+                                 ">
+                                <span className="
+                                        block
+                                        text-5xl sm:text-5xl md:text-3xl    
+                                ">
+                                    Launch Your IT Career with
+                                </span>
+
+                                <span className="
+                                        block mt-1
+                                        text-transparent bg-clip-text 
+                                        bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]
+                                        leading-snug
+                                ">
                                     Vijayawada’s Leading EdTech Institute
                                 </span>
                             </h1>
 
-                            <p className="text-xl md:text-2xl text-slate-900 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
-                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh’s premier
-                                IT training institute and grow with a team driving innovation across India.
+
+                            <p className="
+                                    text-base sm:text-lg md:text-1xl 
+                                    text-slate-900 
+                                    mb-7 leading-relaxed
+                                    max-w-[20rem] sm:max-w-3xl mx-auto
+                                    font-light
+                                ">
+                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh’s
+                                premier IT training institute and grow with a team driving innovation across India.
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
