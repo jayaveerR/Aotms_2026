@@ -20,7 +20,7 @@ const trustStats = [
   },
   {
     icon: Clock,
-    value: 10,
+    value: 12,
     suffix: "+",
     label: "Years Experience",
   },

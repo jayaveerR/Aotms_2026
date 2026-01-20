@@ -284,7 +284,7 @@ const Placements = () => {
                                                 {student.name}
                                             </h3>
                                             <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-black text-xs uppercase tracking-widest mb-4">
-                                                {student.jobTitle}
+                                                {student.jobRole}
                                             </p>
                                             <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm transition-all group-hover:text-slate-900">
                                                 {student.companies.join(' / ')}

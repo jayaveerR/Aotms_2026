@@ -14,7 +14,7 @@ export const StudentPlacementCard = ({ placement }: StudentPlacementCardProps) =
         className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-primary/20"
       />
       <h3 className="text-lg font-bold text-foreground mb-1">{placement.name}</h3>
-      <p className="text-sm text-primary font-semibold mb-2">{placement.jobTitle}</p>
+      <p className="text-sm text-primary font-semibold mb-2">{placement.jobRole}</p>
       <div className="flex flex-wrap justify-center gap-2">
         {placement.companies.map((company, index) => (
           <span key={index} className="px-2 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full">

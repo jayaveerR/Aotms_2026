@@ -8,7 +8,7 @@ const PlacementSchema = new mongoose.Schema({
     },
     // Common/Student fields
     name: String,
-    jobTitle: String,
+    jobRole: String,
     companies: [String],
     image: String, // For student placement
 

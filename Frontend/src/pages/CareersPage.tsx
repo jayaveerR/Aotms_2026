@@ -262,7 +262,7 @@ export default function CareersPage() {
                                         bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]
                                         leading-snug
                                 ">
-                                    Vijayawada’s Leading EdTech Institute
+                                    Vijayawada's Leading EdTech Institute
                                 </span>
                             </h1>
 
@@ -274,7 +274,7 @@ export default function CareersPage() {
                                     max-w-[20rem] sm:max-w-3xl mx-auto
                                     font-light
                                 ">
-                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh’s
+                                Build the future of tech education with AOTMS Vijayawada. Join Andhra Pradesh's
                                 premier IT training institute and grow with a team driving innovation across India.
                             </p>
 

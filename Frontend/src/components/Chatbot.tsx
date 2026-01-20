@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { sanitizeInput } from '@/utils/validation';
 import './Chatbot.css';
 import { MoreHorizontal, Send, MessageSquare, Smile, Copy, ThumbsUp, ThumbsDown, RefreshCw, MessageSquarePlus, MessageSquareX, History, X } from 'lucide-react';
@@ -78,25 +79,53 @@ const Chatbot: React.FC = () => {
     setShowMenu(false);
   };
 
-  const handleSendMessage = (e: React.FormEvent) => {
+
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     const userMessage: Message = { id: Date.now(), text: inputValue, sender: 'user' };
+
+    // Optimistically update UI
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
-
-    // Simulate bot response
     setIsTyping(true);
-    setTimeout(() => {
+
+    try {
+      // Prepare context for the API
+      // Note: We use the functional update 'prev' state or reconstruct the array to include the new message
+      const currentMessages = [...messages, userMessage];
+      const apiMessages = currentMessages.map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: msg.text
+      }));
+
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/chat`, {
+        messages: apiMessages
+      });
+
+      const botContent = response.data.choices?.[0]?.message?.content || "I couldn't generate a response. Please try again.";
+
       const botResponse: Message = {
         id: Date.now() + 1,
-        text: `Sure! The Academy of Tech Masters offers premium training in Java, Python, and Full Stack Development. Would you like to know about a specific course?`,
+        text: botContent,
         sender: 'bot'
       };
+
       setMessages(prev => [...prev, botResponse]);
+
+    } catch (error) {
+      console.error("Chat Error:", error);
+      toast.error("Failed to connect to the assistant.");
+      const errorResponse: Message = {
+        id: Date.now() + 1,
+        text: "I'm having trouble connecting to the server right now. Please try again later.",
+        sender: 'bot'
+      };
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleStartNewChat = () => {
