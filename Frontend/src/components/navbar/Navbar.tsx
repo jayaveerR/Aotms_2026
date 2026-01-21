@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown, User, LogOut } from "lucide-react";
 import { FaBook } from "react-icons/fa";
@@ -21,6 +21,7 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auth Store
   const { user, token, setAuth, logout: storeLogout } = useAuthStore();
@@ -97,6 +98,30 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Helper functions for dropdown with delay
+  const handleDropdownEnter = (linkName: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setActiveDropdown(linkName);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150); // 150ms delay before closing
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <motion.header
@@ -123,8 +148,8 @@ export const Header = () => {
                 <div
                   key={link.name}
                   className="relative group h-full flex items-center"
-                  onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.name)}
-                  onMouseLeave={() => link.hasDropdown && setActiveDropdown(null)}
+                  onMouseEnter={() => link.hasDropdown && handleDropdownEnter(link.name)}
+                  onMouseLeave={() => link.hasDropdown && handleDropdownLeave()}
                 >
                   <Link
                     to={link.href}
@@ -146,6 +171,8 @@ export const Header = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.98 }}
                           transition={{ duration: 0.2 }}
+                          onMouseEnter={() => handleDropdownEnter(link.name)}
+                          onMouseLeave={handleDropdownLeave}
                           className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] ${(link as any).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
                             }`}
                         >
