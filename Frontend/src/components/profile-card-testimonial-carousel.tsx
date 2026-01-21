@@ -202,10 +202,7 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
                                         </a>
                                     ))}
                                 </div>
-                                <button className="btn-secondary px-6 py-2 rounded-xl flex items-center gap-2 group text-xs font-bold active:scale-95 transition-transform">
-                                    View Profile
-                                    <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                                </button>
+                              
                             </div>
                         </div>
                     </div>
