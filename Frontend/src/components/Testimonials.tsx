@@ -10,7 +10,7 @@ export const Testimonials = () => {
     const { data: rawFeedback, isLoading } = useFeedback();
 
     const testimonials = useMemo(() => {
-        if (!rawFeedback) return [];
+        if (!rawFeedback || !Array.isArray(rawFeedback)) return [];
         return rawFeedback.map((item) => ({
             text: item.message,
             image: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=random&color=fff`,
