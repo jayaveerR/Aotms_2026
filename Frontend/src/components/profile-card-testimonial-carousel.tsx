@@ -105,7 +105,7 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
         if (isPaused) return;
         const timer = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-        }, 4000);
+        }, 2000);
         return () => clearInterval(timer);
     }, [isPaused]);
 
