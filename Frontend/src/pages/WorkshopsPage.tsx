@@ -24,7 +24,7 @@ const WorkshopsPage = () => {
 
         const fetchEvents = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/events?type=workshop`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/events?type=workshop&all=true`);
 
                 const adaptedEvents = response.data.map((item: { _id?: string; id?: string; name: string; description?: string; thumbnailUrl?: string; bannerUrl?: string; mode?: string; date?: string; duration?: string; tagline?: string; whatYouWillLearn?: string[]; level?: string; isRegistrationOpen?: boolean; }) => ({
                     id: item.id || item._id,

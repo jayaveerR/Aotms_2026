@@ -202,7 +202,6 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
                                         </a>
                                     ))}
                                 </div>
-                              
                             </div>
                         </div>
                     </div>
