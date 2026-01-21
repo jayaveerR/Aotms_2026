@@ -191,21 +191,27 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-white/100 md:pr-36">
-          <p>
-
-            <span className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4  text-xs md:text-sm text-white/100 md:pr-36">
+        <div className="pt-6 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-6 text-xs md:text-sm text-white/90">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <span className="text-center md:text-left">
               © {new Date().getFullYear()} AOTMS. All rights reserved.
             </span>
-
-
-            <span className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4  text-xs md:text-sm text-white/100 md:pr-36">
+            <span className="hidden md:inline text-white/20">|</span>
+            <span className="text-center md:text-left">
               Designed & Engineered With 🧡 By Team AOTMS
             </span>
-          </p>
-          <div className="flex gap-4">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">▫️Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">▫️Terms</Link>
+          </div>
+
+          <div className="flex flex-col items-center lg:items-end gap-3">
+            <div className="flex gap-6">
+              <Link to="/privacy-policy" className="hover:text-accent transition-colors">▫️Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-accent transition-colors">▫️Terms of Service</Link>
+            </div>
+            <p className="text-[10px] text-white/90 text-center lg:text-right max-w-md">
+              This site is protected by reCAPTCHA and the Google{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-white underline decoration-white/30">Privacy Policy</a> and{" "}
+              <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white underline decoration-white/30">Terms of Service</a> apply.
+            </p>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { motion, useMotionValue, MotionConfig } from "framer-motion";
 import { useEffect, Suspense, lazy } from "react";
 
+
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
 const CourseDetail = lazy(() => import("./pages/CourseDetailPage"));
@@ -28,6 +29,8 @@ const CoursesPage = lazy(() => import("./pages/CoursesPage"));
 const InternshipsPage = lazy(() => import("./pages/InternshipsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const CareersPage = lazy(() => import("./pages/CareersPage"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Terms = lazy(() => import("./pages/Terms"));
 
 import Chatbot from "./components/Chatbot";
 import LimitedTimeOffer from "./components/LimitedTimeOffer";
@@ -126,6 +129,8 @@ const App = () => {
                 <Route path="/internships" element={<InternshipsPage />} />
                 <Route path="/careers" element={<CareersPage />} />
                 <Route path="/resources" element={<ResourcesPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<Terms />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

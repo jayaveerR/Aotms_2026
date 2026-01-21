@@ -173,7 +173,7 @@ const Chatbot: React.FC = () => {
                 <div className="w-12 h-12 -ml-2 -my-2 flex items-center justify-center">
                   <BotAvatar />
                 </div>
-                <h2 className="text-white font-semibold text-sm">Academy Of Tech Masters</h2>
+                <h2 className="text-white font-semibold text-sm">AOTMS Assistant Bot</h2>
               </div>
               <div className="flex items-center gap-1">
                 <button
