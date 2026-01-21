@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Menu, ChevronDown, User, LogOut } from "lucide-react";
-import { FaBook } from "react-icons/fa";
 import { toast } from "sonner";
 import axios from "axios";
 import logo from "@/assets/logo.png";
@@ -12,9 +10,11 @@ import { useCartStore } from "@/store/cartStore";
 import { useUIStore } from "@/store/uiStore";
 import { TopNavbar } from "./TopNavbar";
 import { navLinks } from "./navData";
-import { AuthModal } from "./AuthModal";
-import { MobileMenu } from "./MobileMenu";
-import { CourseEnrollmentModal } from "@/components/ui/CourseEnrollmentModal";
+
+// Lazy load heavy interactive components
+const AuthModal = lazy(() => import("./AuthModal").then(module => ({ default: module.AuthModal })));
+const MobileMenu = lazy(() => import("./MobileMenu").then(module => ({ default: module.MobileMenu })));
+const CourseEnrollmentModal = lazy(() => import("@/components/ui/CourseEnrollmentModal").then(module => ({ default: module.CourseEnrollmentModal })));
 
 export const Header = () => {
   const location = useLocation();
@@ -97,9 +97,14 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Preload mobile menu on hover of menu button (optional optimization)
+  const preloadMobileMenu = () => {
+    const loadMobile = import("./MobileMenu");
+  }
+
   return (
     <>
-      <motion.header
+      <header
         className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}
       >
         <TopNavbar
@@ -137,80 +142,72 @@ export const Header = () => {
                     )}
                   </Link>
 
-                  {/* Dropdown Menu */}
-                  {link.hasDropdown && (
-                    <AnimatePresence>
-                      {activeDropdown === link.name && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                          transition={{ duration: 0.2 }}
-                          className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] ${(link as any).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
-                            }`}
-                        >
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-popover border-t border-l border-border/50 rotate-45" />
+                  {/* Dropdown Menu - CSS Only */}
+                  {link.hasDropdown && activeDropdown === link.name && (
+                    <div
+                      className={`absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] animate-in fade-in zoom-in-95 duration-200 ${(link as any).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
+                        }`}
+                    >
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-popover border-t border-l border-border/50 rotate-45" />
 
-                          {(link as any).menuCategories ? (
-                            <div className="grid grid-cols-3 gap-y-4 gap-x-6 relative z-10">
-                              {(link as any).menuCategories.map((category: any, idx: number) => (
-                                <div key={idx} className="space-y-2">
-                                  <div className="flex items-center gap-2 border-b border-border/40 pb-2 mb-1">
-                                    <span className="text-xs font-bold text-primary uppercase tracking-widest">{category.category}</span>
+                      {(link as any).menuCategories ? (
+                        <div className="grid grid-cols-3 gap-y-4 gap-x-6 relative z-10">
+                          {(link as any).menuCategories.map((category: any, idx: number) => (
+                            <div key={idx} className="space-y-2">
+                              <div className="flex items-center gap-2 border-b border-border/40 pb-2 mb-1">
+                                <span className="text-xs font-bold text-primary uppercase tracking-widest">{category.category}</span>
+                              </div>
+                              <div className="grid gap-1">
+                                {category.courses.map((course: any, cIdx: number) => {
+                                  const isActive = location.pathname === course.href;
+                                  return (
+                                    <Link
+                                      key={cIdx}
+                                      to={course.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className={`flex items-center gap-3 p-1.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50' : 'hover:bg-blue-50'}`}
+                                    >
+                                      <div className={`p-1.5 rounded-md transition-colors ${isActive ? 'bg-primary text-white' : 'bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-white'}`}>
+                                        <course.icon className="w-3.5 h-3.5" />
+                                      </div>
+                                      <span className={`text-sm font-bold transition-colors ${isActive ? 'text-primary' : 'text-slate-900 group-hover/item:text-primary'}`}>
+                                        {course.name}
+                                      </span>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className={`grid gap-1 relative z-10 ${link.isMegaMenu ? 'grid-cols-2 p-2' : 'grid-cols-1'}`}>
+                          {link.dropdownItems?.map((item) => {
+                            const isActive = location.pathname === item.href;
+                            return (
+                              <Link
+                                key={item.name}
+                                to={item.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className={`flex items-center gap-3 p-2.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50 ring-1 ring-blue-100' : 'hover:bg-primary/5'}`}
+                              >
+                                <div className={`p-2 rounded-md transition-colors ${isActive ? 'bg-[#0066CC] text-white' : 'bg-primary/10 text-primary group-hover/item:bg-[#0066CC] group-hover/item:text-white'}`}>
+                                  {item.icon && <item.icon className="w-4 h-4" />}
+                                </div>
+                                <div>
+                                  <div className={`text-sm font-bold transition-colors ${isActive ? 'text-[#0066CC]' : 'text-foreground group-hover/item:text-[#0066CC]'}`}>
+                                    {item.name}
                                   </div>
-                                  <div className="grid gap-1">
-                                    {category.courses.map((course: any, cIdx: number) => {
-                                      const isActive = location.pathname === course.href;
-                                      return (
-                                        <Link
-                                          key={cIdx}
-                                          to={course.href}
-                                          onClick={() => setActiveDropdown(null)}
-                                          className={`flex items-center gap-3 p-1.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50' : 'hover:bg-blue-50'}`}
-                                        >
-                                          <div className={`p-1.5 rounded-md transition-colors ${isActive ? 'bg-primary text-white' : 'bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-white'}`}>
-                                            <course.icon className="w-3.5 h-3.5" />
-                                          </div>
-                                          <span className={`text-sm font-bold transition-colors ${isActive ? 'text-primary' : 'text-slate-900 group-hover/item:text-primary'}`}>
-                                            {course.name}
-                                          </span>
-                                        </Link>
-                                      );
-                                    })}
+                                  <div className="text-[10px] text-muted-foreground font-medium line-clamp-1">
+                                    {item.desc}
                                   </div>
                                 </div>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className={`grid gap-1 relative z-10 ${link.isMegaMenu ? 'grid-cols-2 p-2' : 'grid-cols-1'}`}>
-                              {link.dropdownItems?.map((item) => {
-                                const isActive = location.pathname === item.href;
-                                return (
-                                  <Link
-                                    key={item.name}
-                                    to={item.href}
-                                    onClick={() => setActiveDropdown(null)}
-                                    className={`flex items-center gap-3 p-2.5 rounded-lg transition-all group/item ${isActive ? 'bg-blue-50 ring-1 ring-blue-100' : 'hover:bg-primary/5'}`}
-                                  >
-                                    <div className={`p-2 rounded-md transition-colors ${isActive ? 'bg-[#0066CC] text-white' : 'bg-primary/10 text-primary group-hover/item:bg-[#0066CC] group-hover/item:text-white'}`}>
-                                      {item.icon && <item.icon className="w-4 h-4" />}
-                                    </div>
-                                    <div>
-                                      <div className={`text-sm font-bold transition-colors ${isActive ? 'text-[#0066CC]' : 'text-foreground group-hover/item:text-[#0066CC]'}`}>
-                                        {item.name}
-                                      </div>
-                                      <div className="text-[10px] text-muted-foreground font-medium line-clamp-1">
-                                        {item.desc}
-                                      </div>
-                                    </div>
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          )}
-                        </motion.div>
+                              </Link>
+                            );
+                          })}
+                        </div>
                       )}
-                    </AnimatePresence>
+                    </div>
                   )}
                 </div>
               ))}
@@ -218,9 +215,6 @@ export const Header = () => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-5">
-              {/* Cart Icon */}
-
-
               {/* User Profile */}
               {isLoggedIn ? (
                 <div className="relative group">
@@ -264,6 +258,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
+                onMouseEnter={preloadMobileMenu}
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="text-foreground"
                 aria-label="Open Menu"
@@ -273,33 +268,42 @@ export const Header = () => {
             </div>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        isLoggedIn={isLoggedIn}
-        user={user}
-        cartItemCount={cartItemCount}
-        logout={logout}
-        activeDropdown={activeDropdown}
-        setActiveDropdown={setActiveDropdown}
-        setAuthMode={setAuthMode}
-        setShowAuthModal={setShowAuthModal}
-      />
+      {/* Lazy Loaded Components for Performance */}
+      <Suspense fallback={null}>
+        {isMobileMenuOpen && (
+          <MobileMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+            isLoggedIn={isLoggedIn}
+            user={user}
+            cartItemCount={cartItemCount}
+            logout={logout}
+            activeDropdown={activeDropdown}
+            setActiveDropdown={setActiveDropdown}
+            setAuthMode={setAuthMode}
+            setShowAuthModal={setShowAuthModal}
+          />
+        )}
 
-      <AuthModal
-        showAuthModal={isAuthModalOpen}
-        setShowAuthModal={setShowAuthModal}
-        authMode={authModalMode}
-        setAuthMode={setAuthMode}
-      />
+        {isAuthModalOpen && (
+          <AuthModal
+            showAuthModal={isAuthModalOpen}
+            setShowAuthModal={setShowAuthModal}
+            authMode={authModalMode}
+            setAuthMode={setAuthMode}
+          />
+        )}
 
-      <CourseEnrollmentModal
-        isOpen={isEnrollmentOpen}
-        onClose={() => setIsEnrollmentOpen(false)}
-        source="Navbar - Free Demo"
-      />
+        {isEnrollmentOpen && (
+          <CourseEnrollmentModal
+            isOpen={isEnrollmentOpen}
+            onClose={() => setIsEnrollmentOpen(false)}
+            source="Navbar - Free Demo"
+          />
+        )}
+      </Suspense>
     </>
   );
 };
