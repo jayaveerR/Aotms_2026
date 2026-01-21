@@ -12,6 +12,33 @@ import { useUIStore } from "@/store/uiStore";
 import { TopNavbar } from "./TopNavbar";
 import { navLinks } from "./navData";
 
+interface Course {
+  name: string;
+  href: string;
+  icon: React.ElementType;
+}
+
+interface MenuCategory {
+  category: string;
+  courses: Course[];
+}
+
+interface DropdownItem {
+  name: string;
+  href: string;
+  icon?: React.ElementType;
+  desc?: string;
+}
+
+interface NavLink {
+  name: string;
+  href: string;
+  hasDropdown?: boolean;
+  isMegaMenu?: boolean;
+  menuCategories?: MenuCategory[];
+  dropdownItems?: DropdownItem[];
+}
+
 // Lazy load heavy interactive components
 const AuthModal = lazy(() => import("./AuthModal").then(module => ({ default: module.AuthModal })));
 const MobileMenu = lazy(() => import("./MobileMenu").then(module => ({ default: module.MobileMenu })));
@@ -179,20 +206,20 @@ export const Header = () => {
                           transition={{ duration: 0.2 }}
                           onMouseEnter={() => handleDropdownEnter(link.name)}
                           onMouseLeave={handleDropdownLeave}
-                          className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] ${(link as any).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
+                          className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-popover rounded-xl shadow-xl border border-border/50 overflow-hidden z-[150] ${(link as NavLink).menuCategories ? 'w-[700px] p-4' : (link.isMegaMenu ? 'w-[600px] -left-20 translate-x-[-20%] p-2' : 'w-64 p-2')
                             }`}
                         >
                           <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-popover border-t border-l border-border/50 rotate-45" />
 
-                          {(link as any).menuCategories ? (
+                          {(link as NavLink).menuCategories ? (
                             <div className="grid grid-cols-3 gap-y-4 gap-x-6 relative z-10">
-                              {(link as any).menuCategories.map((category: any, idx: number) => (
+                              {(link as NavLink).menuCategories!.map((category: MenuCategory, idx: number) => (
                                 <div key={idx} className="space-y-2">
                                   <div className="flex items-center gap-2 border-b border-border/40 pb-2 mb-1">
                                     <span className="text-xs font-bold text-primary uppercase tracking-widest">{category.category}</span>
                                   </div>
                                   <div className="grid gap-1">
-                                    {category.courses.map((course: any, cIdx: number) => {
+                                    {category.courses.map((course: Course, cIdx: number) => {
                                       const isActive = location.pathname === course.href;
                                       return (
                                         <Link

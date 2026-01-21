@@ -41,6 +41,7 @@ interface EventItem {
     mode: string;
     thumbnailUrl?: string;
     bannerUrl?: string;
+    isCompleted?: boolean;
 }
 
 interface Lead {
@@ -110,9 +111,10 @@ const Dashboard = () => {
 
                 // Filter for "Upcoming Events" list (exclude completed)
                 // The backend adds 'isCompleted' flag when 'all=true'
-                const upcomingWorkshops = wRes.data.filter((e: any) => !e.isCompleted);
-                const upcomingHackathons = hRes.data.filter((e: any) => !e.isCompleted);
-                const upcomingActivities = aRes.data.filter((e: any) => !e.isCompleted);
+                // The backend adds 'isCompleted' flag when 'all=true'
+                const upcomingWorkshops = wRes.data.filter((e: EventItem) => !e.isCompleted);
+                const upcomingHackathons = hRes.data.filter((e: EventItem) => !e.isCompleted);
+                const upcomingActivities = aRes.data.filter((e: EventItem) => !e.isCompleted);
 
                 setWorkshops(upcomingWorkshops.slice(0, 3));
                 setHackathons(upcomingHackathons.slice(0, 3));

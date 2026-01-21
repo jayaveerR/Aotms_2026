@@ -128,6 +128,7 @@ const LimitedTimeOffer = () => {
                                 <button
                                     onClick={closeForever}
                                     className="text-white/70 hover:text-white"
+                                    aria-label="Close offer"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>

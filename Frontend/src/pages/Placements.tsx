@@ -552,6 +552,7 @@ const Placements = () => {
                                             name="course"
                                             value={formData.course}
                                             onChange={handleChange}
+                                            aria-label="Select course"
                                             className="w-full h-12 bg-slate-50 border border-slate-200 rounded-xl px-6 font-medium text-slate-900 focus:outline-none focus:border-[#0066CC] focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition-all cursor-pointer appearance-none shadow-sm"
                                         >
                                             <option value="" disabled className="text-slate-400">Select your course</option>

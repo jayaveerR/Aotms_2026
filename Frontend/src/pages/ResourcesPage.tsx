@@ -191,7 +191,9 @@ export const ResourcesPage = () => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <button className="bg-[#FD5A1A] hover:bg-[#e0480e] text-white px-6 py-2.5 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/30 text-sm md:text-base hidden sm:block">
+                                <button
+                                    aria-label="Search resources"
+                                    className="bg-[#FD5A1A] hover:bg-[#e0480e] text-white px-6 py-2.5 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/30 text-sm md:text-base hidden sm:block">
                                     Search
                                 </button>
                             </div>
@@ -211,6 +213,7 @@ export const ResourcesPage = () => {
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
+                                aria-label={`Filter by ${cat}`}
                                 className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${activeCategory === cat
                                     ? "bg-[#0066CC] text-white border-[#0066CC] shadow-lg shadow-blue-500/20"
                                     : "bg-white text-slate-600 border-slate-200 hover:border-[#0066CC] hover:text-[#0066CC]"
@@ -225,12 +228,14 @@ export const ResourcesPage = () => {
                     <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm shrink-0">
                         <button
                             onClick={() => setViewMode("grid")}
+                            aria-label="Grid view"
                             className={`p-2 rounded-md transition-all ${viewMode === "grid" ? "bg-slate-100 text-[#0066CC]" : "text-slate-400 hover:text-slate-600"}`}
                         >
                             <LayoutGrid className="w-5 h-5" />
                         </button>
                         <button
                             onClick={() => setViewMode("list")}
+                            aria-label="List view"
                             className={`p-2 rounded-md transition-all ${viewMode === "list" ? "bg-slate-100 text-[#0066CC]" : "text-slate-400 hover:text-slate-600"}`}
                         >
                             <List className="w-5 h-5" />

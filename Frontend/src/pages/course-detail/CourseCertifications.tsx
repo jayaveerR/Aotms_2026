@@ -56,6 +56,7 @@ export const CourseCertifications = ({ certifications }: CourseCertificationsPro
                             <button
                                 onClick={() => setIsCertModalOpen(false)}
                                 className="absolute -top-12 right-0 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors group"
+                                aria-label="Close certificate modal"
                             >
                                 <X className="w-6 h-6 text-white" />
                             </button>
