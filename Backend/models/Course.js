@@ -15,7 +15,7 @@ const CourseSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Indexes for high-performance read queries
-CourseSchema.index({ slug: 1 });
+
 CourseSchema.index({ category: 1 });
 
 module.exports = mongoose.model('Course', CourseSchema);
